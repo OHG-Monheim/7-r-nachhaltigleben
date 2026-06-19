@@ -1,1789 +1,1244 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <title>Die 7R gegen Lebensmittelverschwendung – Schülerprojekt</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root{
-      --bg:#f7fafc;
-      --bg-alt:#edf2f7;
-      --card:#ffffff;
-      --primary:#2b6cb0;
-      --primary-light:#63b3ed;
-      --primary-dark:#1a4f8a;
-      --accent:#38a169;
-      --accent-soft:#e6fffa;
-      --danger:#e53e3e;
-      --text:#1a202c;
-      --muted:#4a5568;
-      --shadow:0 4px 10px rgba(0,0,0,0.08);
-      --radius:12px;
-    }
-    :root.dark{
-      --bg:#0f172a;
-      --bg-alt:#111827;
-      --card:#020617;
-      --primary:#38bdf8;
-      --primary-light:#0ea5e9;
-      --primary-dark:#0369a1;
-      --accent:#22c55e;
-      --accent-soft:#052e16;
-      --danger:#f97373;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --shadow:0 4px 18px rgba(0,0,0,0.7);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.5;
-    }
-    a{text-decoration:none;color:inherit;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreislaufwirtschaft – OHG Monheim am Rhein</title>
+<style>
+:root{
+  --p:#2e7d32;--pl:#4caf50;--pd:#1b5e20;
+  --bg:#f4f7f4;--bg2:#ffffff;
+  --txt:#1a1a1a;--txt2:#555555;
+  --brd:#dde8dd;--shd:0 2px 14px rgba(0,0,0,.09);
+  --r:12px;--tr:.3s ease;
+}
+[data-theme=dark]{
+  --bg:#111b11;--bg2:#1a2a1a;
+  --txt:#e8f0e8;--txt2:#9ab09a;
+  --brd:#2a3d2a;--shd:0 2px 14px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);transition:background var(--tr),color var(--tr);line-height:1.65}
+a{color:var(--p);text-decoration:none}
+a:hover{text-decoration:underline}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--p);padding-bottom:.5rem;border-bottom:3px solid var(--pl);display:inline-block;margin-bottom:.4rem}
+h3{font-size:1.1rem;color:var(--pd);margin-bottom:.35rem}
+p{margin-bottom:.9rem;color:var(--txt)}
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(12px);
-      background:linear-gradient(125deg,var(--primary),var(--primary-dark));
-      color:#fff;
-      padding:0.6rem 1rem 0.5rem;
-    }
-    .header-inner{
-      max-width:1100px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      flex-wrap:wrap;
-    }
-    .logo-wrap{
-      display:flex;
-      align-items:center;
-      gap:0.8rem;
-    }
-    .logo-circle{
-      width:52px;
-      height:52px;
-      border-radius:50%;
-      background:rgba(255,255,255,0.2);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:1.3rem;
-    }
-    .header-text h1{font-size:1.4rem;margin-bottom:0.1rem;}
-    .header-text p{font-size:0.85rem;opacity:0.95;}
+/* NAV */
+nav{position:sticky;top:0;z-index:999;background:var(--pd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding:.7rem 1.5rem;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.brand{font-size:1.1rem;font-weight:800;color:#fff;text-decoration:none}
+.nav-ul{display:flex;flex-wrap:wrap;gap:.25rem;list-style:none}
+.nav-ul a{color:rgba(255,255,255,.9);padding:.28rem .6rem;border-radius:6px;font-size:.8rem;font-weight:500;text-decoration:none;transition:background .2s}
+.nav-ul a:hover{background:rgba(255,255,255,.2)}
+.nav-ctrl{display:flex;gap:.4rem}
+.pbtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.3rem .75rem;border-radius:18px;cursor:pointer;font-size:.79rem;font-weight:600;transition:background .2s}
+.pbtn:hover{background:rgba(255,255,255,.28)}
 
-    .header-controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.6rem;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .lang-area{
-      display:flex;
-      flex-direction:column;
-      gap:0.2rem;
-      align-items:flex-end;
-    }
-    .lang-area label{font-size:0.8rem;}
-    select{
-      padding:0.25rem 0.7rem;
-      border-radius:999px;
-      border:none;
-      font-size:0.85rem;
-    }
-    .badge{
-      font-size:0.75rem;
-      padding:0.2rem 0.7rem;
-      border-radius:999px;
-      background:rgba(255,255,255,0.16);
-      display:inline-block;
-    }
+/* HERO */
+#hero{background:linear-gradient(135deg,#1b5e20,#2e7d32 50%,#43a047);color:#fff;text-align:center;padding:5rem 2rem 4rem}
+#hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,.25);margin-bottom:.75rem}
+.hsub{font-size:clamp(1rem,2.5vw,1.25rem);max-width:680px;margin:0 auto 2.5rem;opacity:.92}
+.hbtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-w{background:#fff;color:#1b5e20;padding:.8rem 2rem;border-radius:30px;font-weight:700;font-size:.97rem;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s}
+.btn-w:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.2);text-decoration:none}
+.btn-o{background:transparent;color:#fff;padding:.8rem 2rem;border-radius:30px;font-weight:700;font-size:.97rem;border:2.5px solid rgba(255,255,255,.85);cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-o:hover{background:rgba(255,255,255,.15);text-decoration:none}
+.hstats{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin-top:3rem}
+.hstat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:1rem 1.5rem;min-width:140px}
+.hnum{font-size:2.1rem;font-weight:900}
+.hlbl{font-size:.8rem;opacity:.88;margin-top:.2rem}
 
-    .toggle{
-      display:flex;
-      align-items:center;
-      gap:0.35rem;
-      font-size:0.8rem;
-      cursor:pointer;
-      padding:0.2rem 0.6rem;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.35);
-    }
-    .toggle span.knob{
-      width:30px;
-      height:16px;
-      border-radius:999px;
-      background:rgba(15,23,42,0.4);
-      position:relative;
-    }
-    .toggle span.knob::after{
-      content:"";
-      position:absolute;
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      top:2px;
-      left:2px;
-      background:#f9fafb;
-      transition:transform .16s ease;
-    }
-    .toggle[data-mode="dark"] span.knob::after{
-      transform:translateX(12px);
-    }
+/* SECTIONS */
+.sec{max-width:1100px;margin:0 auto;padding:4rem 2rem}
+.sec-dk{background:var(--bg2)}
+.lead{color:var(--txt2);font-size:1.02rem;max-width:720px;margin:.4rem 0 2rem}
 
-    nav{
-      max-width:1100px;
-      margin:0.25rem auto 0.4rem;
-      padding:0 1rem;
-    }
-    .nav-links{
-      list-style:none;
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.3rem;
-    }
-    .nav-links a{
-      font-size:0.8rem;
-      padding:0.2rem 0.75rem;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.4);
-      color:#e5e7eb;
-    }
-    .nav-links a.active{
-      background:#fff;
-      color:var(--primary-dark);
-    }
+/* CARDS */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem;margin-top:1.5rem}
+.card{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r);padding:1.4rem;box-shadow:var(--shd);transition:transform .2s}
+.card:hover{transform:translateY(-3px)}
+.card-ico{font-size:2.4rem;margin-bottom:.7rem}
 
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:1.1rem 1rem 2.5rem;
-    }
-    .hero{
-      display:grid;
-      grid-template-columns:2.1fr 1.4fr;
-      gap:1rem;
-      margin-bottom:1rem;
-    }
-    @media(max-width:900px){
-      .header-inner{flex-direction:column;align-items:flex-start;}
-      .header-controls{align-items:flex-start;}
-      .hero{grid-template-columns:1fr;}
-    }
+/* HIGHLIGHT */
+.hl{background:rgba(46,125,50,.09);border-left:4px solid var(--p);border-radius:0 10px 10px 0;padding:1rem 1.4rem;margin:1.5rem 0}
+[data-theme=dark] .hl{background:rgba(76,175,80,.1)}
 
-    section,aside,.card-section{scroll-margin-top:90px;}
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.tag{background:rgba(46,125,50,.1);color:var(--pd);border:1px solid rgba(46,125,50,.28);padding:.28rem .7rem;border-radius:18px;font-size:.84rem;cursor:pointer;transition:all .2s;user-select:none}
+[data-theme=dark] .tag{color:var(--pl)}
+.tag:hover,.tag:focus{background:var(--p);color:#fff;border-color:var(--p);outline:none}
 
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:0.9rem 1.05rem;
-      margin-bottom:0.9rem;
-    }
-    .card-header{
-      display:flex;
-      align-items:center;
-      gap:0.5rem;
-      margin-bottom:0.5rem;
-    }
-    .card-header .icon{
-      width:24px;
-      height:24px;
-      border-radius:999px;
-      background:var(--primary-light);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:0.95rem;
-      color:#0f172a;
-    }
-    h2{font-size:1.1rem;}
-    h3{font-size:0.98rem;}
-    p{font-size:0.92rem;margin-bottom:0.4rem;}
-    ul{padding-left:1.2rem;margin-bottom:0.4rem;font-size:0.9rem;}
-    li+li{margin-top:0.1rem;}
-    .muted{color:var(--muted);font-size:0.82rem;}
+/* MAP */
+#karte{background:var(--bg2)}
+.map-wrap{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+.map-svg-box{flex:1;min-width:280px}
+.map-info{flex:0 0 285px;background:var(--bg);border:1px solid var(--brd);border-radius:var(--r);padding:1.4rem}
+.map-info h3{color:var(--p);margin-bottom:.8rem;font-size:1rem}
+.cpth{fill:#a5d6a7;stroke:#fff;stroke-width:.7;cursor:pointer;transition:fill .25s}
+.cpth:hover{fill:#66bb6a}
+.cpth.active{fill:var(--p)}
+[data-theme=dark] .cpth{fill:#2d5a2d}
+[data-theme=dark] .cpth:hover{fill:#3d7a3d}
+[data-theme=dark] .cpth.active{fill:var(--pl)}
+.cbtn{display:block;width:100%;text-align:left;background:none;border:1px solid var(--brd);border-radius:8px;padding:.5rem .9rem;margin-bottom:.4rem;cursor:pointer;color:var(--txt);font-size:.88rem;transition:all .2s}
+.cbtn:hover,.cbtn.active{background:var(--p);color:#fff;border-color:var(--p)}
+#mi-text{font-size:.88rem;color:var(--txt2);line-height:1.7;margin-bottom:0}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0.38rem 0.9rem;
-      border-radius:999px;
-      border:none;
-      font-size:0.86rem;
-      cursor:pointer;
-      gap:0.3rem;
-      margin:0.15rem 0.15rem 0.15rem 0;
-      box-shadow:0 2px 5px rgba(0,0,0,0.18);
-      transition:transform .09s ease,box-shadow .09s ease,background .15s ease;
-    }
-    .btn-primary{background:var(--primary);color:#fff;}
-    .btn-primary:hover{background:var(--primary-dark);}
-    .btn-secondary{background:var(--accent);color:#fff;}
-    .btn-secondary:hover{background:#15803d;}
-    .btn-outline{
-      background:transparent;
-      color:var(--primary-dark);
-      border:1px solid var(--primary);
-      box-shadow:none;
-    }
-    .btn-outline:hover{background:rgba(96,165,250,0.08);}
-    .btn:active{transform:translateY(1px);box-shadow:0 1px 2px rgba(0,0,0,0.25);}
+/* VIDEO */
+#vsec{background:#0a1a0a;padding:4rem 2rem;text-align:center}
+#vsec h2{color:#fff;border-color:#4caf50}
+#vsec .lead{color:#9ab09a;margin:0 auto 2rem}
+.vframe{max-width:860px;margin:0 auto;border-radius:16px;background:#111;border:2px solid #2e7d32;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;cursor:pointer}
+.vplay{font-size:4rem;width:88px;height:88px;background:rgba(46,125,50,.8);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
+.vframe:hover .vplay,.vframe:focus .vplay{transform:scale(1.1);background:var(--p)}
+.vframe:focus{outline:3px solid var(--pl)}
+.vlbl{color:#4caf50;font-size:1.05rem;font-weight:600}
+.vcred{color:#555;font-size:.83rem;margin-top:.9rem}
+.vembed{display:none;max-width:860px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.7)}
+.vembed video{width:100%;display:block}
 
-    .video-wrap{
-      margin-top:0.35rem;
-      border-radius:var(--radius);
-      overflow:hidden;
-      background:#000;
-      position:relative;
-      padding-top:56.25%;
-    }
-    .video-wrap video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
+/* QUIZ / TEST */
+.qbox{background:var(--bg2);border:1px solid var(--brd);border-radius:16px;padding:2rem;box-shadow:var(--shd);margin-top:1.5rem}
+.pcnt{font-size:.83rem;color:var(--txt2);margin-bottom:.4rem}
+.pwrap{background:var(--brd);border-radius:8px;height:7px;margin-bottom:1.5rem;overflow:hidden}
+.pbar{background:var(--p);height:100%;border-radius:8px;transition:width .4s}
+.qq{font-size:1.1rem;font-weight:700;margin-bottom:1.4rem;color:var(--txt)}
+.qopts{display:flex;flex-direction:column;gap:.65rem}
+.qopt,.topt{background:var(--bg);border:2px solid var(--brd);border-radius:10px;padding:.8rem 1.15rem;cursor:pointer;font-size:.95rem;color:var(--txt);text-align:left;transition:all .2s;width:100%}
+.qopt:hover,.topt:hover{border-color:var(--p);background:rgba(46,125,50,.06)}
+.qopt:focus,.topt:focus{outline:2px solid var(--p)}
+.qopt.ok{border-color:#4caf50;background:#e8f5e9;color:#1b5e20;font-weight:600}
+.qopt.no{border-color:#f44336;background:#ffebee;color:#b71c1c}
+.topt.sel{border-color:var(--p);background:rgba(46,125,50,.11);font-weight:600}
+[data-theme=dark] .qopt.ok{background:#1a3a1a;color:#81c784}
+[data-theme=dark] .qopt.no{background:#3a1a1a;color:#ef9a9a}
+.qfb{margin-top:.9rem;padding:.9rem 1.1rem;border-radius:8px;font-size:.91rem;display:none}
+.qfb.show{display:block}
+.qfb.ok{background:#e8f5e9;color:#1b5e20;border-left:4px solid #4caf50}
+.qfb.no{background:#ffebee;color:#c62828;border-left:4px solid #f44336}
+[data-theme=dark] .qfb.ok{background:#1a3a1a;color:#81c784}
+[data-theme=dark] .qfb.no{background:#3a1a1a;color:#ef9a9a}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;flex-wrap:wrap;gap:.6rem}
+.gbn{background:var(--p);color:#fff;border:none;border-radius:8px;padding:.65rem 1.4rem;font-size:.93rem;font-weight:600;cursor:pointer;transition:background .2s}
+.gbn:hover{background:var(--pd)}
+.gbn:disabled{background:var(--brd);color:var(--txt2);cursor:default}
+.score-dsp{text-align:center;padding:2rem;display:none}
+.score-big{font-size:3.5rem;font-weight:900;color:var(--p)}
+.tbadge{display:inline-block;background:var(--p);color:#fff;border-radius:6px;padding:.18rem .6rem;font-size:.73rem;font-weight:700;margin-bottom:.7rem;text-transform:uppercase;letter-spacing:.04em}
 
-    .accordion{
-      border-radius:var(--radius);
-      border:1px solid #e2e8f0;
-      overflow:hidden;
-      margin-top:0.4rem;
-    }
-    :root.dark .accordion{border-color:#1f2937;}
-    .acc-item+.acc-item{border-top:1px solid #e2e8f0;}
-    :root.dark .acc-item+.acc-item{border-color:#1f2937;}
-    .acc-head{
-      background:var(--bg-alt);
-      padding:0.5rem 0.8rem;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      cursor:pointer;
-    }
-    .acc-head h3{font-size:0.93rem;}
-    .acc-toggle{font-weight:700;}
-    .acc-body{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height .25s ease;
-      background:var(--card);
-    }
-    .acc-body-inner{padding:0.55rem 0.8rem 0.65rem;font-size:0.9rem;}
-    .acc-item.open .acc-body{padding-bottom:0.65rem;}
+/* RESULT */
+.rcard{background:linear-gradient(135deg,var(--pd),var(--pl));color:#fff;border-radius:18px;padding:2.5rem 2rem;text-align:center;margin-top:1.5rem}
+.remoji{font-size:5rem;line-height:1;display:block;margin-bottom:.7rem}
+.rtitle{font-size:2rem;font-weight:900;margin-bottom:.4rem}
+.rscore{font-size:1.15rem;opacity:.9;margin-bottom:1.3rem}
+.rdetails{background:var(--bg2);color:var(--txt);border-radius:14px;padding:1.5rem;text-align:left;margin-top:1.5rem}
+.rblock{margin-bottom:1.4rem}
+.rblock h4{color:var(--p);font-size:1.02rem;margin-bottom:.5rem}
+.tl{list-style:none;padding:0}
+.tl li{padding:.32rem 0 .32rem 1.4rem;position:relative;font-size:.91rem}
+.tl.ok li::before{content:"✅";position:absolute;left:0}
+.tl.imp li::before{content:"💡";position:absolute;left:0}
+.rbtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
 
-    .cycle-diagram{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:0.5rem;
-      margin-top:0.5rem;
-    }
-    @media(max-width:800px){
-      .cycle-diagram{grid-template-columns:repeat(2,minmax(0,1fr));}
-    }
-    .cycle-step{
-      border-radius:10px;
-      padding:0.4rem 0.5rem;
-      background:var(--bg-alt);
-      font-size:0.8rem;
-    }
-    .cycle-step strong{display:block;margin-bottom:0.15rem;font-size:0.82rem;}
+/* CERTIFICATE */
+#carea{display:none;margin-top:2rem}
+#carea.show{display:block}
+.certbox{background:#fff;color:#1a1a1a;border:6px double #2e7d32;border-radius:20px;padding:3rem;text-align:center;max-width:580px;margin:0 auto;font-family:Georgia,serif}
+.chdr{color:#1b5e20;font-size:1.3rem;font-weight:900;margin-bottom:.4rem}
+.csch{font-size:.88rem;color:#555;margin-bottom:1.3rem}
+.cdiv{border:none;border-top:2px solid #2e7d32;margin:1.3rem 0}
+.cemoji{font-size:5rem;display:block;margin-bottom:.9rem}
+.ctitle{font-size:1.95rem;font-weight:900;color:#2e7d32;margin-bottom:.4rem}
+.cline{font-size:.95rem;color:#333;margin-bottom:.25rem}
+.cscore{font-size:1.3rem;font-weight:700;color:#1b5e20;margin:1rem 0}
+.cdate{font-size:.82rem;color:#777;margin-top:1.3rem}
+.sticker{width:175px;height:175px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#4caf50);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:900;margin:1.5rem auto;box-shadow:0 4px 20px rgba(46,125,50,.5);text-align:center;padding:1rem;border:4px solid rgba(255,255,255,.38)}
+.st-ico{font-size:2.8rem;line-height:1;display:block}
+.st-lbl{font-size:.8rem;margin-top:.35rem;text-transform:uppercase;letter-spacing:.05em}
 
-    .world-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:0.5rem;
-      margin-top:0.4rem;
-    }
-    @media(max-width:650px){
-      .world-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-    }
-    .continent-card{
-      background:linear-gradient(135deg,#e0f2fe,#e6fffa);
-      border-radius:10px;
-      padding:0.55rem 0.65rem;
-      border:1px solid #bfdbfe;
-      cursor:pointer;
-      position:relative;
-      transition:transform .1s ease,box-shadow .1s ease,border .1s ease;
-    }
-    :root.dark .continent-card{
-      background:linear-gradient(135deg,#0f172a,#0b1120);
-      border-color:#1f2937;
-    }
-    .continent-card h4{font-size:0.9rem;margin-bottom:0.15rem;}
-    .continent-card p{font-size:0.78rem;color:var(--muted);}
-    .continent-tag{
-      position:absolute;
-      top:4px;
-      right:6px;
-      font-size:0.7rem;
-    }
-    .continent-card:hover{
-      transform:translateY(-1px);
-      box-shadow:0 5px 10px rgba(0,0,0,0.18);
-      border-color:var(--primary-light);
-    }
+/* FAQ */
+.accord{margin-top:1.5rem}
+.aitem{border:1px solid var(--brd);border-radius:10px;margin-bottom:.65rem;overflow:hidden}
+.ahdr{width:100%;background:var(--bg2);color:var(--txt);border:none;padding:1.05rem 1.4rem;text-align:left;cursor:pointer;font-size:.95rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:.5rem;transition:background .2s}
+.ahdr:hover{background:rgba(46,125,50,.07)}
+.ahdr:focus{outline:2px solid var(--p)}
+.achev{transition:transform .3s;font-size:1.05rem;flex-shrink:0}
+.ahdr.open .achev{transform:rotate(180deg)}
+.abdy{display:none;padding:.9rem 1.4rem 1.4rem;background:var(--bg);color:var(--txt2);font-size:.91rem;line-height:1.75}
+.abdy.open{display:block}
 
-    .quiz-progress{
-      font-size:0.78rem;
-      color:var(--muted);
-      margin-bottom:0.3rem;
-    }
-    .question-text{font-weight:600;font-size:0.94rem;margin-bottom:0.35rem;}
-    .options{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:0.38rem;}
-    .option-label{
-      display:flex;
-      align-items:center;
-      gap:0.4rem;
-      padding:0.35rem 0.5rem;
-      border-radius:8px;
-      border:1px solid #e2e8f0;
-      font-size:0.9rem;
-      cursor:pointer;
-    }
-    :root.dark .option-label{border-color:#1f2937;background:#020617;}
-    .option-label input{accent-color:var(--primary);}
-    .quiz-result{
-      margin-top:0.4rem;
-      font-size:0.9rem;
-      padding:0.5rem 0.6rem;
-      border-radius:8px;
-      background:#ebf8ff;
-      border:1px solid #bee3f8;
-    }
-    :root.dark .quiz-result{
-      background:#0f172a;
-      border-color:#1f2937;
-    }
+/* SOURCES */
+.srclist{list-style:none;padding:0;margin-top:1rem}
+.srclist li{padding:.75rem 0;border-bottom:1px solid var(--brd);font-size:.91rem}
+.srclist li:last-child{border:none}
+.srclbl{font-weight:700;color:var(--txt);display:block;margin-bottom:.2rem}
+.srcdesc{font-size:.84rem;color:var(--txt2);margin-top:.15rem}
 
-    .certificate{
-      border-radius:14px;
-      border:2px solid #ecc94b;
-      background:#fffbeb;
-      padding:0.9rem 1rem;
-      margin-top:0.6rem;
-      position:relative;
-      color:#1a202c;
-    }
-    .certificate::before{
-      content:"★";
-      position:absolute;
-      top:-14px;
-      right:12px;
-      font-size:1.6rem;
-      color:#d69e2e;
-    }
-    .certificate h3{
-      text-align:center;
-      font-size:1rem;
-      margin-bottom:0.35rem;
-    }
-    .certificate p{font-size:0.9rem;margin-bottom:0.3rem;}
-    .certificate .score{
-      text-align:center;
-      font-weight:700;
-      margin-bottom:0.3rem;
-    }
-    .certificate ul{font-size:0.88rem;margin-top:0.1rem;}
+/* IMPRINT */
+.impbox{background:var(--bg);border:1px solid var(--brd);border-radius:var(--r);padding:1.4rem;margin-top:1rem}
+.impbox p{font-size:.91rem;color:var(--txt2);margin-bottom:.45rem}
+.impbox strong{color:var(--txt)}
 
-    .print-hint{
-      font-size:0.75rem;
-      color:var(--muted);
-      margin-top:0.2rem;
-    }
+/* FOOTER */
+footer{background:#0a1a0a;color:rgba(255,255,255,.82);text-align:center;padding:2rem;font-size:.87rem;line-height:2}
+footer strong{color:#fff}
 
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:40;
-    }
-    .modal{
-      background:var(--card);
-      color:var(--text);
-      border-radius:12px;
-      max-width:520px;
-      width:90%;
-      max-height:90vh;
-      overflow-y:auto;
-      box-shadow:0 10px 25px rgba(0,0,0,0.4);
-      padding:0.8rem 1rem 1rem;
-    }
-    .modal-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:0.4rem;
-    }
-    .close-btn{
-      background:transparent;
-      border:none;
-      font-size:1.2rem;
-      cursor:pointer;
-      color:inherit;
-    }
+/* MODAL */
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center}
+.mov.open{display:flex}
+.mbox{background:var(--bg2);color:var(--txt);border-radius:16px;padding:2rem;max-width:540px;width:90%;position:relative;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.4);animation:mIn .25s ease}
+@keyframes mIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.mcls{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--txt);line-height:1}
+.mtitle{font-size:1.25rem;font-weight:700;color:var(--p);margin-bottom:.9rem}
+.mbody{font-size:.93rem;line-height:1.75;color:var(--txt2)}
 
-    .toast{
-      position:fixed;
-      bottom:1rem;
-      right:1rem;
-      background:#0f172a;
-      color:#e5e7eb;
-      padding:0.45rem 0.8rem;
-      border-radius:8px;
-      font-size:0.8rem;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(8px);
-      transition:opacity .2s ease,transform .2s ease;
-      z-index:50;
-    }
-    .toast.show{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0);
-    }
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-ul{display:none}
+  .map-wrap{flex-direction:column}
+  .map-info{flex:none;width:100%}
+  .sec{padding:2.5rem 1rem}
+  #vsec{padding:3rem 1rem}
+}
 
-    footer{
-      border-top:1px solid #e5e7eb;
-      padding:0.8rem 1rem 1.2rem;
-      background:var(--bg-alt);
-    }
-    :root.dark footer{border-color:#1f2937;}
-    .footer-inner{
-      max-width:1100px;
-      margin:0 auto;
-      font-size:0.8rem;
-      display:grid;
-      grid-template-columns:2.3fr 1.5fr;
-      gap:0.8rem;
-    }
-    @media(max-width:800px){
-      .footer-inner{grid-template-columns:1fr;}
-    }
-    .footer-inner h4{font-size:0.9rem;margin-bottom:0.3rem;}
-    .source-list{list-style:disc;padding-left:1.1rem;font-size:0.78rem;}
-    .imp-line{margin-bottom:0.2rem;}
-  </style>
+/* PRINT */
+@media print{
+  nav,.no-print,footer,#hero,#about,#karte,#vsec,#quiz,#faq,#quellen,.test-section,.rbtns{display:none!important}
+  #sres{display:block!important}
+  #carea{display:block!important}
+  .certbox{border-color:#000;box-shadow:none;max-width:100%}
+  body,#stest{background:#fff!important;color:#000!important}
+}
+</style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="logo-wrap">
-      <div class="logo-circle">7R</div>
-      <div class="header-text">
-        <h1 data-i18n="title">Die 7R gegen Lebensmittelverschwendung</h1>
-        <p data-i18n="subtitle">Schülerprojekt im Erdkundeunterricht – Video & Webseite</p>
-      </div>
-    </div>
-    <div class="header-controls">
-      <label class="toggle" id="themeToggle" data-mode="light">
-        <span data-i18n="themeLabel">Dark‑Mode</span>
-        <span class="knob"></span>
-      </label>
-      <div class="lang-area">
-        <label for="langSelect" data-i18n="languageLabel">Sprache / Language:</label>
-        <select id="langSelect">
-          <option value="de">Deutsch</option>
-          <option value="en">English</option>
-          <option value="pl">Polski</option>
-          <option value="ar">العربية</option>
-          <option value="ru">Русский</option>
-          <option value="nl">Nederlands</option>
-          <option value="tr">Türkçe</option>
-        </select>
-        <span class="badge" data-i18n="badge">Gemeinsam gegen Lebensmittelverschwendung</span>
-      </div>
-    </div>
+
+<!-- NAVIGATION -->
+<nav role="navigation" aria-label="Hauptnavigation">
+  <a class="brand" href="#hero">♻️ <span data-i18n="brand">KreislaufWelt</span></a>
+  <ul class="nav-ul" role="list">
+    <li><a href="#about"     data-i18n="nAbout">Was ist KLW?</a></li>
+    <li><a href="#karte"     data-i18n="nMap">Weltkarte</a></li>
+    <li><a href="#vsec"      data-i18n="nVideo">Video</a></li>
+    <li><a href="#quiz"      data-i18n="nQuiz">Quiz</a></li>
+    <li><a href="#stest"     data-i18n="nTest">Selbsttest</a></li>
+    <li><a href="#faq"       data-i18n="nFaq">FAQ</a></li>
+    <li><a href="#quellen"   data-i18n="nSrc">Quellen</a></li>
+    <li><a href="#impressum" data-i18n="nImp">Impressum</a></li>
+  </ul>
+  <div class="nav-ctrl">
+    <button class="pbtn" id="lbtn" onclick="toggleLang()" aria-label="Sprache wechseln">🌐 EN</button>
+    <button class="pbtn" id="dbtn" onclick="toggleDark()" aria-label="Dunkelmodus umschalten">🌙 Dark</button>
   </div>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="#video" class="nav-link active" data-i18n="navVideo">Video</a></li>
-      <li><a href="#food" class="nav-link" data-i18n="navFood">Lebensmittel</a></li>
-      <li><a href="#cycle" class="nav-link" data-i18n="navCycle">Kreislauf</a></li>
-      <li><a href="#rs" class="nav-link" data-i18n="nav7R">Die 7R</a></li>
-      <li><a href="#quiz" class="nav-link" data-i18n="navQuiz">Quiz</a></li>
-      <li><a href="#selftest" class="nav-link" data-i18n="navSelftest">Selbsttest</a></li>
-      <li><a href="#world" class="nav-link" data-i18n="navWorld">Weltweit</a></li>
-      <li><a href="#sources" class="nav-link" data-i18n="navSources">Quellen</a></li>
-      <li><a href="#impressum" class="nav-link" data-i18n="navImpressum">Impressum</a></li>
-    </ul>
-  </nav>
-</header>
+</nav>
 
-<main>
-  <div class="hero">
-    <section id="video">
-      <div class="card">
-        <div class="card-header">
-          <div class="icon">🎥</div>
-          <h2 data-i18n="videoTitle">7‑Tage‑Experiment: Wie viel Essen retten wir?</h2>
-        </div>
-        <p data-i18n="videoIntro">
-          Im Video siehst du ein echtes 7‑Tage‑Experiment: Was landet bei uns zu Hause fast im Müll – und wie viel
-          davon können wir mit den 7R noch retten?
-        </p>
-        <div class="video-wrap">
-          <video controls>
-            <source src="e.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <p class="muted" data-i18n="videoHint">
-          Tipp: Achte darauf, welche „R‑Begriffe“ im Video vorkommen und wie sie im Alltag angewendet werden.
-        </p>
-        <p class="muted" data-i18n="credits">
-          Video: Yusuf Serif · Webseite: Anouk Sperling · Erdkundeprojekt
-        </p>
-      </div>
-    </section>
-
-    <aside>
-      <div class="card" id="quiz">
-        <div class="card-header">
-          <div class="icon">❓</div>
-          <h2 data-i18n="quizTitle">Quiz: Wie gut kennst du die 7R?</h2>
-        </div>
-        <p data-i18n="quizIntro">
-          Teste dein Wissen rund um Lebensmittelverschwendung, das Video und die 7R. Jede Frage hat nur eine richtige
-          Antwort.
-        </p>
-        <button class="btn btn-secondary" id="startQuizBtn" data-i18n="btnStartQuiz">Quiz starten</button>
-        <div id="quizContainer" style="display:none;margin-top:0.5rem;">
-          <div class="quiz-progress" id="quizProgress"></div>
-          <div class="question-text" id="quizQuestionText"></div>
-          <div class="options" id="quizOptions"></div>
-          <button class="btn btn-primary" id="quizNextBtn" data-i18n="btnNext">Weiter</button>
-          <div class="quiz-result" id="quizResult" style="display:none;"></div>
-        </div>
-      </div>
-
-      <div class="card" id="selftest">
-        <div class="card-header">
-          <div class="icon">🧠</div>
-          <h2 data-i18n="selftestTitle">Selbsttest: Wie 7R‑fit ist dein Haushalt?</h2>
-        </div>
-        <p data-i18n="selftestIntro">
-          Beantworte ein paar Fragen und erhalte am Ende eine 7R‑Urkunde mit persönlichen Tipps, die du mit deinen
-          Eltern durchgehen kannst.
-        </p>
-        <button class="btn btn-secondary" id="startSelftestBtn" data-i18n="btnStartSelftest">Selbsttest starten</button>
-        <div id="selftestContainer" style="display:none;margin-top:0.5rem;">
-          <div class="quiz-progress" id="selftestProgress"></div>
-          <div class="question-text" id="selftestQuestionText"></div>
-          <div class="options" id="selftestOptions"></div>
-          <button class="btn btn-primary" id="selftestNextBtn" data-i18n="btnNext">Weiter</button>
-          <div id="selftestResultWrap" style="display:none;">
-            <div class="certificate" id="certificate">
-              <h3 data-i18n="certTitle">7R‑Urkunde für deinen Haushalt</h3>
-              <p class="score" id="selftestScoreText"></p>
-              <p id="selftestLevelText"></p>
-              <p data-i18n="certTipsTitle" style="font-weight:600;margin-top:0.2rem;">Unsere Tipps für dich:</p>
-              <ul id="selftestTipsList"></ul>
-            </div>
-            <button class="btn btn-outline" id="printCertificateBtn" data-i18n="btnPrint">
-              Urkunde drucken / als PDF speichern
-            </button>
-            <p class="print-hint" data-i18n="printHint">
-              Tipp: Beim Drucken „Als PDF speichern“ wählen und die Urkunde zu Hause mit den Eltern anschauen.
-            </p>
-          </div>
-        </div>
-      </div>
-    </aside>
+<!-- HERO -->
+<div id="hero" role="banner">
+  <h1 data-i18n="hT">Kreislaufwirtschaft</h1>
+  <p class="hsub" data-i18n="hS">Wie unsere Konsumgewohnheiten die Welt verändern – und was du täglich tun kannst</p>
+  <div class="hbtns">
+    <a href="#stest" class="btn-w" data-i18n="hB1">🧪 Zum Selbsttest</a>
+    <a href="#quiz"  class="btn-o" data-i18n="hB2">❓ Quiz starten</a>
+    <a href="#vsec"  class="btn-o" data-i18n="hB3">▶ Video ansehen</a>
   </div>
+  <div class="hstats" role="region" aria-label="Fakten zur Kreislaufwirtschaft">
+    <div class="hstat"><div class="hnum">92 Mrd.</div><div class="hlbl" data-i18n="s1">Tonnen Rohstoffe jährlich</div></div>
+    <div class="hstat"><div class="hnum">9 %</div><div class="hlbl"    data-i18n="s2">der Materialien recycelt</div></div>
+    <div class="hstat"><div class="hnum">3×</div><div class="hlbl"     data-i18n="s3">mehr Ressourcen bis 2050</div></div>
+  </div>
+</div>
 
-  <section id="food">
-    <div class="card">
-      <div class="card-header">
-        <div class="icon">🍎</div>
-        <h2 data-i18n="foodTitle">Lebensmittel – vom Feld bis in den Mülleimer</h2>
-      </div>
-      <p data-i18n="foodIntro">
-        Wenn wir Essen wegwerfen, verschwenden wir nicht nur die Lebensmittel selbst, sondern auch Wasser, Energie,
-        Transport und Arbeit. Hier siehst du, was alles dahinter steckt.
-      </p>
-
-      <div class="accordion">
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="foodPathTitle">Der Weg eines Lebensmittels</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <ul>
-                <li data-i18n="foodPath1">Anbau: Pflanzen brauchen Wasser, Boden, Dünger und Zeit.</li>
-                <li data-i18n="foodPath2">Transport: Viele Lebensmittel legen lange Wege im LKW oder Flugzeug zurück.</li>
-                <li data-i18n="foodPath3">Kühlung: In Lagern und Supermärkten wird viel Strom verbraucht.</li>
-                <li data-i18n="foodPath4">Lagerung zu Hause: Kühlschrank, Gefrierfach, Vorratsschrank.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="foodWasteTitle">Wo entsteht Lebensmittelverschwendung?</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <ul>
-                <li data-i18n="foodWaste1">Im Supermarkt: Waren mit kleinen Schönheitsfehlern oder kurzem Datum.</li>
-                <li data-i18n="foodWaste2">Zu Hause: Wir kaufen zu viel, lagern falsch oder trauen uns nicht über das Datum zu gehen.</li>
-                <li data-i18n="foodWaste3">In Restaurants: Große Portionen oder Buffets, die nicht leer gegessen werden.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="foodMhdTitle">Mindesthaltbarkeitsdatum richtig verstehen</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="foodMhdText">
-                Das Mindesthaltbarkeitsdatum (MHD) ist kein Verfallsdatum. Viele Lebensmittel sind noch lange nach dem
-                Datum genießbar. Nutze deine Sinne: anschauen, riechen, vorsichtig probieren.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- ABOUT -->
+<section id="about" class="sec" aria-labelledby="about-h">
+  <h2 id="about-h" data-i18n="aT">Was ist Kreislaufwirtschaft?</h2>
+  <p class="lead" data-i18n="aL">Ein alternatives Wirtschaftsmodell, das Verschwendung minimiert und Ressourcen so lange wie möglich im Kreislauf hält – statt einmal zu nutzen und wegzuwerfen.</p>
+  <div class="hl" role="note">
+    <strong>♻️ <span data-i18n="hlT">Linearwirtschaft vs. Kreislaufwirtschaft</span></strong><br>
+    <span data-i18n="hlB">In der <em>Linearwirtschaft</em> gilt: nehmen → herstellen → wegwerfen. Die Kreislaufwirtschaft dreht das um: Produkte werden repariert, wiederverwendet oder recycelt – nichts geht verloren.</span>
+  </div>
+  <div class="cgrid">
+    <div class="card"><div class="card-ico">🔽</div><h3 data-i18n="c1h">Reduce</h3><p data-i18n="c1p">Weniger kaufen und verbrauchen – gezielt statt impulsiv.</p></div>
+    <div class="card"><div class="card-ico">♻️</div><h3 data-i18n="c2h">Reuse</h3><p data-i18n="c2p">Dinge länger nutzen, reparieren und weitergeben.</p></div>
+    <div class="card"><div class="card-ico">🌱</div><h3 data-i18n="c3h">Recycle</h3><p data-i18n="c3p">Materialien durch korrektes Trennen zurück in den Kreislauf.</p></div>
+    <div class="card"><div class="card-ico">🛠️</div><h3 data-i18n="c4h">Reparieren</h3><p data-i18n="c4p">Defekte Produkte reparieren statt neu zu kaufen.</p></div>
+    <div class="card"><div class="card-ico">🤝</div><h3 data-i18n="c5h">Leihen &amp; Teilen</h3><p data-i18n="c5p">Produkte gemeinsam nutzen – weniger Ressourcen, gleicher Nutzen.</p></div>
+    <div class="card"><div class="card-ico">💡</div><h3 data-i18n="c6h">Bewusst konsumieren</h3><p data-i18n="c6p">Vor jedem Kauf fragen: Brauche ich das wirklich?</p></div>
+  </div>
+  <div style="margin-top:2.5rem">
+    <h3 style="color:var(--p);font-size:1.1rem;margin-bottom:.75rem" data-i18n="tgT">Klicke auf ein Thema für mehr Informationen:</h3>
+    <div class="tags" role="list" aria-label="Nachhaltigkeitsthemen">
+      <span class="tag" role="listitem" tabindex="0" data-topic="impulse"      data-i18n="tg1">💸 Impulskäufe</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="tiktok"       data-i18n="tg2">📱 TikTok-Hypes</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="smartphone"   data-i18n="tg3">📲 Neues Smartphone</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="refurbished"  data-i18n="tg4">🔧 Refurbished</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="fastfashion"  data-i18n="tg5">👗 Fast Fashion</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="marken"       data-i18n="tg6">🏷️ Markenfokus</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="becher"       data-i18n="tg7">☕ Einwegbecher</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="snacks"       data-i18n="tg8">🍟 Kiosk-Snacks</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="leihen"       data-i18n="tg9">🔄 Leihen statt kaufen</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="schulmaterial" data-i18n="tg10">📚 Schulmaterial</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="digital"      data-i18n="tg11">💻 Digitale Ordnung</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="lebensmittel" data-i18n="tg12">🥗 Lebensmittel</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="reste"        data-i18n="tg13">🍲 Reste verwerten</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="muell"        data-i18n="tg14">🗑️ Mülltrennung</span>
+      <span class="tag" role="listitem" tabindex="0" data-topic="reparieren"   data-i18n="tg15">🔨 Reparieren</span>
     </div>
-  </section>
-
-  <section id="cycle">
-    <div class="card">
-      <div class="card-header">
-        <div class="icon">🔄</div>
-        <h2 data-i18n="cycleTitle">Der Kreislauf der Lebensmittel – von der Erde zurück zur Erde</h2>
-      </div>
-      <p data-i18n="cycleIntro">
-        Lebensmittel sind Teil eines Kreislaufs: Von der Natur über uns Menschen wieder zurück in den Boden. Die 7R
-        helfen, diesen Kreislauf fairer und nachhaltiger zu machen.
-      </p>
-      <div class="cycle-diagram">
-        <div class="cycle-step">
-          <strong data-i18n="cycle1Title">1. Produktion</strong>
-          <span data-i18n="cycle1Text">Bauern pflanzen, pflegen und ernten – mit Wasser, Boden und Energie.</span>
-        </div>
-        <div class="cycle-step">
-          <strong data-i18n="cycle2Title">2. Handel</strong>
-          <span data-i18n="cycle2Text">Lebensmittel werden transportiert, gekühlt, sortiert und im Supermarkt angeboten.</span>
-        </div>
-        <div class="cycle-step">
-          <strong data-i18n="cycle3Title">3. Haushalt</strong>
-          <span data-i18n="cycle3Text">Wir kaufen ein, lagern, kochen und essen – oder werfen weg.</span>
-        </div>
-        <div class="cycle-step">
-          <strong data-i18n="cycle4Title">4. Entsorgung & Rückgewinnung</strong>
-          <span data-i18n="cycle4Text">Reste werden getrennt gesammelt, kompostiert oder in Biogasanlagen zu Energie.</span>
-        </div>
-      </div>
-      <p class="muted" data-i18n="cycleHint">
-        Frage an dich: An welcher Stelle im Kreislauf kannst du mit den 7R am meisten bewirken?
-      </p>
-    </div>
-  </section>
-
-  <section id="rs">
-    <div class="card">
-      <div class="card-header">
-        <div class="icon">♻️</div>
-        <h2 data-i18n="rsTitle">Die 7R – deine Strategie gegen Verschwendung</h2>
-      </div>
-      <p data-i18n="rsIntro">
-        Die 7R helfen dir, in kleinen Schritten Großes zu verändern. Klicke auf ein R, um Beispiele, Tipps und
-        Ideen zu sehen.
-      </p>
-
-      <div class="accordion">
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r1Title">1. Rethink – Überdenken</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r1Text">
-                Rethink heißt: Stopp, bevor du kaufst oder wegwirfst. Plane deine Woche, schreibe eine Liste und
-                überlege: Was brauche ich wirklich? Gehe nicht hungrig einkaufen.
-              </p>
-              <button class="btn btn-outline" data-open-modal="r1Modal" data-i18n="btnExamples">
-                Beispiel aus dem Video
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r2Title">2. Reduce – Reduzieren</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r2Text">
-                Reduce bedeutet, Abfall von Anfang an zu vermeiden: passende Portionsgrößen, richtige Lagerung und
-                „First in – First out“ im Kühlschrank.
-              </p>
-              <button class="btn btn-outline" data-open-modal="r2Modal" data-i18n="btnTips">
-                Kühlschrank‑Tipps
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r3Title">3. Reuse – Wiederverwenden</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r3Text">
-                Reuse heißt: Reste nicht wegwerfen, sondern kreativ nutzen – z.B. Restetag, Pfannengerichte,
-                Smoothies oder Einfrieren.
-              </p>
-              <button class="btn btn-outline" data-open-modal="r3Modal" data-i18n="btnRecipes">
-                Resterezepte
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r4Title">4. Repair – Reparieren</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r4Text">
-                Repair passt vor allem zu Gegenständen: Vorratsbehälter, Gefrierfächer oder Küchengeräte reparieren,
-                statt neu zu kaufen – damit Lebensmittel besser geschützt sind.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r5Title">5. Refuse – Ablehnen</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r5Text">
-                Refuse bedeutet: Nein sagen zu Dingen, die du nicht brauchst – z.B. „2 für 1“-Angebote, wenn du es
-                realistisch nicht aufbrauchst.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r6Title">6. Recycle – Recyceln</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r6Text">
-                Recycle heißt: Müll richtig trennen, damit Verpackungen und Bioabfall wieder zu neuen Produkten oder
-                Energie werden können.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-item">
-          <div class="acc-head">
-            <h3 data-i18n="r7Title">7. Recover – Zurückgewinnen</h3>
-            <span class="acc-toggle">+</span>
-          </div>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              <p data-i18n="r7Text">
-                Recover nutzt das, was gar nicht mehr essbar ist: z.B. Biogasanlagen oder Kompost, die aus
-                Lebensmittelresten Energie und neue Nährstoffe machen.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="world">
-    <div class="card">
-      <div class="card-header">
-        <div class="icon">🌍</div>
-        <h2 data-i18n="worldTitle">7R weltweit – wie machen es andere?</h2>
-      </div>
-      <p data-i18n="worldIntro">
-        Klicke auf einen Kontinent und sieh dir an, wie dort mit Lebensmittelverschwendung umgegangen wird – und
-        welche Ideen wir übernehmen können.
-      </p>
-      <div class="world-grid">
-        <div class="continent-card" data-continent="europe">
-          <span class="continent-tag">EU</span>
-          <h4 data-i18n="euTitle">Europa</h4>
-          <p data-i18n="euShort">Retterkisten, Apps, Bildungsprojekte</p>
-        </div>
-        <div class="continent-card" data-continent="northamerica">
-          <span class="continent-tag">NA</span>
-          <h4 data-i18n="naTitle">Nordamerika</h4>
-          <p data-i18n="naShort">Food banks, „ugly food“, Kampagnen</p>
-        </div>
-        <div class="continent-card" data-continent="southamerica">
-          <span class="continent-tag">SA</span>
-          <h4 data-i18n="saTitle">Südamerika</h4>
-          <p data-i18n="saShort">Gemeinschaftsküchen, Märkte mit Restware</p>
-        </div>
-        <div class="continent-card" data-continent="asia">
-          <span class="continent-tag">AS</span>
-          <h4 data-i18n="asTitle">Asien</h4>
-          <p data-i18n="asShort">Buffet‑Kampagnen, Apps, Schulprojekte</p>
-        </div>
-        <div class="continent-card" data-continent="africa">
-          <span class="continent-tag">AF</span>
-          <h4 data-i18n="afTitle">Afrika</h4>
-          <p data-i18n="afShort">Solartrocknung, Lagerung, Kompost</p>
-        </div>
-        <div class="continent-card" data-continent="oceania">
-          <span class="continent-tag">OC</span>
-          <h4 data-i18n="ocTitle">Ozeanien</h4>
-          <p data-i18n="ocShort">Zero‑Waste‑Kampagnen, Schulkampagnen</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<section id="sources" class="card-section">
-  <div class="card">
-    <div class="card-header">
-      <div class="icon">📚</div>
-      <h2 data-i18n="sourcesTitle">Quellen & weiterführende Links</h2>
-    </div>
-    <ul class="source-list">
-      <li data-i18n="src1">
-        Bundeszentrum für Ernährung (BZfE): Informationen zu Lebensmittelverschwendung und Haltbarkeit.
-      </li>
-      <li data-i18n="src2">
-        Verbraucherzentrale: „Mindesthaltbarkeitsdatum verstehen“ – Tipps zum Prüfen mit den Sinnen.
-      </li>
-      <li data-i18n="src3">
-        Too Good To Go – App und Infomaterial zu überschüssigen Lebensmitteln im Handel.
-      </li>
-      <li data-i18n="src4">
-        WWF / FAO: Studien zu globaler Lebensmittelverschwendung und Ressourcenverbrauch.
-      </li>
-      <li data-i18n="src5">
-        Eigene Auswertung des 7‑Tage‑Experiments aus dem Video (Haushalt von Yusuf Serif).
-      </li>
-    </ul>
   </div>
 </section>
 
-<section id="impressum" class="card-section">
-  <div class="card">
-    <div class="card-header">
-      <div class="icon">ℹ️</div>
-      <h2 data-i18n="impTitle">Impressum (Schülerprojekt)</h2>
+<!-- WORLD MAP -->
+<section id="karte" aria-labelledby="karte-h">
+  <div class="sec">
+    <h2 id="karte-h" data-i18n="mT">🌍 Kreislaufwirtschaft weltweit</h2>
+    <p class="lead" data-i18n="mL">Klicke auf einen Kontinent oder eine Region, um mehr über Kreislaufwirtschaft weltweit zu erfahren.</p>
+    <div class="map-wrap">
+      <div class="map-svg-box">
+        <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto"
+             role="img" aria-label="Vereinfachte Weltkarte mit klickbaren Kontinenten">
+          <title>Kreislaufwirtschaft Weltkarte – klickbare Kontinente</title>
+          <rect width="900" height="440" fill="#c8e6f5" rx="8"/>
+          <path id="mp-na" class="cpth" d="M80,55 L195,45 L248,62 L262,88 L252,128 L228,152 L183,162 L142,152 L108,128 L83,98 Z"
+            role="button" tabindex="0" aria-label="Nordamerika"
+            onclick="selR('na')" onkeypress="if(event.key==='Enter')selR('na')"/>
+          <path id="mp-sa" class="cpth" d="M162,182 L232,172 L258,194 L252,238 L232,278 L208,296 L184,282 L163,248 L156,208 Z"
+            role="button" tabindex="0" aria-label="Südamerika"
+            onclick="selR('sa')" onkeypress="if(event.key==='Enter')selR('sa')"/>
+          <path id="mp-eu" class="cpth" d="M368,50 L428,44 L458,52 L463,77 L448,98 L428,108 L408,103 L393,113 L378,103 L366,88 Z"
+            role="button" tabindex="0" aria-label="Europa"
+            onclick="selR('eu')" onkeypress="if(event.key==='Enter')selR('eu')"/>
+          <path id="mp-af" class="cpth" d="M368,127 L422,115 L438,137 L432,182 L412,222 L388,242 L363,232 L348,197 L343,162 L353,137 Z"
+            role="button" tabindex="0" aria-label="Afrika"
+            onclick="selR('af')" onkeypress="if(event.key==='Enter')selR('af')"/>
+          <path id="mp-as" class="cpth" d="M463,43 L638,36 L693,57 L718,83 L693,118 L658,132 L618,142 L573,135 L528,127 L488,113 L460,93 Z"
+            role="button" tabindex="0" aria-label="Asien"
+            onclick="selR('as')" onkeypress="if(event.key==='Enter')selR('as')"/>
+          <path id="mp-au" class="cpth" d="M645,228 L718,222 L743,240 L736,275 L708,287 L670,279 L650,257 Z"
+            role="button" tabindex="0" aria-label="Australien"
+            onclick="selR('au')" onkeypress="if(event.key==='Enter')selR('au')"/>
+          <text x="170" y="106" font-size="12" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">N-Amerika</text>
+          <text x="205" y="232" font-size="12" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">S-Amerika</text>
+          <text x="415" y="78"  font-size="12" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">Europa</text>
+          <text x="390" y="182" font-size="12" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">Afrika</text>
+          <text x="588" y="90"  font-size="12" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">Asien</text>
+          <text x="694" y="255" font-size="11" fill="#fff" text-anchor="middle" pointer-events="none" font-weight="700">Australien</text>
+        </svg>
+      </div>
+      <div class="map-info" role="region" aria-live="polite" aria-label="Regioninformationen">
+        <h3 id="mi-title" data-i18n="miT">🌐 Region wählen</h3>
+        <p id="mi-text" data-i18n="miS">Klicke auf einen Kontinent auf der Karte oder wähle eine Region aus der Liste.</p>
+        <hr style="border:none;border-top:1px solid var(--brd);margin:1rem 0">
+        <div style="font-size:.8rem;color:var(--txt2);margin-bottom:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em" data-i18n="mlT">Alle Regionen:</div>
+        <button class="cbtn" data-r="eu" onclick="selR('eu')" data-i18n="mEu">🌍 Europa</button>
+        <button class="cbtn" data-r="as" onclick="selR('as')" data-i18n="mAs">🌏 Asien</button>
+        <button class="cbtn" data-r="af" onclick="selR('af')" data-i18n="mAf">🌍 Afrika</button>
+        <button class="cbtn" data-r="na" onclick="selR('na')" data-i18n="mNA">🌎 Nordamerika</button>
+        <button class="cbtn" data-r="sa" onclick="selR('sa')" data-i18n="mSA">🌎 Südamerika</button>
+        <button class="cbtn" data-r="au" onclick="selR('au')" data-i18n="mAu">🌏 Australien &amp; Ozeanien</button>
+      </div>
     </div>
-    <p class="imp-line" data-i18n="impLine1">
-      Dieses Projekt wurde im Rahmen des Erdkundeunterrichts erstellt.
-    </p>
-    <p class="imp-line" data-i18n="impLine2">
-      Video: Yusuf Serif · Webseite: Anouk Sperling.
-    </p>
-    <p class="imp-line" data-i18n="impLine3">
-      Die Seite dient ausschließlich zu Bildungszwecken und wird nicht kommerziell genutzt.
-    </p>
   </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div>
-      <h4 data-i18n="footerTitle">Ziel der Seite</h4>
-      <p data-i18n="footerText">
-        Diese Seite soll Schülerinnen und Schüler motivieren, mit ihren Familien über Lebensmittelverschwendung zu
-        sprechen und mit den 7R im Alltag zu experimentieren.
-      </p>
+<!-- VIDEO -->
+<section id="vsec" aria-labelledby="vsec-h">
+  <div style="max-width:920px;margin:0 auto;text-align:center">
+    <h2 id="vsec-h" data-i18n="vT">📽️ Unser Projektvideo</h2>
+    <p class="lead" style="margin:0 auto 2rem" data-i18n="vS">Schülerprojekt des Otto-Hahn-Gymnasiums Monheim am Rhein zu Kreislaufwirtschaft und nachhaltigem Konsum. Produziert von Yusuf Serif.</p>
+    <div class="vframe no-print" id="vph" role="button" tabindex="0"
+         aria-label="Video abspielen" onclick="startVid()" onkeypress="if(event.key==='Enter')startVid()">
+      <div class="vplay" aria-hidden="true">▶</div>
+      <div class="vlbl" data-i18n="vPl">Projektvideo abspielen</div>
     </div>
-    <div>
-      <h4 data-i18n="footerContact">Kontakt (Schule)</h4>
-      <p class="muted" data-i18n="footerHint">
-        Für Rückfragen zum Projekt wende dich bitte an deine Lehrkraft im Fach Erdkunde.
-      </p>
+    <div class="vembed" id="vemb">
+      <video controls style="width:100%;display:block;border-radius:14px" aria-label="Projektvideo Kreislaufwirtschaft">
+        <source src="video.mp4" type="video/mp4">
+        <p data-i18n="vFb">Dein Browser unterstützt kein HTML5-Video. <a href="video.mp4">Hier herunterladen</a>.</p>
+      </video>
+    </div>
+    <p class="vcred" data-i18n="vCr">📹 Videomaterial von Yusuf Serif | Otto-Hahn-Gymnasium Monheim am Rhein</p>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" class="sec" aria-labelledby="quiz-h">
+  <h2 id="quiz-h" data-i18n="qzT">🧠 Quiz: Teste dein Wissen</h2>
+  <p class="lead" data-i18n="qzS">Beantworte 8 Fragen zu Kreislaufwirtschaft und nachhaltigem Konsum!</p>
+  <div class="qbox" id="qbox">
+    <div class="pcnt" id="qcnt">Frage 1 von 8</div>
+    <div class="pwrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Quiz-Fortschritt">
+      <div class="pbar" id="qpb" style="width:0%"></div>
+    </div>
+    <div class="qq" id="qq"></div>
+    <div class="qopts" id="qopts" role="radiogroup" aria-label="Antwortoptionen"></div>
+    <div class="qfb" id="qfb" role="alert" aria-live="polite"></div>
+    <div class="qnav no-print">
+      <span></span>
+      <button class="gbn" id="qnxt" onclick="qNext()" disabled data-i18n="bNext">Weiter →</button>
+    </div>
+    <div class="score-dsp" id="qscr">
+      <div class="score-big" id="qsnum"></div>
+      <div style="font-size:1.05rem;margin:.5rem 0 1.5rem" id="qslbl"></div>
+      <button class="gbn" onclick="qReset()" data-i18n="bReplay">🔄 Quiz wiederholen</button>
     </div>
   </div>
+</section>
+
+<!-- SELBSTTEST -->
+<section id="stest" class="sec sec-dk" aria-labelledby="stest-h">
+  <h2 id="stest-h" data-i18n="stT">🧪 Selbsttest: Wie nachhaltig bin ich?</h2>
+  <p class="lead" data-i18n="stS">15 Fragen zu deinem Alltag – ehrlich antworten! Ideal auch abends mit den Eltern. Am Ende: persönliche Auswertung mit Urkunde.</p>
+  <div class="qbox test-section" id="stbox">
+    <div class="pcnt" id="stcnt">Frage 1 von 15</div>
+    <div class="pwrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Selbsttest-Fortschritt">
+      <div class="pbar" id="stpb" style="width:0%"></div>
+    </div>
+    <div class="tbadge" id="stbadge">Thema</div>
+    <div class="qq" id="stq"></div>
+    <div class="qopts" id="stopts" role="radiogroup" aria-label="Antwortoptionen"></div>
+    <div class="qnav no-print" style="margin-top:1.4rem">
+      <button class="gbn" id="stbk"  onclick="stBack()" disabled data-i18n="bBack">← Zurück</button>
+      <button class="gbn" id="stnxt" onclick="stNext()" disabled data-i18n="bNext">Weiter →</button>
+    </div>
+  </div>
+
+  <div id="sres" style="display:none">
+    <div class="rcard">
+      <span class="remoji" id="rej">🌱</span>
+      <div class="rtitle" id="rtt"></div>
+      <div class="rscore" id="rsc"></div>
+      <div id="rdesc" style="font-size:.97rem;opacity:.92;max-width:600px;margin:0 auto"></div>
+    </div>
+    <div class="rdetails">
+      <div class="rblock"><h4 data-i18n="rStr">💪 Deine Stärken</h4><ul class="tl ok"  id="rstr"></ul></div>
+      <div class="rblock"><h4 data-i18n="rImp">🎯 Verbesserungsbereiche</h4><ul class="tl imp" id="rimp"></ul></div>
+      <div class="rblock"><h4 data-i18n="rTip">🚀 Deine nächsten Schritte</h4><ul class="tl ok" id="rtip"></ul></div>
+    </div>
+    <div class="rbtns no-print">
+      <button class="gbn" onclick="showCert()"  data-i18n="bCert">🏆 Urkunde anzeigen</button>
+      <button class="gbn" onclick="stReset()" style="background:#607d8b" data-i18n="bRetake">🔄 Test wiederholen</button>
+    </div>
+
+    <!-- CERTIFICATE -->
+    <div id="carea">
+      <div class="certbox">
+        <div class="chdr">♻️ Kreislaufwirtschaft – Schülerprojekt OHG Monheim</div>
+        <div class="csch">Otto-Hahn-Gymnasium Monheim am Rhein</div>
+        <hr class="cdiv">
+        <span class="cemoji" id="cico">🌱</span>
+        <div style="font-size:.88rem;color:#555;margin-bottom:.4rem" data-i18n="cAw">Diese Urkunde bestätigt:</div>
+        <div class="ctitle" id="ctitle">Circular Hero</div>
+        <div class="cline" data-i18n="cL1">hat den Nachhaltigkeits-Selbsttest erfolgreich abgeschlossen</div>
+        <div class="cscore" id="cscore"></div>
+        <div class="cline" data-i18n="cL2">und zeigt echtes Engagement für eine nachhaltige Zukunft.</div>
+        <div style="margin:2rem 0">
+          <div class="sticker">
+            <span class="st-ico" id="stico">🌱</span>
+            <span class="st-lbl" id="stlbl">Circular Hero</span>
+          </div>
+        </div>
+        <hr class="cdiv">
+        <div class="cdate" id="cdate"></div>
+        <div style="font-size:.77rem;color:#888;margin-top:.4rem">Kreislaufwirtschaft-Schülerprojekt • OHG Monheim am Rhein</div>
+      </div>
+      <div style="text-align:center;margin-top:1.4rem" class="no-print">
+        <button class="gbn" onclick="window.print()" data-i18n="bPrint">🖨️ Urkunde drucken</button>
+        <button class="gbn" onclick="hideCert()" style="margin-left:.7rem;background:#607d8b" data-i18n="bClose">✕ Schließen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="sec" aria-labelledby="faq-h">
+  <h2 id="faq-h" data-i18n="fqT">❓ FAQ – Häufig gestellte Fragen</h2>
+  <p class="lead" data-i18n="fqS">Antworten auf die wichtigsten Fragen rund um Kreislaufwirtschaft und nachhaltigen Konsum.</p>
+  <div class="accord" id="faqlist" role="list"></div>
+</section>
+
+<!-- QUELLEN -->
+<section id="quellen" class="sec sec-dk" aria-labelledby="quellen-h">
+  <h2 id="quellen-h" data-i18n="sqT">📚 Quellen &amp; weiterführende Links</h2>
+  <p class="lead" data-i18n="sqS">Seriöse Quellen, die bei der Erstellung dieser Webseite verwendet wurden:</p>
+  <ul class="srclist" id="srclist" role="list"></ul>
+</section>
+
+<!-- IMPRESSUM -->
+<section id="impressum" class="sec" aria-labelledby="imp-h">
+  <h2 id="imp-h" data-i18n="ipT">📋 Impressum</h2>
+  <p class="lead" data-i18n="ipS">Diese Webseite wurde im Rahmen eines Schülerprojekts erstellt.</p>
+  <div class="impbox">
+    <p><strong data-i18n="ipSc">Schule:</strong> Otto-Hahn-Gymnasium Monheim am Rhein</p>
+    <p><strong data-i18n="ipCo">Kontext:</strong> <span data-i18n="ipCoT">Schülerprojekt im Rahmen von Bildung für nachhaltige Entwicklung (BNE), NRW</span></p>
+    <p><strong data-i18n="ipVi">Videomaterial:</strong> <span data-i18n="ipViT">Yusuf Serif – schulintern produziert</span></p>
+    <p><strong data-i18n="ipMe">Bilder &amp; Medien:</strong> <span data-i18n="ipMeT">Alle Bilder und Medien sind schulintern erstellt oder gemeinfrei (CC0). Nutzung ausschließlich zu Bildungszwecken.</span></p>
+    <p><strong data-i18n="ipCr">Erstellt von:</strong> Anouk Sperling</p>
+    <p><strong data-i18n="ipYr">Jahr:</strong> 2025</p>
+    <p><strong data-i18n="ipDi">Hinweis:</strong> <span data-i18n="ipDiT">Nicht-kommerzielles Schülerprojekt. Keine Haftung für externe Links. Inhalte dienen ausschließlich der schulischen Bildung.</span></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div data-i18n="ftL1">Seite wurde erstellt durch <strong>Anouk Sperling</strong></div>
+  <div data-i18n="ftL2">Videomaterial von <strong>Yusuf Serif</strong></div>
+  <div data-i18n="ftL3"><strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong></div>
+  <div style="margin-top:.4rem;font-size:.79rem;opacity:.55" data-i18n="ftBne">Bildung für nachhaltige Entwicklung (BNE) • Kreislaufwirtschaft-Schülerprojekt 2025</div>
 </footer>
 
-<!-- Modale Fenster -->
-<div class="modal-backdrop" id="r1ModalBackdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 data-i18n="r1ModalTitle">Rethink – Beispiel aus dem Video</h3>
-      <button class="close-btn" data-close-modal="r1ModalBackdrop">&times;</button>
-    </div>
-    <div>
-      <p data-i18n="r1ModalText1">
-        Im Experiment wurden Bananen, Blaubeeren und Skyr nicht weggeworfen, sondern in einen Smoothie verwandelt.
-        Rethink heißt: Erst denken, dann wegwerfen.
-      </p>
-      <p data-i18n="r1ModalText2">
-        Überlege: Was kannst du diese Woche anders planen? Schreibe 3 Dinge auf, die du weglassen oder besser nutzen
-        möchtest.
-      </p>
-    </div>
+<!-- MODAL -->
+<div class="mov" id="modal" role="dialog" aria-modal="true" aria-labelledby="mtid"
+     onclick="if(event.target===this)closeMod()">
+  <div class="mbox">
+    <button class="mcls" onclick="closeMod()" aria-label="Schließen">✕</button>
+    <div class="mtitle" id="mtid"></div>
+    <div class="mbody"  id="mbod"></div>
   </div>
 </div>
-
-<div class="modal-backdrop" id="r2ModalBackdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 data-i18n="r2ModalTitle">Reduce – Kühlschrank‑Check</h3>
-      <button class="close-btn" data-close-modal="r2ModalBackdrop">&times;</button>
-    </div>
-    <div>
-      <ul>
-        <li data-i18n="r2ModalLi1">„First in – First out“: Altes nach vorne, Neues nach hinten.</li>
-        <li data-i18n="r2ModalLi2">Unten ist es am kältesten – hier lagern Fleisch und Fisch.</li>
-        <li data-i18n="r2ModalLi3">Mittelbereich: Milchprodukte wie Skyr.</li>
-        <li data-i18n="r2ModalLi4">Obst und Gemüse ins Gemüsefach – möglichst unverpackt.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="modal-backdrop" id="r3ModalBackdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 data-i18n="r3ModalTitle">Reuse – Ideen für Restetage</h3>
-      <button class="close-btn" data-close-modal="r3ModalBackdrop">&times;</button>
-    </div>
-    <div>
-      <ul>
-        <li data-i18n="r3ModalLi1">Nudeln vom Vortag + Ei + Gemüse = Restepfanne.</li>
-        <li data-i18n="r3ModalLi2">Braune Bananen + Joghurt + Obst = Smoothie.</li>
-        <li data-i18n="r3ModalLi3">Hartes Brot = Croutons oder Semmelbrösel.</li>
-        <li data-i18n="r3ModalLi4">Früchte einkochen = Kompott oder Apfelmus.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="modal-backdrop" id="continentModalBackdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="continentModalTitle"></h3>
-      <button class="close-btn" data-close-modal="continentModalBackdrop">&times;</button>
-    </div>
-    <div id="continentModalBody"></div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-  const translations={
-    de:{
-      title:"Die 7R gegen Lebensmittelverschwendung",
-      subtitle:"Schülerprojekt im Erdkundeunterricht – Video & Webseite",
-      languageLabel:"Sprache / Language:",
-      badge:"Gemeinsam gegen Lebensmittelverschwendung",
-      themeLabel:"Dark‑Mode",
-      navVideo:"Video",
-      navFood:"Lebensmittel",
-      navCycle:"Kreislauf",
-      nav7R:"Die 7R",
-      navQuiz:"Quiz",
-      navSelftest:"Selbsttest",
-      navWorld:"Weltweit",
-      navSources:"Quellen",
-      navImpressum:"Impressum",
+// ============================================================
+// TRANSLATIONS
+// ============================================================
+const TR = {
+de:{
+  brand:"KreislaufWelt",nAbout:"Was ist KLW?",nMap:"Weltkarte",nVideo:"Video",nQuiz:"Quiz",
+  nTest:"Selbsttest",nFaq:"FAQ",nSrc:"Quellen",nImp:"Impressum",
+  hT:"Kreislaufwirtschaft",
+  hS:"Wie unsere Konsumgewohnheiten die Welt verändern – und was du täglich tun kannst",
+  hB1:"🧪 Zum Selbsttest",hB2:"❓ Quiz starten",hB3:"▶ Video ansehen",
+  s1:"Tonnen Rohstoffe jährlich",s2:"der Materialien recycelt",s3:"mehr Ressourcen bis 2050",
+  aT:"Was ist Kreislaufwirtschaft?",
+  aL:"Ein alternatives Wirtschaftsmodell, das Verschwendung minimiert und Ressourcen so lange wie möglich im Kreislauf hält – statt einmal zu nutzen und wegzuwerfen.",
+  hlT:"Linearwirtschaft vs. Kreislaufwirtschaft",
+  hlB:"In der <em>Linearwirtschaft</em> gilt: nehmen → herstellen → wegwerfen. Die Kreislaufwirtschaft dreht das um: Produkte werden repariert, wiederverwendet oder recycelt – nichts geht verloren.",
+  c1h:"Reduce – Weniger kaufen",c1p:"Weniger kaufen und verbrauchen – gezielt statt impulsiv.",
+  c2h:"Reuse – Wiederverwenden",c2p:"Dinge länger nutzen, reparieren und weitergeben.",
+  c3h:"Recycle",c3p:"Materialien durch korrektes Trennen zurück in den Kreislauf bringen.",
+  c4h:"Reparieren",c4p:"Defekte Produkte reparieren statt neu zu kaufen – spart Ressourcen und Geld.",
+  c5h:"Leihen & Teilen",c5p:"Produkte gemeinsam nutzen – weniger Ressourcen, gleicher Nutzen.",
+  c6h:"Bewusst konsumieren",c6p:"Vor jedem Kauf fragen: Brauche ich das wirklich?",
+  tgT:"Klicke auf ein Thema für mehr Informationen:",
+  tg1:"💸 Impulskäufe",tg2:"📱 TikTok-Hypes",tg3:"📲 Neues Smartphone",tg4:"🔧 Refurbished",
+  tg5:"👗 Fast Fashion",tg6:"🏷️ Markenfokus",tg7:"☕ Einwegbecher",tg8:"🍟 Kiosk-Snacks",
+  tg9:"🔄 Leihen statt kaufen",tg10:"📚 Schulmaterial",tg11:"💻 Digitale Ordnung",
+  tg12:"🥗 Lebensmittel",tg13:"🍲 Reste verwerten",tg14:"🗑️ Mülltrennung",tg15:"🔨 Reparieren",
+  mT:"🌍 Kreislaufwirtschaft weltweit",
+  mL:"Klicke auf einen Kontinent oder eine Region, um mehr über Kreislaufwirtschaft weltweit zu erfahren.",
+  miT:"🌐 Region wählen",
+  miS:"Klicke auf einen Kontinent auf der Karte oder wähle eine Region aus der Liste.",
+  mlT:"Alle Regionen:",mEu:"🌍 Europa",mAs:"🌏 Asien",mAf:"🌍 Afrika",
+  mNA:"🌎 Nordamerika",mSA:"🌎 Südamerika",mAu:"🌏 Australien & Ozeanien",
+  vT:"📽️ Unser Projektvideo",
+  vS:"Schülerprojekt des Otto-Hahn-Gymnasiums Monheim am Rhein zu Kreislaufwirtschaft. Produziert von Yusuf Serif.",
+  vPl:"Projektvideo abspielen",vFb:"Dein Browser unterstützt kein HTML5-Video.",
+  vCr:"📹 Videomaterial von Yusuf Serif | Otto-Hahn-Gymnasium Monheim am Rhein",
+  qzT:"🧠 Quiz: Teste dein Wissen",
+  qzS:"Beantworte 8 Fragen zu Kreislaufwirtschaft und nachhaltigem Konsum!",
+  bNext:"Weiter →",bBack:"← Zurück",bReplay:"🔄 Quiz wiederholen",
+  stT:"🧪 Selbsttest: Wie nachhaltig bin ich?",
+  stS:"15 Fragen zu deinem Alltag – ehrlich antworten! Ideal auch abends mit den Eltern. Am Ende: persönliche Auswertung mit Urkunde.",
+  rStr:"💪 Deine Stärken",rImp:"🎯 Verbesserungsbereiche",rTip:"🚀 Deine nächsten Schritte",
+  bCert:"🏆 Urkunde anzeigen",bRetake:"🔄 Test wiederholen",
+  cAw:"Diese Urkunde bestätigt:",
+  cL1:"hat den Nachhaltigkeits-Selbsttest erfolgreich abgeschlossen",
+  cL2:"und zeigt echtes Engagement für eine nachhaltige Zukunft.",
+  bPrint:"🖨️ Urkunde drucken",bClose:"✕ Schließen",
+  fqT:"❓ FAQ – Häufig gestellte Fragen",
+  fqS:"Antworten auf die wichtigsten Fragen rund um Kreislaufwirtschaft und nachhaltigem Konsum.",
+  sqT:"📚 Quellen & weiterführende Links",
+  sqS:"Seriöse Quellen, die bei der Erstellung dieser Webseite verwendet wurden:",
+  ipT:"📋 Impressum",ipS:"Diese Webseite wurde im Rahmen eines Schülerprojekts erstellt.",
+  ipSc:"Schule:",ipCo:"Kontext:",
+  ipCoT:"Schülerprojekt im Rahmen von Bildung für nachhaltige Entwicklung (BNE), NRW",
+  ipVi:"Videomaterial:",ipViT:"Yusuf Serif – schulintern produziert",
+  ipMe:"Bilder & Medien:",
+  ipMeT:"Alle Bilder und Medien sind schulintern erstellt oder gemeinfrei (CC0). Nutzung ausschließlich zu Bildungszwecken.",
+  ipCr:"Erstellt von:",ipYr:"Jahr:",ipDi:"Hinweis:",
+  ipDiT:"Nicht-kommerzielles Schülerprojekt. Keine Haftung für externe Links. Inhalte dienen der schulischen Bildung.",
+  ftL1:"Seite wurde erstellt durch <strong>Anouk Sperling</strong>",
+  ftL2:"Videomaterial von <strong>Yusuf Serif</strong>",
+  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
+  ftBne:"Bildung für nachhaltige Entwicklung (BNE) • Kreislaufwirtschaft-Schülerprojekt 2025"
+},
+en:{
+  brand:"CircularWorld",nAbout:"What is CE?",nMap:"World Map",nVideo:"Video",nQuiz:"Quiz",
+  nTest:"Self-Test",nFaq:"FAQ",nSrc:"Sources",nImp:"Imprint",
+  hT:"Circular Economy",
+  hS:"How our consumption habits change the world – and what you can do every day",
+  hB1:"🧪 Take Self-Test",hB2:"❓ Start Quiz",hB3:"▶ Watch Video",
+  s1:"tons of raw materials annually",s2:"of materials recycled",s3:"more resources by 2050",
+  aT:"What is the Circular Economy?",
+  aL:"An alternative economic model that minimizes waste and keeps resources in use for as long as possible – instead of using once and disposing.",
+  hlT:"Linear Economy vs. Circular Economy",
+  hlB:"In the <em>linear economy</em>: take → make → dispose. The circular economy reverses this: products are repaired, reused or recycled – nothing is wasted.",
+  c1h:"Reduce",c1p:"Buy and consume less – targeted instead of impulsive.",
+  c2h:"Reuse",c2p:"Use things longer, repair and pass on instead of discarding.",
+  c3h:"Recycle",c3p:"Return materials to the cycle through proper separation.",
+  c4h:"Repair",c4p:"Repair broken products instead of buying new – saves resources and money.",
+  c5h:"Share & Borrow",c5p:"Use products together – fewer resources, same benefit.",
+  c6h:"Conscious Consumption",c6p:"Before every purchase: Do I really need this?",
+  tgT:"Click on a topic for more information:",
+  tg1:"💸 Impulse Buying",tg2:"📱 TikTok Hypes",tg3:"📲 New Smartphone",tg4:"🔧 Refurbished",
+  tg5:"👗 Fast Fashion",tg6:"🏷️ Brand Focus",tg7:"☕ Disposable Cups",tg8:"🍟 Kiosk Snacks",
+  tg9:"🔄 Borrow Instead of Buy",tg10:"📚 School Supplies",tg11:"💻 Digital Organization",
+  tg12:"🥗 Food",tg13:"🍲 Using Leftovers",tg14:"🗑️ Waste Sorting",tg15:"🔨 Repair",
+  mT:"🌍 Circular Economy Worldwide",
+  mL:"Click on a continent or region to learn more about circular economy worldwide.",
+  miT:"🌐 Select region",
+  miS:"Click on a continent on the map or choose a region from the list.",
+  mlT:"All Regions:",mEu:"🌍 Europe",mAs:"🌏 Asia",mAf:"🌍 Africa",
+  mNA:"🌎 North America",mSA:"🌎 South America",mAu:"🌏 Australia & Oceania",
+  vT:"📽️ Our Project Video",
+  vS:"Student project of Otto-Hahn-Gymnasium Monheim am Rhein on circular economy. Produced by Yusuf Serif.",
+  vPl:"Play project video",vFb:"Your browser does not support HTML5 video.",
+  vCr:"📹 Video by Yusuf Serif | Otto-Hahn-Gymnasium Monheim am Rhein",
+  qzT:"🧠 Quiz: Test Your Knowledge",
+  qzS:"Answer 8 questions about circular economy and sustainable consumption!",
+  bNext:"Next →",bBack:"← Back",bReplay:"🔄 Replay Quiz",
+  stT:"🧪 Self-Test: How Sustainable Am I?",
+  stS:"15 questions about your daily life – answer honestly! Great to do with parents in the evening. Personal evaluation with certificate at the end.",
+  rStr:"💪 Your Strengths",rImp:"🎯 Areas for Improvement",rTip:"🚀 Your Next Steps",
+  bCert:"🏆 Show Certificate",bRetake:"🔄 Retake Test",
+  cAw:"This certificate confirms:",
+  cL1:"has successfully completed the sustainability self-test",
+  cL2:"and shows real commitment to a sustainable future.",
+  bPrint:"🖨️ Print Certificate",bClose:"✕ Close",
+  fqT:"❓ FAQ – Frequently Asked Questions",
+  fqS:"Answers to the most important questions about circular economy and sustainable consumption.",
+  sqT:"📚 Sources & Further Links",
+  sqS:"Reputable sources used in creating this website:",
+  ipT:"📋 Imprint",ipS:"This website was created as part of a student project.",
+  ipSc:"School:",ipCo:"Context:",
+  ipCoT:"Student project in the context of Education for Sustainable Development (ESD), NRW",
+  ipVi:"Video material:",ipViT:"Yusuf Serif – produced internally at school",
+  ipMe:"Images & Media:",
+  ipMeT:"All images and media were created internally or are public domain (CC0). For educational use only.",
+  ipCr:"Created by:",ipYr:"Year:",ipDi:"Notice:",
+  ipDiT:"Non-commercial student project. No liability for external links. Content for educational purposes only.",
+  ftL1:"Website created by <strong>Anouk Sperling</strong>",
+  ftL2:"Video material by <strong>Yusuf Serif</strong>",
+  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
+  ftBne:"Education for Sustainable Development (ESD) • Circular Economy Student Project 2025"
+}
+};
 
-      videoTitle:"7‑Tage‑Experiment: Wie viel Essen retten wir?",
-      videoIntro:"Im Video siehst du ein echtes 7‑Tage‑Experiment: Was landet bei uns zu Hause fast im Müll – und wie viel davon können wir mit den 7R noch retten?",
-      videoHint:"Tipp: Achte darauf, welche „R‑Begriffe“ im Video vorkommen und wie sie im Alltag angewendet werden.",
-      credits:"Video: Yusuf Serif · Webseite: Anouk Sperling · Erdkundeprojekt",
+// ============================================================
+// QUIZ DATA
+// ============================================================
+const QUIZ = [
+  {q:"Was beschreibt das Prinzip der Kreislaufwirtschaft am besten?",
+   opts:["Produkte werden einmal genutzt und dann entsorgt.","Rohstoffe und Produkte bleiben so lange wie möglich im Kreislauf.","Wirtschaftswachstum hat Vorrang vor Umweltschutz.","Recycling ist der einzige Weg zur Nachhaltigkeit."],
+   ok:1,fb:"Richtig! Kreislaufwirtschaft bedeutet: Ressourcen sollen so lange wie möglich genutzt und nicht weggeworfen werden."},
+  {q:"Was bedeutet 'refurbished' bei einem Smartphone?",
+   opts:["Das Gerät ist brandneu und unbenutzt.","Das Gerät wurde aus Sondermüll gewonnen.","Das Gerät wurde aufgearbeitet und wie neu aufbereitet.","Es handelt sich um ein billiges No-Name-Produkt."],
+   ok:2,fb:"Richtig! Refurbished-Geräte sind professionell aufgearbeitet – gut für Portemonnaie und Umwelt."},
+  {q:"Was ist Fast Fashion?",
+   opts:["Hochwertige Kleidung, die lange hält.","Modische Kleidung, die schnell produziert und günstig verkauft wird.","Kleidung nur für den Sport.","Nachhaltige Secondhand-Mode."],
+   ok:1,fb:"Richtig! Fast Fashion = günstige, schnell produzierte Kleidung mit kurzer Lebensdauer – verursacht viel Müll und belastet die Umwelt."},
+  {q:"Welcher Schritt kommt in der Kreislaufwirtschaft an erster Stelle?",
+   opts:["Recyceln","Verkaufen","Reduzieren (weniger verbrauchen)","Reparieren"],
+   ok:2,fb:"Genau! Die Hierarchie: erst reduzieren, dann wiederverwenden, dann recyceln. Weniger zu kaufen ist der wichtigste erste Schritt."},
+  {q:"Wie viel Prozent aller Materialien werden global wiederverwendet oder recycelt?",
+   opts:["Ca. 50 %","Ca. 30 %","Ca. 9 %","Ca. 75 %"],
+   ok:2,fb:"Erschreckend, aber wahr: Nur rund 9 % aller Materialien werden recycelt – das ist der sogenannte 'Circularity Gap'."},
+  {q:"Was ist ein Hauptvorteil von Leihen statt Kaufen?",
+   opts:["Es ist immer günstiger.","Weniger Produkte müssen hergestellt werden, da mehr Menschen ein Gerät nutzen.","Man hat immer das neueste Modell.","Es gibt keine echten Vorteile."],
+   ok:1,fb:"Richtig! Wenn mehr Menschen ein Produkt teilen, müssen weniger hergestellt werden – das spart Ressourcen und Energie."},
+  {q:"Was passiert, wenn wir Lebensmittel wegwerfen?",
+   opts:["Nur Wasser wird verschwendet.","Es entstehen keine negativen Konsequenzen.","Wasser, Energie, Fläche und Arbeit sind verschwendet – und es entstehen Treibhausgase.","Die Lebensmittel werden automatisch kompostiert."],
+   ok:2,fb:"Lebensmittelverschwendung ist ein großes Problem: Für jedes weggeworfene Produkt wurden Ressourcen verbraucht und Treibhausgase emittiert."},
+  {q:"Warum ist korrekte Mülltrennung wichtig?",
+   opts:["Sie hat keinen echten Nutzen, es ist nur Vorschrift.","Nur Papier muss getrennt werden.","Richtige Trennung ermöglicht es, Materialien wieder in den Kreislauf einzuspeisen.","Trennung erhöht die Müllmenge."],
+   ok:2,fb:"Korrekte Mülltrennung ist essenziell: Nur so können Rohstoffe wie Papier, Glas oder Kunststoff recycelt und wieder genutzt werden."}
+];
 
-      foodTitle:"Lebensmittel – vom Feld bis in den Mülleimer",
-      foodIntro:"Wenn wir Essen wegwerfen, verschwenden wir nicht nur die Lebensmittel selbst, sondern auch Wasser, Energie, Transport und Arbeit. Hier siehst du, was alles dahinter steckt.",
-      foodPathTitle:"Der Weg eines Lebensmittels",
-      foodPath1:"Anbau: Pflanzen brauchen Wasser, Boden, Dünger und Zeit.",
-      foodPath2:"Transport: Viele Lebensmittel legen lange Wege im LKW oder Flugzeug zurück.",
-      foodPath3:"Kühlung: In Lagern und Supermärkten wird viel Strom verbraucht.",
-      foodPath4:"Lagerung zu Hause: Kühlschrank, Gefrierfach, Vorratsschrank.",
-      foodWasteTitle:"Wo entsteht Lebensmittelverschwendung?",
-      foodWaste1:"Im Supermarkt: Waren mit kleinen Schönheitsfehlern oder kurzem Datum.",
-      foodWaste2:"Zu Hause: Wir kaufen zu viel, lagern falsch oder trauen uns nicht über das Datum zu gehen.",
-      foodWaste3:"In Restaurants: Große Portionen oder Buffets, die nicht leer gegessen werden.",
-      foodMhdTitle:"Mindesthaltbarkeitsdatum richtig verstehen",
-      foodMhdText:"Das Mindesthaltbarkeitsdatum (MHD) ist kein Verfallsdatum. Viele Lebensmittel sind noch lange nach dem Datum genießbar. Nutze deine Sinne: anschauen, riechen, vorsichtig probieren.",
+// ============================================================
+// SELF-TEST DATA
+// ============================================================
+const TEST = [
+  {topic:"Impulskäufe",topicEN:"Impulse Buying",
+   q:"Ich kaufe Dinge spontan, ohne nachzudenken, ob ich sie wirklich brauche.",
+   qEN:"I buy things spontaneously without thinking about whether I really need them.",
+   opts:["Sehr oft – ich kann nicht widerstehen 😅","Manchmal – wenn etwas günstig ist","Selten – ich überlege immer gut"],
+   optsEN:["Very often – I can't resist 😅","Sometimes – when something is cheap","Rarely – I always think carefully"],
+   scores:[1,2,3]},
+  {topic:"Social-Media-Hypes",topicEN:"Social Media Hypes",
+   q:"Wenn auf TikTok oder Instagram ein Produkt gehypt wird, möchte ich es auch haben.",
+   qEN:"When a product is hyped on TikTok or Instagram, I want it too.",
+   opts:["Ja, fast immer","Manchmal, wenn es wirklich cool wirkt","Nein, ich kaufe unabhängig von Trends"],
+   optsEN:["Yes, almost always","Sometimes, if it really looks cool","No, I buy independently of trends"],
+   scores:[1,2,3]},
+  {topic:"Smartphone",topicEN:"Smartphone",
+   q:"Mein Handy funktioniert noch gut, aber ich möchte das neueste Modell haben.",
+   qEN:"My phone still works well, but I want the latest model.",
+   opts:["Ja, ich brauche immer das Neueste","Ich schaue es mir an, entscheide aber rational","Nein, ich nutze mein Handy solange es funktioniert"],
+   optsEN:["Yes, I always need the latest","I look at it, but decide rationally","No, I use my phone as long as it works"],
+   scores:[1,2,3]},
+  {topic:"Refurbished",topicEN:"Refurbished",
+   q:"Ich würde ein aufgearbeitetes (refurbished) Gerät kaufen statt eines neuen.",
+   qEN:"I would buy a refurbished device instead of a new one.",
+   opts:["Nein, lieber neu","Vielleicht, wenn es sehr günstig ist","Ja, das ist nachhaltig und spart Geld"],
+   optsEN:["No, I prefer new","Maybe, if it's very cheap","Yes, it's sustainable and saves money"],
+   scores:[1,2,3]},
+  {topic:"Fast Fashion",topicEN:"Fast Fashion",
+   q:"Ich kaufe günstige Kleidung, die ich nach kurzer Zeit nicht mehr anziehe.",
+   qEN:"I buy cheap clothing that I stop wearing after a short time.",
+   opts:["Ja, oft – Kleidung ist billig","Manchmal, ich versuche es zu reduzieren","Nein, ich kaufe weniger, aber bessere Qualität"],
+   optsEN:["Yes, often – clothes are cheap","Sometimes, I try to reduce it","No, I buy fewer but better quality pieces"],
+   scores:[1,2,3]},
+  {topic:"Markenfokus",topicEN:"Brand Focus",
+   q:"Ich kaufe Produkte lieber von einer bekannten Marke, auch wenn sie teurer ist.",
+   qEN:"I prefer products from a well-known brand, even if they're more expensive.",
+   opts:["Ja, Marke ist mir sehr wichtig","Manchmal schaue ich auf die Marke","Nein, ich schaue auf Qualität und Nachhaltigkeit"],
+   optsEN:["Yes, brand is very important to me","Sometimes I consider the brand","No, I look at quality and sustainability"],
+   scores:[1,2,3]},
+  {topic:"Einwegbecher",topicEN:"Disposable Cups",
+   q:"Ich benutze Einwegbecher (z. B. für Kaffee oder Softdrinks) und werfe sie danach weg.",
+   qEN:"I use disposable cups (e.g. for coffee or soft drinks) and throw them away.",
+   opts:["Ja, fast täglich","Manchmal, aber ich habe auch einen Mehrwegbecher","Ich nutze immer meinen eigenen Becher"],
+   optsEN:["Yes, almost daily","Sometimes, but I also have a reusable cup","I always use my own cup"],
+   scores:[1,2,3]},
+  {topic:"Kiosk-Snacks",topicEN:"Kiosk Snacks",
+   q:"Ich kaufe oft Snacks oder Getränke am Kiosk in Einwegverpackungen.",
+   qEN:"I often buy snacks or drinks at the kiosk in single-use packaging.",
+   opts:["Ja, fast täglich","Manchmal – 2–3 Mal pro Woche","Selten – ich bringe meist etwas von zuhause mit"],
+   optsEN:["Yes, almost daily","Sometimes – 2–3 times a week","Rarely – I usually bring something from home"],
+   scores:[1,2,3]},
+  {topic:"Leihen statt kaufen",topicEN:"Borrow Instead of Buy",
+   q:"Wenn ich etwas nur einmal brauche, leihe ich es mir aus statt es zu kaufen.",
+   qEN:"If I only need something once, I borrow it instead of buying it.",
+   opts:["Nein, ich kaufe es lieber gleich","Manchmal, wenn es einfach möglich ist","Ja, ich frage gerne Freunde oder Familie"],
+   optsEN:["No, I prefer to just buy it","Sometimes, when it's easy","Yes, I like to ask friends or family"],
+   scores:[1,2,3]},
+  {topic:"Schulmaterial",topicEN:"School Supplies",
+   q:"Ich benutze Schulmaterialien so lange wie möglich und kaufe nicht jedes Jahr alles neu.",
+   qEN:"I use school supplies for as long as possible and don't buy everything new every year.",
+   opts:["Nein, ich kaufe jedes Jahr alles neu","Manchmal spare ich einzelne Sachen auf","Ja, ich nutze alles bis es wirklich verbraucht ist"],
+   optsEN:["No, I buy everything new every year","Sometimes I keep some things","Yes, I use everything until it's really used up"],
+   scores:[1,2,3]},
+  {topic:"Digitale Ordnung",topicEN:"Digital Organization",
+   q:"Ich lösche regelmäßig unnötige Dateien, E-Mails und Apps, um Energie zu sparen.",
+   qEN:"I regularly delete unnecessary files, emails, and apps to save energy.",
+   opts:["Nein, ich denke da nie dran","Gelegentlich, wenn es unübersichtlich wird","Ja, ich achte bewusst auf meinen digitalen Fußabdruck"],
+   optsEN:["No, I never think about it","Occasionally, when things get messy","Yes, I consciously manage my digital footprint"],
+   scores:[1,2,3]},
+  {topic:"Lebensmittel",topicEN:"Food Consumption",
+   q:"Ich plane meine Einkäufe und kaufe nur das, was ich wirklich esse.",
+   qEN:"I plan my shopping and only buy what I really eat.",
+   opts:["Nein, ich kaufe viel und werfe viel weg","Manchmal plane ich grob vor","Ja, ich mache eine Einkaufsliste und halte mich daran"],
+   optsEN:["No, I buy a lot and throw a lot away","Sometimes I plan roughly","Yes, I make a shopping list and stick to it"],
+   scores:[1,2,3]},
+  {topic:"Reste verwerten",topicEN:"Using Leftovers",
+   q:"Ich verwerte Essensreste als neue Mahlzeit am nächsten Tag.",
+   qEN:"I use food leftovers as a new meal the next day.",
+   opts:["Nein, Reste landen meist im Müll","Manchmal, wenn es einfach ist","Ja, Reste sind für mich eine neue Mahlzeit!"],
+   optsEN:["No, leftovers usually go in the trash","Sometimes, when it's easy","Yes, leftovers are a new meal for me!"],
+   scores:[1,2,3]},
+  {topic:"Mülltrennung",topicEN:"Waste Sorting",
+   q:"Ich trenne meinen Müll korrekt (Papier, Plastik, Glas, Bio, Restmüll).",
+   qEN:"I sort my waste correctly (paper, plastic, glass, organic, residual waste).",
+   opts:["Nein, alles kommt in eine Tonne","Manchmal, wenn ich Zeit habe","Ja, immer – das ist mir wichtig"],
+   optsEN:["No, everything goes in one bin","Sometimes, when I have time","Yes, always – that's important to me"],
+   scores:[1,2,3]},
+  {topic:"Reparieren",topicEN:"Repair",
+   q:"Wenn etwas kaputt geht, versuche ich es zuerst zu reparieren, bevor ich es wegwerfe.",
+   qEN:"When something breaks, I first try to repair it before throwing it away.",
+   opts:["Nein, ich kaufe lieber neu","Manchmal, bei einfachen Reparaturen","Ja, ich repariere immer erst!"],
+   optsEN:["No, I prefer to buy new","Sometimes, for simple repairs","Yes, I always repair first!"],
+   scores:[1,2,3]}
+];
 
-      cycleTitle:"Der Kreislauf der Lebensmittel – von der Erde zurück zur Erde",
-      cycleIntro:"Lebensmittel sind Teil eines Kreislaufs: Von der Natur über uns Menschen wieder zurück in den Boden. Die 7R helfen, diesen Kreislauf fairer und nachhaltiger zu machen.",
-      cycle1Title:"1. Produktion",
-      cycle1Text:"Bauern pflanzen, pflegen und ernten – mit Wasser, Boden und Energie.",
-      cycle2Title:"2. Handel",
-      cycle2Text:"Lebensmittel werden transportiert, gekühlt, sortiert und im Supermarkt angeboten.",
-      cycle3Title:"3. Haushalt",
-      cycle3Text:"Wir kaufen ein, lagern, kochen und essen – oder werfen weg.",
-      cycle4Title:"4. Entsorgung & Rückgewinnung",
-      cycle4Text:"Reste werden getrennt gesammelt, kompostiert oder in Biogasanlagen zu Energie.",
-      cycleHint:"Frage an dich: An welcher Stelle im Kreislauf kannst du mit den 7R am meisten bewirken?",
+// ============================================================
+// MAP DATA
+// ============================================================
+const MAP_DATA = {
+  eu:{title:"🌍 Europa",titleEN:"🌍 Europe",
+    text:"Europa ist führend in der Kreislaufwirtschaft. Der EU Green Deal setzt ambitionierte Ziele: bis 2050 klimaneutral, bis 2030 mehr Recycling und weniger Abfall. Deutschland hat ein vorbildliches Pfandsystem. Die Niederlande gelten als weltweites Vorbild. Das EU-Lieferkettengesetz soll faire und ressourcenschonende Produktion sicherstellen.",
+    textEN:"Europe leads in the circular economy. The EU Green Deal sets ambitious targets: climate neutral by 2050, more recycling and less waste by 2030. Germany has an exemplary deposit system. The Netherlands is a global role model. The EU Supply Chain Act aims to ensure fair and resource-efficient production."},
+  as:{title:"🌏 Asien",titleEN:"🌏 Asia",
+    text:"Asien ist größter Produzent und Konsument vieler Güter. China hat eine nationale Kreislaufwirtschaftsstrategie. Japan praktiziert das Prinzip des 'Mottainai' – tiefe Abneigung gegen Verschwendung. Südkorea hat eine der höchsten Recyclingquoten weltweit.",
+    textEN:"Asia is the largest producer and consumer of many goods. China has a national circular economy strategy. Japan practices 'Mottainai' – a deep aversion to waste. South Korea has one of the highest recycling rates worldwide."},
+  af:{title:"🌍 Afrika",titleEN:"🌍 Africa",
+    text:"Afrika besitzt enorme Rohstoffvorkommen (Kobalt, Coltan, Gold) für Elektronikprodukte – oft unter schwierigen Bedingungen abgebaut. Gleichzeitig landen große Mengen Elektroschrott aus Europa auf dem Kontinent. In vielen Gemeinschaften gibt es eine starke Reparatur- und Wiederverwendungskultur.",
+    textEN:"Africa has enormous raw material deposits (cobalt, coltan, gold) for electronics – often mined under difficult conditions. At the same time, large amounts of e-waste from Europe end up here. Many communities have a strong culture of repair and reuse."},
+  na:{title:"🌎 Nordamerika",titleEN:"🌎 North America",
+    text:"Die USA und Kanada haben einen der höchsten Ressourcenverbrauch pro Kopf weltweit. Allerdings gibt es starke Initiativen: San Francisco hat eine Recyclingquote von über 80 %. Firmen wie Patagonia zeigen, dass nachhaltiges Wirtschaften auch kommerziell funktioniert.",
+    textEN:"USA and Canada have one of the highest per capita resource consumptions worldwide. But there are strong initiatives: San Francisco has a recycling rate of over 80%. Companies like Patagonia show that sustainable business also works commercially."},
+  sa:{title:"🌎 Südamerika",titleEN:"🌎 South America",
+    text:"Südamerika beherbergt den Amazonas-Regenwald – den größten CO₂-Speicher der Erde. In Brasilien ist Recycling durch informelle Sammler (Catadores) weit verbreitet. Länder wie Costa Rica setzen Maßstäbe beim Umweltschutz und erneuerbaren Energien.",
+    textEN:"South America is home to the Amazon rainforest – the Earth's largest CO₂ store. In Brazil, recycling through informal collectors (Catadores) is widespread. Countries like Costa Rica set standards in environmental protection and renewable energy."},
+  au:{title:"🌏 Australien & Ozeanien",titleEN:"🌏 Australia & Oceania",
+    text:"Australien hat ein umfassendes Pfand- und Recyclingsystem eingeführt. Die Pazifikinseln leiden stark unter Plastikmüll im Ozean und dem Klimawandel. Neuseeland hat strenge Umweltgesetze und setzt auf nachhaltige Landwirtschaft.",
+    textEN:"Australia has introduced a comprehensive deposit and recycling system. Pacific islands suffer severely from ocean plastic and climate change. New Zealand has strict environmental laws and focuses on sustainable agriculture."}
+};
 
-      rsTitle:"Die 7R – deine Strategie gegen Verschwendung",
-      rsIntro:"Die 7R helfen dir, in kleinen Schritten Großes zu verändern. Klicke auf ein R, um Beispiele, Tipps und Ideen zu sehen.",
-      r1Title:"1. Rethink – Überdenken",
-      r1Text:"Rethink heißt: Stopp, bevor du kaufst oder wegwirfst. Plane deine Woche, schreibe eine Liste und überlege: Was brauche ich wirklich? Gehe nicht hungrig einkaufen.",
-      r2Title:"2. Reduce – Reduzieren",
-      r2Text:"Reduce bedeutet, Abfall von Anfang an zu vermeiden: passende Portionsgrößen, richtige Lagerung und „First in – First out“ im Kühlschrank.",
-      r3Title:"3. Reuse – Wiederverwenden",
-      r3Text:"Reuse heißt: Reste nicht wegwerfen, sondern kreativ nutzen – z.B. Restetag, Pfannengerichte, Smoothies oder Einfrieren.",
-      r4Title:"4. Repair – Reparieren",
-      r4Text:"Repair passt vor allem zu Gegenständen: Vorratsbehälter, Gefrierfächer oder Küchengeräte reparieren, statt neu zu kaufen – damit Lebensmittel besser geschützt sind.",
-      r5Title:"5. Refuse – Ablehnen",
-      r5Text:"Refuse bedeutet: Nein sagen zu Dingen, die du nicht brauchst – z.B. „2 für 1“-Angebote, wenn du es realistisch nicht aufbrauchst.",
-      r6Title:"6. Recycle – Recyceln",
-      r6Text:"Recycle heißt: Müll richtig trennen, damit Verpackungen und Bioabfall wieder zu neuen Produkten oder Energie werden können.",
-      r7Title:"7. Recover – Zurückgewinnen",
-      r7Text:"Recover nutzt das, was gar nicht mehr essbar ist: z.B. Biogasanlagen oder Kompost, die aus Lebensmittelresten Energie und neue Nährstoffe machen.",
+// ============================================================
+// TOPIC MODAL DATA
+// ============================================================
+const TOPICS = {
+  impulse:{title:"💸 Impulskäufe",titleEN:"💸 Impulse Buying",
+    body:"Impulskäufe entstehen durch Werbung, Rabatte oder Langeweile. Studien zeigen: bis zu 40 % unserer Einkäufe sind ungeplant.\n\n✅ Tipp: Warte 24 Stunden. Frage dich: Brauche ich das wirklich? Habe ich schon etwas Ähnliches? Entferne Shopping-Apps vom Startbildschirm.",
+    bodyEN:"Impulse purchases are triggered by advertising, discounts, or boredom. Studies show up to 40% of purchases are unplanned.\n\n✅ Tip: Wait 24 hours. Ask: Do I really need this? Do I already have something similar? Remove shopping apps from your home screen."},
+  tiktok:{title:"📱 TikTok & Instagram Hypes",titleEN:"📱 TikTok & Instagram Hypes",
+    body:"Plattformen nutzen Algorithmen, die gezielt Produkte zeigen. Haul-Videos und gesponserte Posts erzeugen sozialen Druck.\n\n✅ Tipp: Erkenne Werbung als Werbung. Frage dich: Bin ich wirklich interessiert – oder nur beeinflusst?",
+    bodyEN:"Platforms use algorithms that specifically show products. Haul videos and sponsored posts create social pressure.\n\n✅ Tip: Recognize advertising as advertising. Ask yourself: Am I genuinely interested – or just influenced?"},
+  smartphone:{title:"📲 Immer das neueste Smartphone",titleEN:"📲 Always the Newest Smartphone",
+    body:"Die Produktion eines Smartphones verbraucht seltene Rohstoffe (Kobalt, Lithium, Gold) und viel Energie. Viele dieser Rohstoffe werden unter schwierigen Bedingungen abgebaut. Ein Smartphone sollte idealerweise 4–5 Jahre genutzt werden.\n\n✅ Tipp: Refurbished kaufen und Geräte länger nutzen!",
+    bodyEN:"Smartphone production consumes rare raw materials (cobalt, lithium, gold) and lots of energy. Many of these are mined under difficult conditions. A smartphone should ideally be used for 4–5 years.\n\n✅ Tip: Buy refurbished and use devices longer!"},
+  refurbished:{title:"🔧 Refurbished statt neu",titleEN:"🔧 Refurbished Instead of New",
+    body:"Refurbished-Geräte sind professionell aufgearbeitet, geprüft und mit Garantie verkauft. Sie sind 20–50 % günstiger, haben die gleiche Funktion und verursachen weniger Elektroschrott.\n\nGute Anbieter: BackMarket, refurbed, AfB Social & Green IT.",
+    bodyEN:"Refurbished devices are professionally refurbished, tested, and sold with warranty. They are 20–50% cheaper, have the same function, and generate less e-waste.\n\nGood providers: BackMarket, refurbed, AfB Social & Green IT."},
+  fastfashion:{title:"👗 Fast Fashion",titleEN:"👗 Fast Fashion",
+    body:"Fast Fashion produziert Kleidung schnell und günstig – zu Lasten von Mensch und Umwelt. 92 Mio. Tonnen Kleidungsmüll weltweit jährlich. Die Modeindustrie verursacht ca. 10 % der globalen CO₂-Emissionen.\n\n✅ Tipp: Secondhand kaufen, Kleidung tauschen, weniger aber bessere Qualität wählen.",
+    bodyEN:"Fast fashion produces clothing quickly and cheaply – at the expense of people and the environment. 92 million tons of clothing waste annually worldwide. The fashion industry causes about 10% of global CO₂ emissions.\n\n✅ Tip: Buy secondhand, swap clothes, choose fewer but better quality pieces."},
+  marken:{title:"🏷️ Markenfokus & Statussymbole",titleEN:"🏷️ Brand Focus & Status Symbols",
+    body:"Ein Marken-Hoodie kostet 80 €, ein vergleichbarer ohne Logo 15 €. Du zahlst für einen Namen.\n\n✅ Tipp: Frage dich: Kaufe ich das, weil es qualitativ besser ist – oder um anerkannt zu werden? Nachhaltig konsumieren heißt: Qualität vor Logo.",
+    bodyEN:"A branded hoodie costs €80, a comparable one without a logo €15. You pay for a name.\n\n✅ Tip: Ask yourself: Am I buying this because it's better quality – or to gain recognition? Sustainable consumption means: quality over logo."},
+  becher:{title:"☕ Einwegbecher",titleEN:"☕ Disposable Cups",
+    body:"In Deutschland werden täglich ca. 320.000 Einwegbecher weggeworfen. Die meisten bestehen aus Karton + Plastikbeschichtung und sind kaum recycelbar.\n\n✅ Tipp: Mehrwegbecher nutzen – viele Coffeeshops geben Rabatt (0,10–0,30 €). Er amortisiert sich nach 3–5 Benutzungen!",
+    bodyEN:"In Germany, around 320,000 disposable cups are thrown away daily. Most consist of cardboard + plastic coating and are barely recyclable.\n\n✅ Tip: Use a reusable cup – many coffee shops give a discount (€0.10–0.30). It pays for itself after 3–5 uses!"},
+  snacks:{title:"🍟 Snacks aus dem Kiosk",titleEN:"🍟 Kiosk Snacks",
+    body:"Täglich Kiosk = ca. 100–200 € pro Monat + enorme Mengen Einwegverpackungen.\n\n✅ Tipp: Snacks in einer Brotdose und eine eigene Trinkflasche von zuhause mitbringen. Spart Geld und Verpackungsmüll!",
+    bodyEN:"Daily kiosk = approx. €100–200 per month + enormous amounts of single-use packaging.\n\n✅ Tip: Bring snacks in a lunch box and your own water bottle from home. Saves money and packaging waste!"},
+  leihen:{title:"🔄 Leihen statt kaufen",titleEN:"🔄 Borrow Instead of Buy",
+    body:"Viele Dinge werden nur einmal oder sehr selten genutzt. Statt zu kaufen: Freunde, Familie oder Nachbarn fragen – oder eine Bibliothek der Dinge nutzen (Werkzeug, Sportgeräte, Partyausstattung).\n\nPlattformen: Leila, Peerby, lokale Repair Cafés & Tauschbörsen.",
+    bodyEN:"Many things are only used once or rarely. Instead of buying: ask friends, family, or neighbors – or use a library of things (tools, sports equipment, party supplies).\n\nPlatforms: Leila, Peerby, local repair cafés & swap meets."},
+  schulmaterial:{title:"📚 Schulmaterial länger nutzen",titleEN:"📚 Using School Supplies Longer",
+    body:"Jedes Jahr komplett neu zu kaufen ist oft unnötig. Hefte können weitergenutzt, Stifte nachgefüllt, Bücher weitergegeben werden.\n\n✅ Tipp: Vor dem neuen Schuljahr prüfen: Was kann ich von letztem Jahr noch nutzen?",
+    bodyEN:"Buying completely new every year is often unnecessary. Notebooks can be reused, pens refilled, books passed on.\n\n✅ Tip: Before the new school year: check what you can still use from last year."},
+  digital:{title:"💻 Digitale Ordnung",titleEN:"💻 Digital Organization",
+    body:"Serverfarmen verbrauchen ca. 200 Terawattstunden Strom jährlich. Auch unnötige E-Mails, Cloud-Fotos und Video-Streams summieren sich.\n\n✅ Tipp: Alte E-Mails löschen, Fotos aufräumen, ungenutzte Apps deinstallieren, Cloud-Speicher reduzieren.",
+    bodyEN:"Server farms consume about 200 terawatt hours of electricity annually. Unnecessary emails, cloud photos and video streams add up.\n\n✅ Tip: Delete old emails, tidy photos, uninstall unused apps, reduce cloud storage."},
+  lebensmittel:{title:"🥗 Lebensmittel bewusst verbrauchen",titleEN:"🥗 Conscious Food Consumption",
+    body:"Weltweit wird ca. ein Drittel aller Lebensmittel weggeworfen – in Deutschland ca. 12 Mio. Tonnen jährlich. Das verschwendet Wasser, Energie, Fläche und Arbeit.\n\n✅ Tipp: Einkaufsliste schreiben, Vorräte kennen, MHD beachten (aber nicht blind befolgen!), Reste einfrieren.",
+    bodyEN:"Around one third of all food is wasted worldwide – in Germany about 12 million tons annually. This wastes water, energy, land and labor.\n\n✅ Tip: Write a shopping list, know your supplies, check expiry dates (but don't follow blindly!), freeze leftovers."},
+  reste:{title:"🍲 Reste verwerten",titleEN:"🍲 Using Leftovers",
+    body:"Reste sind keine Abfälle – sie sind Zutaten! Aus übrigem Gemüse wird Suppe, aus altem Brot werden Croutons oder Arme Ritter.\n\nApp-Tipp: 'Too Good To Go' oder 'Zu gut für die Tonne' des Bundesministeriums.",
+    bodyEN:"Leftovers are not waste – they're ingredients! Leftover vegetables become soup, old bread becomes croutons or French toast.\n\nApp tip: 'Too Good To Go'."},
+  muell:{title:"🗑️ Mülltrennung",titleEN:"🗑️ Waste Sorting",
+    body:"Deutschland hat eines der besten Recyclingsysteme der Welt – aber es funktioniert nur bei korrekter Trennung.\n\nGelb = Verpackungen | Blau = Papier | Grün/Weiß/Braun = Glas | Braun = Bioabfall | Grau = Restmüll\n\n⚠️ Sondermüll (Batterien, Medikamente, Elektronik) niemals in den Hausmüll!",
+    bodyEN:"Germany has one of the world's best recycling systems – but only with correct sorting.\n\nYellow = packaging | Blue = paper | Green/White/Brown = glass | Brown = organic | Grey = residual\n\n⚠️ Never put hazardous waste (batteries, meds, electronics) in household waste!"},
+  reparieren:{title:"🔨 Reparieren",titleEN:"🔨 Repair",
+    body:"Reparieren schützt die Umwelt und schätzt Dinge wert. Viele Kommunen haben Repair Cafés mit ehrenamtlichen Helfern.\n\nSeit 2021 müssen EU-Hersteller Ersatzteile für bestimmte Produkte bereithalten – das Recht auf Reparatur ist gesetzlich gestärkt worden.",
+    bodyEN:"Repairing protects the environment and values things. Many municipalities have repair cafés with volunteer helpers.\n\nSince 2021, EU manufacturers must provide spare parts for certain products – the right to repair has been legally strengthened."}
+};
 
-      btnExamples:"Beispiel aus dem Video",
-      btnTips:"Kühlschrank‑Tipps",
-      btnRecipes:"Resterezepte",
+// ============================================================
+// FAQ DATA
+// ============================================================
+const FAQ = [
+  {q:"Was bedeutet Kreislaufwirtschaft genau?",
+   a:"Kreislaufwirtschaft (Circular Economy) ist ein Wirtschaftsmodell, das darauf abzielt, Abfall zu minimieren und Ressourcen so lange wie möglich zu nutzen. Im Gegensatz zur linearen Wirtschaft (nehmen – herstellen – wegwerfen) werden Produkte, Materialien und Rohstoffe immer wieder in den Kreislauf zurückgeführt – durch Reparieren, Wiederverwenden, Aufarbeiten oder Recyceln."},
+  {q:"Was ist der Unterschied zwischen Recyceln und Kreislaufwirtschaft?",
+   a:"Recyceln ist nur ein Teil der Kreislaufwirtschaft. Das Konzept ist viel breiter: Zuerst soll Konsum reduziert werden (weniger kaufen), dann Produkte so lange wie möglich genutzt werden (Reuse), dann repariert werden – und erst als letzter Schritt recycelt. Recyceln allein reicht nicht, weil dabei immer Energie und Materialqualität verloren geht."},
+  {q:"Was ist Fast Fashion und warum ist sie ein Problem?",
+   a:"Fast Fashion bezeichnet die Herstellung von günstiger Kleidung in großen Mengen, die schnell aus der Mode kommt. Die Probleme: 92 Millionen Tonnen Kleidungsmüll jährlich, ausbeuterische Arbeitsbedingungen in Produktionsländern, hoher Wasser- und Chemikalieneinsatz sowie hohe CO₂-Emissionen. Nachhaltige Alternativen: Secondhand kaufen (Vinted, Flohmärkte), Kleidung reparieren oder tauschen, weniger aber qualitätsvollere Kleidung kaufen."},
+  {q:"Was bedeutet 'refurbished' und lohnt es sich?",
+   a:"Refurbished bedeutet, dass ein gebrauchtes elektronisches Gerät professionell überprüft, gereinigt, repariert und zertifiziert wurde – und dann mit Garantie weiterverkauft wird. Es lohnt sich fast immer: 20–50 % günstiger als neu, weniger Ressourcenverbrauch, weniger Elektroschrott, oft gleiche Funktion. Bekannte Anbieter: BackMarket, refurbed, AfB Social & Green IT."},
+  {q:"Warum ist Mülltrennung so wichtig?",
+   a:"Richtige Mülltrennung ist die Grundlage für funktionierendes Recycling. Wenn Papier, Glas, Kunststoff und Bioabfälle getrennt gesammelt werden, können diese Materialien wieder als Rohstoffe eingesetzt werden. In Deutschland: Gelbe Tonne (Verpackungen), Blaue Tonne (Papier), Glascontainer (nach Farbe), Braune Tonne (Bioabfall), Restmüll. Sondermüll wie Batterien und Elektronik gehören zum Wertstoffhof."},
+  {q:"Was sind Impulskäufe und wie vermeide ich sie?",
+   a:"Impulskäufe sind spontane Kaufentscheidungen ohne Planung – oft ausgelöst durch Rabatte, Social-Media-Werbung oder Langeweile. Strategien: (1) 24 Stunden warten. (2) Fragen: Brauche ich das wirklich? (3) Shopping-Apps deinstallieren. (4) Einkaufslisten erstellen und einhalten. (5) Werbemails abbestellen und Push-Benachrichtigungen von Shopping-Apps deaktivieren."},
+  {q:"Was kann ich als Schüler/in konkret tun?",
+   a:"Es gibt viele Möglichkeiten: Schulmaterial bis zum Ende nutzen; Snacks von zuhause mitbringen statt am Kiosk kaufen; Mehrwegbecher verwenden; Kleidung auf Flohmärkten kaufen oder tauschen; Geräte reparieren statt wegwerfen; Lebensmittel nicht verschwenden; Müll konsequent trennen; digitale Ordnung halten. Jede Handlung zählt – besonders wenn du sie mit Freunden oder der Familie teilst!"},
+  {q:"Was bedeutet BNE – Bildung für nachhaltige Entwicklung?",
+   a:"BNE (Bildung für nachhaltige Entwicklung) befähigt Schülerinnen und Schüler, nachhaltige Entscheidungen zu treffen und aktiv an einer zukunftsfähigen Gesellschaft mitzuwirken. In NRW ist BNE fester Bestandteil der Lehrpläne. Es geht um Handlungskompetenz: Was kann ich tun? BNE verknüpft ökologische, soziale und wirtschaftliche Aspekte der Nachhaltigkeit."},
+  {q:"Wie hängen Social Media und Konsum zusammen?",
+   a:"TikTok und Instagram sind heute wichtige Einflussquellen auf Kaufentscheidungen – besonders bei Jugendlichen. Algorithmen zeigen gezielt Kaufanreize. Micro-Trends machen Produkte kurz viral. Bewusster Medienkonsum hilft: Werbeinhalte erkennen, Influencer-Empfehlungen hinterfragen und fragen: Kaufe ich das, weil ich es brauche – oder weil ich es gesehen habe?"},
+  {q:"Was passiert mit Elektroschrott?",
+   a:"Elektroschrott (E-Waste) ist der am schnellsten wachsende Müllstrom weltweit – 2022 global 62 Millionen Tonnen, nur 22 % korrekt recycelt. Der Rest landet oft in Ländern des Globalen Südens. Für Verbraucher gilt: Geräte beim Händler oder Wertstoffhof abgeben (in Deutschland Pflicht), Geräte möglichst lange nutzen, auf Reparierbarkeit achten, ggf. refurbished kaufen."}
+];
 
-      worldTitle:"7R weltweit – wie machen es andere?",
-      worldIntro:"Klicke auf einen Kontinent und sieh dir an, wie dort mit Lebensmittelverschwendung umgegangen wird – und welche Ideen wir übernehmen können.",
-      euTitle:"Europa",
-      euShort:"Retterkisten, Apps, Bildungsprojekte",
-      naTitle:"Nordamerika",
-      naShort:"Food banks, „ugly food“, Kampagnen",
-      saTitle:"Südamerika",
-      saShort:"Gemeinschaftsküchen, Märkte mit Restware",
-      asTitle:"Asien",
-      asShort:"Buffet‑Kampagnen, Apps, Schulprojekte",
-      afTitle:"Afrika",
-      afShort:"Solartrocknung, Lagerung, Kompost",
-      ocTitle:"Ozeanien",
-      ocShort:"Zero‑Waste‑Kampagnen, Schulkampagnen",
+// ============================================================
+// SOURCES DATA
+// ============================================================
+const SOURCES = [
+  {label:"Schulministerium NRW – Bildung für nachhaltige Entwicklung",
+   url:"https://www.schulministerium.nrw/bildung-fuer-nachhaltige-entwicklung",
+   desc:"Offizielle Informationen des Schulministeriums NRW zu BNE in der schulischen Bildung."},
+  {label:"Umweltbundesamt – Kreislaufwirtschaft",
+   url:"https://www.umweltbundesamt.de/themen/abfall-ressourcen/kreislaufwirtschaft",
+   desc:"Fachliche Informationen zur Kreislaufwirtschaft und Ressourcenschutz in Deutschland."},
+  {label:"Bundeszentrale für politische Bildung – Nachhaltigkeit & Umwelt",
+   url:"https://www.bpb.de/themen/umwelt/",
+   desc:"Hintergrundinformationen zu Wirtschaft, Konsum und Nachhaltigkeit für Bildungszwecke."},
+  {label:"Ellen MacArthur Foundation – Circular Economy",
+   url:"https://www.ellenmacarthurfoundation.org",
+   desc:"Internationale Stiftung, die das Konzept der Kreislaufwirtschaft weltweit verbreitet und dokumentiert."},
+  {label:"Verbraucherzentrale NRW – Nachhaltiger Konsum",
+   url:"https://www.verbraucherzentrale.nrw",
+   desc:"Praktische Tipps für Verbraucher zu nachhaltigem Einkaufen und Konsumieren in Deutschland."},
+  {label:"Greenpeace – Fast Fashion & Ressourcen",
+   url:"https://www.greenpeace.de/themen/endlichkeit-ressourcen",
+   desc:"Informationen zu Fast Fashion und Ressourcenverbrauch sowie Hintergründe zur Modeindustrie."},
+  {label:"Videomaterial – Schülerprojekt OHG Monheim (schulinterne Quelle)",
+   url:"#vsec",
+   desc:"Projektvideo: Kreislaufwirtschaft im Alltag – produziert von Yusuf Serif, Otto-Hahn-Gymnasium Monheim am Rhein (2025)."}
+];
 
-      quizTitle:"Quiz: Wie gut kennst du die 7R?",
-      quizIntro:"Teste dein Wissen rund um Lebensmittelverschwendung, das Video und die 7R. Jede Frage hat nur eine richtige Antwort.",
-      btnStartQuiz:"Quiz starten",
-      btnNext:"Weiter",
+// ============================================================
+// STATE
+// ============================================================
+let LANG = 'de', DARK = false;
+let qIdx = 0, qScore = 0, qDone = false;
+let stIdx = 0, stAns = new Array(15).fill(null);
+let certData = {};
 
-      selftestTitle:"Selbsttest: Wie 7R‑fit ist dein Haushalt?",
-      selftestIntro:"Beantworte ein paar Fragen und erhalte am Ende eine 7R‑Urkunde mit persönlichen Tipps, die du mit deinen Eltern durchgehen kannst.",
-      btnStartSelftest:"Selbsttest starten",
+// ============================================================
+// LANGUAGE & DARK MODE
+// ============================================================
+function toggleLang() {
+  LANG = LANG === 'de' ? 'en' : 'de';
+  document.getElementById('lbtn').textContent = LANG === 'de' ? '🌐 EN' : '🌐 DE';
+  document.documentElement.lang = LANG;
+  applyTR();
+  buildFAQ();
+  buildSources();
+  renderQuiz();
+  renderTest();
+}
 
-      certTitle:"7R‑Urkunde für deinen Haushalt",
-      certTipsTitle:"Unsere Tipps für dich:",
-      btnPrint:"Urkunde drucken / als PDF speichern",
-      printHint:"Tipp: Beim Drucken „Als PDF speichern“ wählen und die Urkunde zu Hause mit den Eltern anschauen.",
+function applyTR() {
+  const tr = TR[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (tr[k] !== undefined) el.innerHTML = tr[k];
+  });
+}
 
-      r1ModalTitle:"Rethink – Beispiel aus dem Video",
-      r1ModalText1:"Im Experiment wurden Bananen, Blaubeeren und Skyr nicht weggeworfen, sondern in einen Smoothie verwandelt. Rethink heißt: Erst denken, dann wegwerfen.",
-      r1ModalText2:"Überlege: Was kannst du diese Woche anders planen? Schreibe 3 Dinge auf, die du weglassen oder besser nutzen möchtest.",
+function toggleDark() {
+  DARK = !DARK;
+  document.documentElement.setAttribute('data-theme', DARK ? 'dark' : 'light');
+  document.getElementById('dbtn').textContent = DARK ? '☀️ Hell' : '🌙 Dark';
+}
 
-      r2ModalTitle:"Reduce – Kühlschrank‑Check",
-      r2ModalLi1:"„First in – First out“: Altes nach vorne, Neues nach hinten.",
-      r2ModalLi2:"Unten ist es am kältesten – hier lagern Fleisch und Fisch.",
-      r2ModalLi3:"Mittelbereich: Milchprodukte wie Skyr.",
-      r2ModalLi4:"Obst und Gemüse ins Gemüsefach – möglichst unverpackt.",
+// ============================================================
+// MAP
+// ============================================================
+function selR(id) {
+  document.querySelectorAll('.cpth').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.cbtn').forEach(b => b.classList.remove('active'));
+  const path = document.getElementById('mp-' + id);
+  if (path) path.classList.add('active');
+  document.querySelectorAll('.cbtn[data-r="' + id + '"]').forEach(b => b.classList.add('active'));
+  const d = MAP_DATA[id];
+  if (!d) return;
+  document.getElementById('mi-title').textContent = LANG === 'de' ? d.title : d.titleEN;
+  document.getElementById('mi-text').textContent  = LANG === 'de' ? d.text  : d.textEN;
+}
 
-      r3ModalTitle:"Reuse – Ideen für Restetage",
-      r3ModalLi1:"Nudeln vom Vortag + Ei + Gemüse = Restepfanne.",
-      r3ModalLi2:"Braune Bananen + Joghurt + Obst = Smoothie.",
-      r3ModalLi3:"Hartes Brot = Croutons oder Semmelbrösel.",
-      r3ModalLi4:"Früchte einkochen = Kompott oder Apfelmus.",
+// ============================================================
+// VIDEO
+// ============================================================
+function startVid() {
+  document.getElementById('vph').style.display  = 'none';
+  document.getElementById('vemb').style.display = 'block';
+  const vid = document.querySelector('#vemb video');
+  if (vid) vid.play().catch(() => {});
+}
 
-      sourcesTitle:"Quellen & weiterführende Links",
-      src1:"Bundeszentrum für Ernährung (BZfE): Informationen zu Lebensmittelverschwendung und Haltbarkeit.",
-      src2:"Verbraucherzentrale: „Mindesthaltbarkeitsdatum verstehen“ – Tipps zum Prüfen mit den Sinnen.",
-      src3:"Too Good To Go – App und Infomaterial zu überschüssigen Lebensmitteln im Handel.",
-      src4:"WWF / FAO: Studien zu globaler Lebensmittelverschwendung und Ressourcenverbrauch.",
-      src5:"Eigene Auswertung des 7‑Tage‑Experiments aus dem Video (Haushalt von Yusuf Serif).",
+// ============================================================
+// TOPIC MODALS
+// ============================================================
+function openTopic(id) {
+  const d = TOPICS[id];
+  if (!d) return;
+  document.getElementById('mtid').textContent = LANG === 'de' ? d.title : d.titleEN;
+  document.getElementById('mbod').innerHTML   = (LANG === 'de' ? d.body : d.bodyEN).replace(/\n/g, '<br>');
+  document.getElementById('modal').classList.add('open');
+}
 
-      impTitle:"Impressum (Schülerprojekt)",
-      impLine1:"Dieses Projekt wurde im Rahmen des Erdkundeunterrichts erstellt.",
-      impLine2:"Video: Yusuf Serif · Webseite: Anouk Sperling.",
-      impLine3:"Die Seite dient ausschließlich zu Bildungszwecken und wird nicht kommerziell genutzt.",
+function closeMod() {
+  document.getElementById('modal').classList.remove('open');
+}
 
-      footerTitle:"Ziel der Seite",
-      footerText:"Diese Seite soll Schülerinnen und Schüler motivieren, mit ihren Familien über Lebensmittelverschwendung zu sprechen und mit den 7R im Alltag zu experimentieren.",
-      footerContact:"Kontakt (Schule)",
-      footerHint:"Für Rückfragen zum Projekt wende dich bitte an deine Lehrkraft im Fach Erdkunde."
-    },
-    en:{
-      title:"The 7R against food waste",
-      subtitle:"Geography class project – video & website",
-      languageLabel:"Sprache / Language:",
-      badge:"Together against food waste",
-      themeLabel:"Dark mode",
-      navVideo:"Video",
-      navFood:"Food",
-      navCycle:"Cycle",
-      nav7R:"The 7R",
-      navQuiz:"Quiz",
-      navSelftest:"Self‑test",
-      navWorld:"Worldwide",
-      navSources:"Sources",
-      navImpressum:"Imprint",
+// ============================================================
+// QUIZ
+// ============================================================
+function renderQuiz() {
+  const scoreEl = document.getElementById('qscr');
+  if (qIdx >= QUIZ.length) { showQScore(); return; }
+  if (scoreEl) scoreEl.style.display = 'none';
 
-      videoTitle:"7‑day experiment: How much food can we save?",
-      videoIntro:"In the video you see a real 7‑day experiment at home: what almost ended up in the bin – and how much can be saved using the 7R.",
-      videoHint:"Tip: Watch which R‑words appear in the video and how they are used in everyday life.",
-      credits:"Video: Yusuf Serif · Website: Anouk Sperling · Geography project",
+  const q = QUIZ[qIdx];
+  const cnt = document.getElementById('qcnt');
+  if (cnt) cnt.textContent = (LANG === 'de' ? 'Frage' : 'Question') + ' ' + (qIdx+1) + ' ' + (LANG === 'de' ? 'von' : 'of') + ' ' + QUIZ.length;
+  const pb = document.getElementById('qpb');
+  if (pb) pb.style.width = (qIdx / QUIZ.length * 100) + '%';
+  const qq = document.getElementById('qq');
+  if (qq) qq.textContent = q.q;
+  const opts = document.getElementById('qopts');
+  if (opts) {
+    opts.innerHTML = '';
+    q.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.className = 'qopt'; b.textContent = o;
+      b.onclick = () => answerQ(i);
+      opts.appendChild(b);
+    });
+  }
+  const fb = document.getElementById('qfb');
+  if (fb) { fb.className = 'qfb'; fb.textContent = ''; }
+  const nxt = document.getElementById('qnxt');
+  if (nxt) nxt.disabled = true;
+  qDone = false;
+}
 
-      foodTitle:"Food – from field to bin",
-      foodIntro:"When we throw away food, we waste not only the food itself but also water, energy, transport and work. Here you can see what is behind it.",
-      foodPathTitle:"The journey of a food item",
-      foodPath1:"Growing: plants need water, soil, fertiliser and time.",
-      foodPath2:"Transport: many foods travel long distances by lorry or plane.",
-      foodPath3:"Cooling: a lot of electricity is used in storage and supermarkets.",
-      foodPath4:"Storage at home: fridge, freezer, pantry.",
-      foodWasteTitle:"Where does food waste happen?",
-      foodWaste1:"In supermarkets: products with small visual defects or short dates.",
-      foodWaste2:"At home: we buy too much, store things wrongly or are afraid of dates.",
-      foodWaste3:"In restaurants: big portions or buffets that are not finished.",
-      foodMhdTitle:"Understanding best‑before dates",
-      foodMhdText:"The best‑before date is not an expiry date. Many foods are still safe long after the date. Use your senses: look, smell, taste carefully.",
+function answerQ(i) {
+  if (qDone) return;
+  qDone = true;
+  const q = QUIZ[qIdx];
+  document.querySelectorAll('#qopts .qopt').forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.ok) b.classList.add('ok');
+    else if (j === i) b.classList.add('no');
+  });
+  if (i === q.ok) qScore++;
+  const fb = document.getElementById('qfb');
+  if (fb) {
+    const correct = i === q.ok;
+    fb.className = 'qfb show ' + (correct ? 'ok' : 'no');
+    fb.textContent = (correct
+      ? (LANG==='de' ? '✅ Richtig! ' : '✅ Correct! ')
+      : (LANG==='de' ? '❌ Leider falsch. ' : '❌ Incorrect. ')) + q.fb;
+  }
+  const nxt = document.getElementById('qnxt');
+  if (nxt) nxt.disabled = false;
+}
 
-      cycleTitle:"The cycle of food – from soil back to soil",
-      cycleIntro:"Food is part of a cycle: from nature, through us humans, back into the soil. The 7R help to make this cycle fairer and more sustainable.",
-      cycle1Title:"1. Production",
-      cycle1Text:"Farmers plant, care for and harvest – using water, soil and energy.",
-      cycle2Title:"2. Trade",
-      cycle2Text:"Food is transported, cooled, sorted and sold in supermarkets.",
-      cycle3Title:"3. Household",
-      cycle3Text:"We buy, store, cook and eat – or throw away.",
-      cycle4Title:"4. Disposal & recovery",
-      cycle4Text:"Leftovers are collected separately, composted or turned into energy in biogas plants.",
-      cycleHint:"Question for you: at which point in the cycle can you achieve the most with the 7R?",
+function qNext() {
+  qIdx++;
+  if (qIdx >= QUIZ.length) showQScore();
+  else renderQuiz();
+}
 
-      rsTitle:"The 7R – your strategy against waste",
-      rsIntro:"The 7R help you change a lot with small steps. Click an R to see examples, tips and ideas.",
-      r1Title:"1. Rethink",
-      r1Text:"Rethink means: stop before you buy or throw away. Plan your week, write a list and think: what do I really need? Don’t go shopping when hungry.",
-      r2Title:"2. Reduce",
-      r2Text:"Reduce means avoiding waste from the start: correct portion sizes, proper storage and “first in – first out” in the fridge.",
-      r3Title:"3. Reuse",
-      r3Text:"Reuse means: don’t throw leftovers away – use them creatively: leftover days, pan dishes, smoothies or freezing.",
-      r4Title:"4. Repair",
-      r4Text:"Repair is mainly about things: repair containers, freezers or kitchen devices instead of buying new ones – so food is better protected.",
-      r5Title:"5. Refuse",
-      r5Text:"Refuse means saying no to things you don’t need – e.g. “2 for 1” offers if you realistically cannot use them.",
-      r6Title:"6. Recycle",
-      r6Text:"Recycle means separating waste correctly so that packaging and organic waste can become new products or energy.",
-      r7Title:"7. Recover",
-      r7Text:"Recover uses what is no longer edible at all: biogas plants or compost that turn food waste into energy and new nutrients.",
-
-      btnExamples:"Example from the video",
-      btnTips:"Fridge tips",
-      btnRecipes:"Leftover recipes",
-
-      worldTitle:"7R worldwide – how do others do it?",
-      worldIntro:"Click on a continent to see how food waste is handled there – and which ideas we can use.",
-      euTitle:"Europe",
-      euShort:"Rescue boxes, apps, education projects",
-      naTitle:"North America",
-      naShort:"Food banks, \"ugly food\", campaigns",
-      saTitle:"South America",
-      saShort:"Community kitchens, leftover markets",
-      asTitle:"Asia",
-      asShort:"Buffet campaigns, apps, school projects",
-      afTitle:"Africa",
-      afShort:"Solar drying, storage, compost",
-      ocTitle:"Oceania",
-      ocShort:"Zero‑waste campaigns, school actions",
-
-      quizTitle:"Quiz: How well do you know the 7R?",
-      quizIntro:"Test your knowledge about food waste, the video and the 7R. Each question has only one correct answer.",
-      btnStartQuiz:"Start quiz",
-      btnNext:"Next",
-
-      selftestTitle:"Self‑test: How 7R‑fit is your home?",
-      selftestIntro:"Answer a few questions and get a 7R certificate with personal tips you can discuss with your parents.",
-      btnStartSelftest:"Start self‑test",
-
-      certTitle:"7R certificate for your home",
-      certTipsTitle:"Our tips for you:",
-      btnPrint:"Print certificate / save as PDF",
-      printHint:"Tip: When printing choose \"Save as PDF\" and look at the certificate at home with your parents.",
-
-      r1ModalTitle:"Rethink – example from the video",
-      r1ModalText1:"In the experiment, bananas, blueberries and skyr were not thrown away but turned into a smoothie. Rethink means: think first, then throw away.",
-      r1ModalText2:"Think: what can you plan differently this week? Write down 3 things you want to avoid or use better.",
-
-      r2ModalTitle:"Reduce – fridge check",
-      r2ModalLi1:"“First in – first out”: old to the front, new to the back.",
-      r2ModalLi2:"Bottom is coldest – store meat and fish here.",
-      r2ModalLi3:"Middle: dairy products like skyr.",
-      r2ModalLi4:"Fruit and vegetables in the crisper drawer – preferably unpackaged.",
-
-      r3ModalTitle:"Reuse – ideas for leftover days",
-      r3ModalLi1:"Pasta from yesterday + egg + vegetables = leftover pan.",
-      r3ModalLi2:"Brown bananas + yoghurt + fruit = smoothie.",
-      r3ModalLi3:"Hard bread = croutons or breadcrumbs.",
-      r3ModalLi4:"Cook fruit = compote or apple sauce.",
-
-      sourcesTitle:"Sources & further links",
-      src1:"German Nutrition Center (BZfE): information on food waste and shelf life (in German).",
-      src2:"Consumer advice center: “Understanding best‑before dates” – tips for checking food with your senses.",
-      src3:"Too Good To Go – app and information on surplus food in supermarkets.",
-      src4:"WWF / FAO: studies on global food waste and resource use.",
-      src5:"Own evaluation of the 7‑day experiment from the video (household of Yusuf Serif).",
-
-      impTitle:"Imprint (student project)",
-      impLine1:"This project was created as part of geography lessons.",
-      impLine2:"Video: Yusuf Serif · Website: Anouk Sperling.",
-      impLine3:"The website is for educational purposes only and is not used commercially.",
-
-      footerTitle:"Goal of this page",
-      footerText:"This site wants to motivate students to talk about food waste with their families and to experiment with the 7R in everyday life.",
-      footerContact:"Contact (school)",
-      footerHint:"If you have questions about the project, please ask your teacher in geography."
-    },
-    pl:{}, ar:{}, ru:{}, nl:{}, tr:{}
-  };
-
-  const quizQuestions=[
-    {
-      text:{
-        de:"Was zeigt das Video vor allem?",
-        en:"What does the video mainly show?"
-      },
-      options:[
-        {id:"a",correct:false,text:{de:"Wie man neue Gerichte erfindet.",en:"How to invent new recipes."}},
-        {id:"b",correct:true,text:{de:"Wie viele Lebensmittel fast weggeworfen worden wären – und wie man sie rettet.",en:"How much food would almost have been thrown away – and how to save it."}},
-        {id:"c",correct:false,text:{de:"Nur, wie ein Kühlschrank aufgebaut ist.",en:"Only how a fridge is organised."}}
-      ]
-    },
-    {
-      text:{
-        de:"Was passt am besten zu „Rethink“?",
-        en:"What fits best to “Rethink”?"
-      },
-      options:[
-        {id:"a",correct:true,text:{de:"Bewusst planen, was man einkauft und isst.",en:"Consciously plan what you buy and eat."}},
-        {id:"b",correct:false,text:{de:"Immer spontan alles kaufen, was gut aussieht.",en:"Always buy everything that looks good spontaneously."}},
-        {id:"c",correct:false,text:{de:"Nur nach Sonderangeboten gehen.",en:"Only look for special offers."}}
-      ]
-    },
-    {
-      text:{
-        de:"Welches Beispiel ist Reuse?",
-        en:"Which example is Reuse?"
-      },
-      options:[
-        {id:"a",correct:false,text:{de:"Nudeln vom Vortag direkt wegwerfen.",en:"Throw away pasta from yesterday."}},
-        {id:"b",correct:true,text:{de:"Aus Nudeln vom Vortag eine Restepfanne machen.",en:"Make a leftover pan from pasta from yesterday."}},
-        {id:"c",correct:false,text:{de:"Immer zu viel kochen.",en:"Always cook too much."}}
-      ]
-    },
-    {
-      text:{
-        de:"Wie hilft „First in – First out“?",
-        en:"How does “first in – first out” help?"
-      },
-      options:[
-        {id:"a",correct:false,text:{de:"Man stellt immer alles nach hinten.",en:"You always put everything at the back."}},
-        {id:"b",correct:true,text:{de:"Alte Lebensmittel werden zuerst aufgegessen, bevor neue geöffnet werden.",en:"Old food is eaten first before new ones are opened."}},
-        {id:"c",correct:false,text:{de:"Der Kühlschrank wird ganz leer gelassen.",en:"You always leave the fridge empty."}}
-      ]
-    },
-    {
-      text:{
-        de:"Was bedeutet „Refuse“ im Supermarkt?",
-        en:"What does “Refuse” mean in the supermarket?"
-      },
-      options:[
-        {id:"a",correct:true,text:{de:"Angebote ablehnen, die du nicht wirklich brauchst.",en:"Refuse offers you don't really need."}},
-        {id:"b",correct:false,text:{de:"Alles kaufen, was im Angebot ist.",en:"Buy everything on offer."}},
-        {id:"c",correct:false,text:{de:"Nur nach der Verpackung entscheiden.",en:"Decide only by packaging."}}
-      ]
-    },
-    {
-      text:{
-        de:"Wie hängt Lebensmittelverschwendung mit Wasserverbrauch zusammen?",
-        en:"How is food waste connected to water use?"
-      },
-      options:[
-        {id:"a",correct:true,text:{de:"Für jedes Lebensmittel wurde vorher Wasser eingesetzt, das sonst umsonst verbraucht wurde.",en:"Every food used water before, which is wasted if we throw it away."}},
-        {id:"b",correct:false,text:{de:"Lebensmittel haben mit Wasser nichts zu tun.",en:"Food has nothing to do with water."}},
-        {id:"c",correct:false,text:{de:"Nur Getränke brauchen Wasser.",en:"Only drinks need water."}}
-      ]
-    }
+function showQScore() {
+  ['qcnt','qq','qopts','qfb'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelectorAll('#qbox .pwrap, #qbox .qnav').forEach(el => el.style.display = 'none');
+  const sd = document.getElementById('qscr');
+  if (!sd) return;
+  sd.style.display = 'block';
+  const pct = Math.round(qScore / QUIZ.length * 100);
+  document.getElementById('qsnum').textContent = qScore + ' / ' + QUIZ.length;
+  const labels = [
+    [80, LANG==='de' ? '🌟 Ausgezeichnet! Du kennst dich super aus!' : '🌟 Excellent! You really know your stuff!'],
+    [50, LANG==='de' ? '👍 Gut gemacht! Noch ein bisschen üben.' : '👍 Well done! A little more practice.'],
+    [0,  LANG==='de' ? '📚 Weiter lernen – du schaffst das!' : '📚 Keep learning – you\'ve got this!']
   ];
+  document.getElementById('qslbl').textContent = labels.find(([t]) => pct >= t)[1];
+}
 
-  const selftestQuestions=[
-    {
-      text:{
-        de:"Wie oft wirfst du zu Hause essbare Reste weg?",
-        en:"How often do you throw away edible leftovers at home?"
-      },
-      options:[
-        {id:"a",score:1,text:{de:"Mehrmals pro Woche.",en:"Several times a week."}},
-        {id:"b",score:2,text:{de:"Manchmal, aber nicht so oft.",en:"Sometimes, but not very often."}},
-        {id:"c",score:3,text:{de:"Selten, ich versuche Reste zu nutzen.",en:"Rarely, I try to use leftovers."}}
-      ]
-    },
-    {
-      text:{
-        de:"Wie planst du deine Einkäufe?",
-        en:"How do you plan your shopping?"
-      },
-      options:[
-        {id:"a",score:1,text:{de:"Ich gehe ohne Plan los.",en:"I go without any plan."}},
-        {id:"b",score:2,text:{de:"Ich habe eine grobe Idee.",en:"I have a rough idea."}},
-        {id:"c",score:3,text:{de:"Ich nutze Einkaufslisten und checke den Vorrat.",en:"I use shopping lists and check what we already have."}}
-      ]
-    },
-    {
-      text:{
-        de:"Wie gut trennst du Müll (besonders Bioabfall)?",
-        en:"How well do you separate waste (especially organic waste)?"
-      },
-      options:[
-        {id:"a",score:1,text:{de:"Kaum, alles kommt zusammen.",en:"Hardly, everything goes together."}},
-        {id:"b",score:2,text:{de:"Teilweise, manchmal vergesse ich es.",en:"Partly, sometimes I forget."}},
-        {id:"c",score:3,text:{de:"Sehr gut, Bioabfall und Verpackungen trenne ich.",en:"Very well, I separate organic waste and packaging."}}
-      ]
-    },
-    {
-      text:{
-        de:"Wie gehst du mit Lebensmitteln kurz vor dem MHD um?",
-        en:"How do you handle food close to the best‑before date?"
-      },
-      options:[
-        {id:"a",score:1,text:{de:"Ich werfe es meistens weg, sobald das Datum da ist.",en:"I usually throw it away when the date is reached."}},
-        {id:"b",score:2,text:{de:"Manchmal prüfe ich, manchmal werfe ich es weg.",en:"Sometimes I check, sometimes I throw it away."}},
-        {id:"c",score:3,text:{de:"Ich nutze Aussehen, Geruch und Geschmack, bevor ich entscheide.",en:"I use look, smell and taste before deciding."}}
-      ]
-    },
-    {
-      text:{
-        de:"Gibt es bei dir zu Hause einen festen „Restetag“?",
-        en:"Do you have a regular “leftover day” at home?"
-      },
-      options:[
-        {id:"a",score:1,text:{de:"Nein, darüber haben wir noch nie nachgedacht.",en:"No, we never thought about that."}},
-        {id:"b",score:2,text:{de:"Manchmal essen wir Reste, aber ohne festen Tag.",en:"Sometimes we eat leftovers, but without a fixed day."}},
-        {id:"c",score:3,text:{de:"Ja, wir planen bewusst einen Tag für Reste ein.",en:"Yes, we plan a fixed day for leftovers."}}
-      ]
-    }
-  ];
+function qReset() {
+  qIdx = 0; qScore = 0; qDone = false;
+  document.getElementById('qscr').style.display = 'none';
+  ['qcnt','qq','qopts','qfb'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = '';
+  });
+  document.querySelectorAll('#qbox .pwrap, #qbox .qnav').forEach(el => el.style.display = '');
+  renderQuiz();
+}
 
-  const continentInfos={
-    europe:{
-      de:{
-        title:"Europa: Apps und Retterkisten",
-        body:`<p>In vielen europäischen Ländern gibt es Supermärkte mit eigenen Regalen für Lebensmittel kurz vor dem Mindesthaltbarkeitsdatum. Außerdem arbeiten sie mit Apps wie „Too Good To Go“ zusammen.</p>
-        <p><strong>Idee für euch:</strong> Schaut nach, ob es in eurer Stadt solche Angebote gibt und testet eine Rettertüte.</p>`
-      },
-      en:{
-        title:"Europe: Apps and rescue boxes",
-        body:`<p>In many European countries supermarkets have special shelves for food close to the best‑before date. They also work with apps like \"Too Good To Go\".</p>
-        <p><strong>Idea for you:</strong> Check if there are such offers in your city and try a rescue bag.</p>`
-      }
-    },
-    northamerica:{
-      de:{
-        title:"Nordamerika: Food banks und „ugly food“",
-        body:`<p>In Nordamerika spenden Supermärkte überschüssige Lebensmittel an Food banks. Es gibt auch „ugly food“, also krummes Obst und Gemüse, das bewusst verkauft wird.</p>`
-      },
-      en:{
-        title:"North America: Food banks and \"ugly food\"",
-        body:`<p>In North America supermarkets donate surplus food to food banks. There is also \"ugly food\", crooked fruit and vegetables that are sold on purpose.</p>`
-      }
-    },
-    southamerica:{
-      de:{
-        title:"Südamerika: Gemeinschaftsküchen",
-        body:`<p>In manchen Städten Südamerikas gibt es Gemeinschaftsküchen, in denen überschüssige Lebensmittel gesammelt und gemeinsam gekocht werden.</p>`
-      },
-      en:{
-        title:"South America: Community kitchens",
-        body:`<p>In some South American cities there are community kitchens where surplus food is collected and cooked together.</p>`
-      }
-    },
-    asia:{
-      de:{
-        title:"Asien: Kampagnen gegen Buffetreste",
-        body:`<p>In einigen asiatischen Ländern gibt es Kampagnen, damit in Restaurants weniger Reste am Buffet bleiben. Gäste werden ermutigt, nur so viel zu nehmen, wie sie essen.</p>`
-      },
-      en:{
-        title:"Asia: Campaigns against buffet waste",
-        body:`<p>In some Asian countries there are campaigns so that less food is left on buffet plates. Guests are encouraged to only take as much as they can eat.</p>`
-      }
-    },
-    africa:{
-      de:{
-        title:"Afrika: Lagerung und Solartrocknung",
-        body:`<p>In Teilen Afrikas wird viel daran gearbeitet, Lebensmittel besser zu lagern und zu trocknen, damit sie länger haltbar sind – zum Beispiel mit Solartrocknern.</p>`
-      },
-      en:{
-        title:"Africa: Storage and solar drying",
-        body:`<p>In parts of Africa a lot is done to store and dry food better so that it lasts longer – for example with solar dryers.</p>`
-      }
-    },
-    oceania:{
-      de:{
-        title:"Ozeanien: Zero‑Waste‑Ideen",
-        body:`<p>In Australien und Neuseeland gibt es Zero‑Waste‑Kampagnen und Schulprojekte, die zeigen, wie man im Alltag Abfall vermeidet.</p>`
-      },
-      en:{
-        title:"Oceania: Zero‑waste ideas",
-        body:`<p>In Australia and New Zealand there are zero‑waste campaigns and school projects that show how to avoid waste in everyday life.</p>`
-      }
-    }
-  };
-
-  let currentLang="de";
-
-  function applyLanguage(lang){
-    currentLang=lang;
-    const dict=translations[lang]||translations["de"];
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key=el.getAttribute("data-i18n");
-      if(dict[key]) el.textContent=dict[key];
+// ============================================================
+// SELF TEST
+// ============================================================
+function renderTest() {
+  if (stIdx >= TEST.length) return;
+  const q = TEST[stIdx];
+  const cnt = document.getElementById('stcnt');
+  if (cnt) cnt.textContent = (LANG==='de' ? 'Frage' : 'Question') + ' ' + (stIdx+1) + ' ' + (LANG==='de' ? 'von' : 'of') + ' ' + TEST.length;
+  const pb = document.getElementById('stpb');
+  if (pb) pb.style.width = (stIdx / TEST.length * 100) + '%';
+  const badge = document.getElementById('stbadge');
+  if (badge) badge.textContent = LANG==='de' ? q.topic : q.topicEN;
+  const stq = document.getElementById('stq');
+  if (stq) stq.textContent = LANG==='de' ? q.q : q.qEN;
+  const opts = document.getElementById('stopts');
+  if (opts) {
+    opts.innerHTML = '';
+    const options = LANG==='de' ? q.opts : q.optsEN;
+    options.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.className = 'topt' + (stAns[stIdx] === i ? ' sel' : '');
+      b.textContent = o;
+      b.onclick = () => pickAns(i);
+      opts.appendChild(b);
     });
   }
-
-  const langSelect=document.getElementById("langSelect");
-  langSelect.addEventListener("change",function(){
-    localStorage.setItem("lang",this.value);
-    applyLanguage(this.value);
-    if(quizContainer.style.display!=="none") renderQuizQuestion();
-    if(selftestContainer.style.display!=="none") renderSelftestQuestion();
-    showToast(currentLang==="de"?"Sprache geändert.":"Language changed.");
-  });
-
-  (function initLang(){
-    const saved=localStorage.getItem("lang");
-    if(saved && translations[saved]) langSelect.value=saved;
-    applyLanguage(langSelect.value);
-  })();
-
-  const themeToggle=document.getElementById("themeToggle");
-  function applyTheme(mode){
-    const root=document.documentElement;
-    if(mode==="dark"){
-      root.classList.add("dark");
-      themeToggle.dataset.mode="dark";
-    }else{
-      root.classList.remove("dark");
-      themeToggle.dataset.mode="light";
-    }
+  const bk = document.getElementById('stbk');
+  if (bk) bk.disabled = stIdx === 0;
+  const nxt = document.getElementById('stnxt');
+  if (nxt) {
+    nxt.disabled = stAns[stIdx] === null;
+    nxt.textContent = stIdx === TEST.length - 1
+      ? (LANG==='de' ? '✅ Auswertung anzeigen' : '✅ Show Results')
+      : (LANG==='de' ? 'Weiter →' : 'Next →');
   }
-  themeToggle.addEventListener("click",()=>{
-    const newMode=themeToggle.dataset.mode==="dark"?"light":"dark";
-    localStorage.setItem("theme",newMode);
-    applyTheme(newMode);
-  });
-  (function initTheme(){
-    const saved=localStorage.getItem("theme")||"light";
-    applyTheme(saved);
-  })();
+}
 
-  document.querySelectorAll(".acc-head").forEach(head=>{
-    head.addEventListener("click",()=>{
-      const item=head.parentElement;
-      const body=item.querySelector(".acc-body");
-      const toggle=head.querySelector(".acc-toggle");
-      const acc=item.parentElement;
-      acc.querySelectorAll(".acc-item").forEach(i=>{
-        if(i!==item){
-          i.classList.remove("open");
-          i.querySelector(".acc-body").style.maxHeight="0";
-          i.querySelector(".acc-toggle").textContent="+";
-        }
-      });
-      if(item.classList.contains("open")){
-        item.classList.remove("open");
-        body.style.maxHeight="0";
-        toggle.textContent="+";
-      }else{
-        item.classList.add("open");
-        body.style.maxHeight=body.scrollHeight+"px";
-        toggle.textContent="–";
-      }
-    });
-  });
+function pickAns(i) {
+  stAns[stIdx] = i;
+  document.querySelectorAll('#stopts .topt').forEach((b, j) => b.classList.toggle('sel', j === i));
+  const nxt = document.getElementById('stnxt');
+  if (nxt) nxt.disabled = false;
+}
 
-  document.querySelectorAll("[data-open-modal]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const id=btn.getAttribute("data-open-modal");
-      const backdrop=document.getElementById(id+"Backdrop");
-      if(backdrop) backdrop.style.display="flex";
-    });
-  });
-  document.querySelectorAll("[data-close-modal]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const id=btn.getAttribute("data-close-modal");
-      const backdrop=document.getElementById(id);
-      if(backdrop) backdrop.style.display="none";
-    });
-  });
-  document.querySelectorAll(".modal-backdrop").forEach(backdrop=>{
-    backdrop.addEventListener("click",e=>{
-      if(e.target===backdrop) backdrop.style.display="none";
-    });
-  });
+function stBack() { if (stIdx > 0) { stIdx--; renderTest(); } }
 
-  document.querySelectorAll(".continent-card").forEach(card=>{
-    card.addEventListener("click",()=>{
-      const id=card.getAttribute("data-continent");
-      const info=continentInfos[id];
-      if(!info) return;
-      const lang=info[currentLang]?currentLang:"de";
-      document.getElementById("continentModalTitle").textContent=info[lang].title;
-      document.getElementById("continentModalBody").innerHTML=info[lang].body;
-      document.getElementById("continentModalBackdrop").style.display="flex";
-    });
-  });
+function stNext() {
+  if (stAns[stIdx] === null) return;
+  if (stIdx < TEST.length - 1) { stIdx++; renderTest(); }
+  else showResult();
+}
 
-  const sections=document.querySelectorAll("section, aside .card");
-  const navLinks=document.querySelectorAll(".nav-link");
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        navLinks.forEach(l=>l.classList.remove("active"));
-        const id=e.target.id;
-        const link=[...navLinks].find(l=>l.getAttribute("href")==="#"+id);
-        if(link) link.classList.add("active");
-      }
-    });
-  },{threshold:0.4});
-  sections.forEach(s=>obs.observe(s));
+function showResult() {
+  let total = 0;
+  stAns.forEach((a, i) => { if (a !== null) total += TEST[i].scores[a]; });
+  const max = TEST.length * 3;
+  const pct = Math.round(total / max * 100);
+  const DE = LANG === 'de';
 
-  const toastEl=document.getElementById("toast");
-  function showToast(msg){
-    toastEl.textContent=msg;
-    toastEl.classList.add("show");
-    setTimeout(()=>toastEl.classList.remove("show"),2200);
+  let type, emoji, desc, strengths, improve, tips;
+
+  if (total <= 20) {
+    type     = DE ? 'Linear-Konsument' : 'Linear Consumer';
+    emoji    = '🌱';
+    desc     = DE ? 'Du stehst noch am Anfang deiner Nachhaltigkeitsreise – aber du hast den ersten Schritt gemacht! Jede Veränderung zählt.'
+                  : 'You\'re at the start of your sustainability journey – but you\'ve taken the first step! Every change counts.';
+    strengths = DE ? ['Du hast den Selbsttest gemacht – das zeigt Interesse!', 'Du bist dir deines Konsums bewusster geworden.']
+                   : ['You took the self-test – that shows interest!', 'You\'ve become more aware of your consumption.'];
+    improve   = DE ? ['Impulskäufe reduzieren', 'Mülltrennung verbessern', 'Einwegprodukte vermeiden', 'Lebensmittelverschwendung angehen']
+                   : ['Reduce impulse purchases', 'Improve waste sorting', 'Avoid single-use products', 'Address food waste'];
+    tips      = DE ? ['Starte mit einer Änderung: Bring deinen eigenen Becher mit.', 'Versuche eine Woche lang nichts Ungeplantes zu kaufen.', 'Trenne deinen Müll ab sofort konsequent.']
+                   : ['Start with one change: bring your own cup.', 'Try for one week to buy nothing unplanned.', 'Sort your waste consistently from now on.'];
+  } else if (total <= 35) {
+    type     = DE ? 'Nachhaltigkeits-Aktivist' : 'Sustainability Activist';
+    emoji    = '♻️';
+    desc     = DE ? 'Du denkst bereits nachhaltig und triffst viele gute Entscheidungen. Mit mehr Konsequenz wirst du ein echter Kreislauf-Champion!'
+                  : 'You\'re already thinking sustainably and making many good decisions. With more consistency you\'ll be a true circular champion!';
+    strengths = DE ? ['Du trennst deinen Müll korrekt', 'Du denkst vor dem Kauf nach', 'Du versuchst Reste zu verwerten']
+                   : ['You sort your waste correctly', 'You think before you buy', 'You try to use up leftovers'];
+    improve   = DE ? ['Fast Fashion weiter reduzieren', 'Smartphone länger nutzen', 'Mehr leihen statt kaufen']
+                   : ['Reduce fast fashion even further', 'Use smartphone longer', 'Borrow more instead of buying'];
+    tips      = DE ? ['Kaufe dein nächstes Kleidungsstück secondhand.', 'Nutze dein Smartphone noch ein weiteres Jahr.', 'Repariere das nächste kaputte Gerät vor dem Wegwerfen.']
+                   : ['Buy your next clothing item secondhand.', 'Use your smartphone for one more year.', 'Repair the next broken item before discarding.'];
+  } else {
+    type     = DE ? 'Circular Hero 🦸' : 'Circular Hero 🦸';
+    emoji    = '🌍';
+    desc     = DE ? 'Fantastisch! Du lebst und denkst kreislauforientiert. Du bist ein echtes Vorbild – mach weiter so und inspiriere andere!'
+                  : 'Fantastic! You live and think in a circular way. You\'re a true role model – keep it up and inspire others!';
+    strengths = DE ? ['Du vermeidest Impulskäufe konsequent', 'Du nutzt Produkte so lange wie möglich', 'Du reparierst statt wegzuwerfen', 'Du trennst Müll und denkst über deinen Fußabdruck nach']
+                   : ['You consistently avoid impulse purchases', 'You use products for as long as possible', 'You repair instead of throwing away', 'You sort waste and think about your footprint'];
+    improve   = DE ? ['Andere motivieren und mitnehmen', 'Dich politisch für Kreislaufwirtschaft einsetzen']
+                   : ['Motivate and inspire others', 'Advocate politically for the circular economy'];
+    tips      = DE ? ['Erzähle Freunden von deinen nachhaltigen Gewohnheiten.', 'Initiiere eine Tauschbörse oder ein Repair Café in deiner Schule.', 'Werde Botschafter für Kreislaufwirtschaft in deiner Klasse!']
+                   : ['Tell friends about your sustainable habits.', 'Initiate a swap event or repair café at your school.', 'Become a circular economy ambassador in your class!'];
   }
 
-  let quizIndex=0,quizScore=0;
-  const quizContainer=document.getElementById("quizContainer");
-  const quizQuestionText=document.getElementById("quizQuestionText");
-  const quizOptions=document.getElementById("quizOptions");
-  const quizProgress=document.getElementById("quizProgress");
-  const quizResult=document.getElementById("quizResult");
+  certData = { type, emoji, total, max, pct };
 
-  document.getElementById("startQuizBtn").addEventListener("click",()=>{
-    quizIndex=0;quizScore=0;
-    quizContainer.style.display="block";
-    quizResult.style.display="none";
-    renderQuizQuestion();
-    document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+  document.getElementById('stbox').style.display = 'none';
+  document.getElementById('sres').style.display  = 'block';
+  document.getElementById('rej').textContent   = emoji;
+  document.getElementById('rtt').textContent   = type;
+  document.getElementById('rsc').textContent   = total + ' / ' + max + ' Punkte (' + pct + '%)';
+  document.getElementById('rdesc').textContent = desc;
+  document.getElementById('rstr').innerHTML    = strengths.map(s => '<li>' + s + '</li>').join('');
+  document.getElementById('rimp').innerHTML    = improve.map(s => '<li>' + s + '</li>').join('');
+  document.getElementById('rtip').innerHTML    = tips.map(s => '<li>' + s + '</li>').join('');
+  document.getElementById('stpb').style.width  = '100%';
+  document.getElementById('carea').style.display = 'none';
+}
+
+function showCert() {
+  const d = certData;
+  if (!d.type) return;
+  document.getElementById('cico').textContent   = d.emoji;
+  document.getElementById('ctitle').textContent = d.type;
+  document.getElementById('cscore').textContent = d.total + ' / ' + d.max + ' Punkte • ' + d.pct + '%';
+  document.getElementById('stico').textContent  = d.emoji;
+  document.getElementById('stlbl').textContent  = d.type;
+  document.getElementById('cdate').textContent  =
+    new Date().toLocaleDateString(LANG === 'de' ? 'de-DE' : 'en-GB', {year:'numeric',month:'long',day:'numeric'});
+  const ca = document.getElementById('carea');
+  ca.style.display = 'block';
+  ca.scrollIntoView({ behavior:'smooth' });
+}
+
+function hideCert() { document.getElementById('carea').style.display = 'none'; }
+
+function stReset() {
+  stIdx = 0; stAns = new Array(15).fill(null); certData = {};
+  document.getElementById('stbox').style.display = 'block';
+  document.getElementById('sres').style.display  = 'none';
+  document.getElementById('carea').style.display = 'none';
+  renderTest();
+}
+
+// ============================================================
+// FAQ
+// ============================================================
+function buildFAQ() {
+  const list = document.getElementById('faqlist');
+  if (!list) return;
+  list.innerHTML = '';
+  FAQ.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'aitem';
+    div.setAttribute('role', 'listitem');
+    div.innerHTML =
+      '<button class="ahdr" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="fab' + i + '">' +
+        '<span>' + item.q + '</span>' +
+        '<span class="achev" aria-hidden="true">▼</span>' +
+      '</button>' +
+      '<div class="abdy" id="fab' + i + '" role="region">' + item.a + '</div>';
+    list.appendChild(div);
   });
+}
 
-  function renderQuizQuestion(){
-    if(quizIndex>=quizQuestions.length){showQuizResult();return;}
-    const q=quizQuestions[quizIndex];
-    quizQuestionText.textContent=q.text[currentLang]||q.text["de"];
-    quizProgress.textContent=(quizIndex+1)+"/"+quizQuestions.length;
-    quizOptions.innerHTML="";
-    q.options.forEach(o=>{
-      const label=document.createElement("label");
-      label.className="option-label";
-      const input=document.createElement("input");
-      input.type="radio";
-      input.name="quizOption";
-      input.value=o.id;
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(" "+(o.text[currentLang]||o.text["de"])));
-      quizOptions.appendChild(label);
-    });
+function toggleFAQ(btn) {
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  document.querySelectorAll('.ahdr').forEach(b => {
+    b.classList.remove('open');
+    b.setAttribute('aria-expanded', 'false');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!open) {
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    body.classList.add('open');
   }
+}
 
-  document.getElementById("quizNextBtn").addEventListener("click",()=>{
-    if(quizIndex>=quizQuestions.length)return;
-    const sel=document.querySelector("input[name='quizOption']:checked");
-    if(!sel){
-      alert(currentLang==="de"?"Bitte wähle eine Antwort.":"Please select an answer.");
-      return;
-    }
-    const q=quizQuestions[quizIndex];
-    const opt=q.options.find(o=>o.id===sel.value);
-    if(opt && opt.correct) quizScore++;
-    quizIndex++;
-    if(quizIndex<quizQuestions.length) renderQuizQuestion(); else showQuizResult();
+// ============================================================
+// SOURCES
+// ============================================================
+function buildSources() {
+  const list = document.getElementById('srclist');
+  if (!list) return;
+  list.innerHTML = '';
+  SOURCES.forEach(s => {
+    const li = document.createElement('li');
+    li.setAttribute('role', 'listitem');
+    const target = s.url.startsWith('#') ? '' : ' target="_blank" rel="noopener"';
+    li.innerHTML =
+      '<span class="srclbl">' + s.label + '</span>' +
+      '<a href="' + s.url + '"' + target + '>' + s.url + '</a>' +
+      '<div class="srcdesc">' + s.desc + '</div>';
+    list.appendChild(li);
   });
+}
 
-  function showQuizResult(){
-    const total=quizQuestions.length;
-    const percent=Math.round(quizScore/total*100);
-    quizResult.style.display="block";
-    let text;
-    if(currentLang==="de"){
-      if(percent>=80) text=`Super! Du hast ${quizScore} von ${total} Fragen richtig (${percent} %). Du kennst die 7R schon sehr gut.`;
-      else if(percent>=50) text=`Gut gemacht! ${quizScore} von ${total} Fragen (${percent} %). Schau dir Video und Infos noch einmal an und probiere das Quiz später erneut.`;
-      else text=`Du hast ${quizScore} von ${total} Fragen richtig (${percent} %). Kein Problem – nutze das Video und die 7R‑Erklärungen und starte das Quiz noch einmal.`;
-    }else{
-      if(percent>=80) text=`Great! You answered ${quizScore} of ${total} questions correctly (${percent}%). You already know the 7R very well.`;
-      else if(percent>=50) text=`Well done! ${quizScore} of ${total} questions (${percent}%). Check the video and information again and try the quiz later.`;
-      else text=`You answered ${quizScore} of ${total} questions correctly (${percent}%). No problem – use the video and 7R explanations and start again.`;
-    }
-    quizQuestionText.textContent="";
-    quizOptions.innerHTML="";
-    quizProgress.textContent="";
-    quizResult.textContent=text;
-  }
-
-  let selftestIndex=0,selftestScore=0;
-  const selftestContainer=document.getElementById("selftestContainer");
-  const selftestProgress=document.getElementById("selftestProgress");
-  const selftestQuestionText=document.getElementById("selftestQuestionText");
-  const selftestOptions=document.getElementById("selftestOptions");
-  const selftestResultWrap=document.getElementById("selftestResultWrap");
-  const selftestScoreText=document.getElementById("selftestScoreText");
-  const selftestLevelText=document.getElementById("selftestLevelText");
-  const selftestTipsList=document.getElementById("selftestTipsList");
-
-  document.getElementById("startSelftestBtn").addEventListener("click",()=>{
-    selftestIndex=0;selftestScore=0;
-    selftestContainer.style.display="block";
-    selftestResultWrap.style.display="none";
-    renderSelftestQuestion();
-    document.getElementById("selftest").scrollIntoView({behavior:"smooth"});
-  });
-
-  function renderSelftestQuestion(){
-    if(selftestIndex>=selftestQuestions.length){showSelftestResult();return;}
-    const q=selftestQuestions[selftestIndex];
-    selftestQuestionText.textContent=q.text[currentLang]||q.text["de"];
-    selftestProgress.textContent=(selftestIndex+1)+"/"+selftestQuestions.length;
-    selftestOptions.innerHTML="";
-    q.options.forEach(o=>{
-      const label=document.createElement("label");
-      label.className="option-label";
-      const input=document.createElement("input");
-      input.type="radio";
-      input.name="selftestOption";
-      input.value=o.id;
-      label.appendChild(input);
-      label.appendChild(document.createTextNode(" "+(o.text[currentLang]||o.text["de"])));
-      selftestOptions.appendChild(label);
-    });
-  }
-
-  document.getElementById("selftestNextBtn").addEventListener("click",()=>{
-    if(selftestIndex>=selftestQuestions.length)return;
-    const sel=document.querySelector("input[name='selftestOption']:checked");
-    if(!sel){
-      alert(currentLang==="de"?"Bitte wähle eine Antwort.":"Please select an answer.");
-      return;
-    }
-    const q=selftestQuestions[selftestIndex];
-    const opt=q.options.find(o=>o.id===sel.value);
-    selftestScore+=opt?opt.score:0;
-    selftestIndex++;
-    if(selftestIndex<selftestQuestions.length) renderSelftestQuestion(); else showSelftestResult();
-  });
-
-  function showSelftestResult(){
-    const max=selftestQuestions.length*3;
-    const percent=Math.round(selftestScore/max*100);
-    selftestResultWrap.style.display="block";
-    let levelText,tips;
-    if(currentLang==="de"){
-      if(percent>=80){
-        levelText="Stark! Euer Haushalt nutzt die 7R schon sehr bewusst. Ihr seid echte Lebensmittelretter:innen.";
-        tips=[
-          "Teilt eure Tipps mit Freunden oder in der Klasse.",
-          "Probiert jede Woche ein neues Resterezept.",
-          "Überlegt gemeinsam, wie ihr auch Verpackungsmüll weiter reduzieren könnt."
-        ];
-      }else if(percent>=50){
-        levelText="Ihr seid auf einem guten Weg. Mit ein paar Veränderungen könnt ihr noch viel mehr retten.";
-        tips=[
-          "Führt einen festen Restetag pro Woche ein.",
-          "Nutzt Einkaufslisten und schaut vor dem Einkaufen in den Kühlschrank.",
-          "Überlegt, wie ihr Mülltrennung zu Hause einfacher machen könnt (z.B. extra Behälter)."
-        ];
-      }else{
-        levelText="Ihr habt mit dem Test einen wichtigen Schritt gemacht. Jetzt könnt ihr anfangen, euren Alltag nach den 7R zu verändern.";
-        tips=[
-          "Sucht euch eine Sache aus dem Video, die ihr ab dieser Woche ändern wollt.",
-          "Schreibt auf, welche Lebensmittel bei euch oft im Müll landen – und warum.",
-          "Redet mit eurer Familie darüber, wie ihr gemeinsam weniger wegwerfen könnt."
-        ];
-      }
-    }else{
-      if(percent>=80){
-        levelText="Great! Your household already uses the 7R very consciously. You are real food savers.";
-        tips=[
-          "Share your tips with friends or in class.",
-          "Try a new leftover recipe every week.",
-          "Think about how you can further reduce packaging waste."
-        ];
-      }else if(percent>=50){
-        levelText="You are on a good way. With a few changes you can save much more.";
-        tips=[
-          "Introduce a regular leftover day once a week.",
-          "Use shopping lists and check the fridge before shopping.",
-          "Make waste separation easier at home (e.g. extra bins)."
-        ];
-      }else{
-        levelText="By taking this test you made an important first step. Now you can start to change your everyday life with the 7R.";
-        tips=[
-          "Choose one idea from the video that you want to try from this week on.",
-          "Write down which foods you often throw away and why.",
-          "Talk with your family about how to throw away less food together."
-        ];
-      }
-    }
-    selftestScoreText.textContent=(currentLang==="de"
-      ?`Dein Ergebnis: ${selftestScore} von ${max} Punkten (${percent} %)`
-      :`Your result: ${selftestScore} of ${max} points (${percent}%)`);
-    selftestLevelText.textContent=levelText;
-    selftestTipsList.innerHTML="";
-    tips.forEach(t=>{
-      const li=document.createElement("li");
-      li.textContent=t;
-      selftestTipsList.appendChild(li);
-    });
-    document.getElementById("certificate").scrollIntoView({behavior:"smooth"});
-  }
-
-  document.getElementById("printCertificateBtn").addEventListener("click",()=>{
-    const cert=document.getElementById("certificate").cloneNode(true);
-    const w=window.open("","_blank");
-    w.document.write("<html><head><title>7R‑Urkunde</title></head><body style='font-family:sans-serif;padding:1rem;background:#fff;'>");
-    w.document.body.appendChild(cert);
-    w.document.write("</body></html>");
-    w.document.close();
-    w.focus();
-    w.print();
-  });
-</script>
-</body>
-</html>
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  applyTR();
+  render
