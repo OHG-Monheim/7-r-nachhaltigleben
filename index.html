@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mobbing verstehen und handeln</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --primary-light: #63b3ed;
+            --secondary: #f6ad55;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --accent: #48bb78;
+            --danger: #e53e3e;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --border-radius: 10px;
+            --shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            padding: 1.5rem 1rem;
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .header-text p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .header-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        select {
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 1.5rem auto;
+            padding: 0 1rem 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1.4fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .header-inner { flex-direction: column; align-items: flex-start; }
+            .header-controls { align-items: flex-start; }
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card h2 span.icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        p { margin-bottom: 0.5rem; }
+
+        /* Akkordeon */
+        .accordion {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            margin-top: 0.5rem;
+        }
+
+        .accordion-item + .accordion-item {
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .accordion-header {
+            background: #edf2f7;
+            padding: 0.6rem 0.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header h3 {
+            font-size: 0.95rem;
+        }
+
+        .accordion-header span.toggle {
+            font-weight: 700;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+            background: #fff;
+            padding: 0 0.8rem;
+        }
+
+        .accordion-content-inner {
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+        }
+
+        .accordion-item.open .accordion-content {
+            padding-bottom: 0.6rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+            margin: 0.2rem 0.2rem 0.2rem 0;
+        }
+        .btn:hover { background: #1e4e8c; transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        .btn-secondary:hover { background: #dd6b20; }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: rgba(66,153,225,0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(72,187,120,0.15);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Quiz */
+        .quiz-container, .selftest-container {
+            margin-top: 0.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .option-label input {
+            accent-color: var(--primary);
+        }
+
+        .quiz-progress {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .quiz-result {
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.7rem;
+            border-radius: 8px;
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            font-size: 0.9rem;
+        }
+
+        /* Selbsttest + Urkunde */
+        .certificate {
+            border-radius: 12px;
+            border: 2px solid #ecc94b;
+            background: #fffbeb;
+            padding: 1rem 1.2rem;
+            margin-top: 0.7rem;
+            position: relative;
+        }
+        .certificate::before {
+            content: "⭐";
+            position: absolute;
+            top: -14px;
+            right: 16px;
+            font-size: 1.6rem;
+        }
+        .certificate h3 {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .certificate p {
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+        .certificate .score {
+            text-align: center;
+            font-weight: 700;
+            margin: 0.3rem 0 0.5rem;
+        }
+        .certificate .tips-title {
+            font-weight: 600;
+            margin-top: 0.4rem;
+        }
+        .certificate ul {
+            margin: 0.2rem 0 0.1rem 1rem;
+            padding-left: 0;
+            font-size: 0.9rem;
+        }
+
+        .print-hint {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        /* Modale Info-Fenster */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        .modal {
+            background: #fff;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .modal-header h3 {
+            font-size: 1.05rem;
+        }
+        .close-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Weltkarte (vereinfachte Kontinent-Kacheln) */
+        .world-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 0.6rem;
+            margin-top: 0.4rem;
+        }
+        @media (max-width: 600px) {
+            .world-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+        }
+
+        .continent-card {
+            background: linear-gradient(135deg, #edf2f7, #e6fffa);
+            border-radius: 12px;
+            padding: 0.6rem 0.7rem;
+            cursor: pointer;
+            border: 1px solid #cbd5f5;
+            transition: transform 0.1s ease, box-shadow 0.1s ease, border 0.1s ease;
+            position: relative;
+        }
+
+        .continent-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+            border-color: var(--primary-light);
+        }
+
+        .continent-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        .continent-card p {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        .continent-tag {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 0.75rem;
+        }
+
+        /* Bild-Platzhalter */
+        .image-row {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .image-placeholder {
+            flex: 1;
+            min-width: 120px;
+            border-radius: 10px;
+            background: repeating-linear-gradient(
+                45deg,
+                #edf2f7,
+                #edf2f7 8px,
+                #e2e8f0 8px,
+                #e2e8f0 16px
+            );
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #4a5568;
+            text-align: center;
+            padding: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <div class="logo-title">
+            <div class="logo-circle">M</div>
+            <div class="header-text">
+                <h1 data-i18n="title">Mobbing? Nicht mit uns!</h1>
+                <p data-i18n="subtitle">Interaktive Seite für Schüler:innen, Eltern und Lehrkräfte</p>
+            </div>
+        </div>
+        <div class="header-controls">
+            <div>
+                <label for="languageSelect" style="font-size:0.9rem;" data-i18n="languageLabel">
+                    Sprache / Language:
+                </label>
+                <select id="languageSelect">
+                    <option value="de">Deutsch</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <span class="badge" data-i18n="badge">Gemeinsam gegen Mobbing</span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="grid">
+        <!-- Linke Spalte: Inhalte -->
+        <section>
+            <div class="card">
+                <h2><span class="icon">💬</span><span data-i18n="whatIsTitle">Was ist Mobbing?</span></h2>
+                <p data-i18n="whatIsIntro">
+                    Mobbing bedeutet, dass eine Person immer wieder fertiggemacht, ausgeschlossen oder verletzt wird –
+                    über längere Zeit und oft vor anderen.
+                </p>
+
+                <!-- Akkordeon für Detailinfos -->
+                <div class="accordion" id="infoAccordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3 data-i18n="accordionSignsTitle">Woran erkennt man Mobbing?</h3>
+                            <span class="toggle">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <ul>
+                                    <li data-i18n="accordionSigns1">Jemand wird immer wieder ausgelacht oder beleidigt.</li>
+                                    <li data-i18n="accordionSigns2">Jemand wird ausgeschlossen – in der Pause, in Chats oder bei Spielen.</li>
+                                    <li data-i18n="accordionSigns3">Gerüchte werden verbreitet oder peinliche Bilder werden verschickt.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3 data-i18n="accordionOnlineTitle">Cybermobbing – was ist anders?</h3>
+                            <span class="toggle">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p data-i18n="accordionOnlineText">
+                                    Im Internet können Bilder und Nachrichten sich schnell verbreiten und bleiben oft lange sichtbar.
+                                    Manchmal fühlen sich Täter:innen „unsichtbar“, weil sie hinter einem Bildschirm sitzen.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3 data-i18n="accordionHelpTitle">Was kannst du tun?</h3>
+                            <span class="toggle">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p data-i18n="accordionHelpText">
+                                    Du musst mit Mobbing nicht alleine bleiben: Sprich mit Vertrauenslehrer:innen,
+                                    deinen Eltern oder Freund:innen. Beweise (Screenshots) sichern hilft beim Klären.
+                                </p>
+                                <button class="btn-outline btn" data-open-modal="helpModal" data-i18n="btnMoreHelp">
+                                    Mehr Tipps anzeigen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bild-/Material-Platzhalter -->
+                <div class="image-row">
+                    <div class="image-placeholder" data-i18n="imagePlaceholder1">
+                        Platz für Comics oder Beispiele aus dem Schulalltag
+                    </div>
+                    <div class="image-placeholder" data-i18n="imagePlaceholder2">
+                        Platz für Infografik: „Das kannst du tun“
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="icon">🌍</span><span data-i18n="worldTitle">Wie gehen andere Länder mit Mobbing um?</span></h2>
+                <p data-i18n="worldIntro">
+                    Klicke auf einen Kontinent, um zu sehen, wie dort mit Mobbing umgegangen wird und welche Ideen wir
+                    uns abschauen können.
+                </p>
+
+                <div class="world-grid">
+                    <div class="continent-card" data-continent="europe">
+                        <span class="continent-tag">EU</span>
+                        <h4 data-i18n="europeTitle">Europa</h4>
+                        <p data-i18n="europeShort">Schulprogramme, Klassenregeln, Anti-Mobbing-Tage</p>
+                    </div>
+                    <div class="continent-card" data-continent="northamerica">
+                        <span class="continent-tag">NA</span>
+                        <h4 data-i18n="northAmericaTitle">Nordamerika</h4>
+                        <p data-i18n="northAmericaShort">Schulgesetze, anonyme Meldestellen, Peer-Programme</p>
+                    </div>
+                    <div class="continent-card" data-continent="southamerica">
+                        <span class="continent-tag">SA</span>
+                        <h4 data-i18n="southAmericaTitle">Südamerika</h4>
+                        <p data-i18n="southAmericaShort">Gemeinschaftsprojekte, Elternarbeit, Theaterarbeit</p>
+                    </div>
+                    <div class="continent-card" data-continent="asia">
+                        <span class="continent-tag">AS</span>
+                        <h4 data-i18n="asiaTitle">Asien</h4>
+                        <p data-i18n="asiaShort">Respekt-Kampagnen, Klassenverträge, digitale Kurse</p>
+                    </div>
+                    <div class="continent-card" data-continent="africa">
+                        <span class="continent-tag">AF</span>
+                        <h4 data-i18n="africaTitle">Afrika</h4>
+                        <p data-i18n="africaShort">Programme zu Zusammenhalt und Vielfalt</p>
+                    </div>
+                    <div class="continent-card" data-continent="oceania">
+                        <span class="continent-tag">OC</span>
+                        <h4 data-i18n="oceaniaTitle">Ozeanien</h4>
+                        <p data-i18n="oceaniaShort">„No Bullying“-Regeln, Online-Sicherheitstrainings</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Rechte Spalte: Quiz & Selbsttest -->
+        <aside>
+            <div class="card">
+                <h2><span class="icon">❓</span><span data-i18n="quizTitle">Quiz: Wie gut kennst du dich aus?</span></h2>
+                <p data-i18n="quizIntro">
+                    Teste dein Wissen rund um Mobbing und Cybermobbing.
+                </p>
+                <button class="btn btn-secondary" id="startQuizBtn" data-i18n="btnStartQuiz">Quiz starten</button>
+
+                <div class="quiz-container" id="quizContainer" style="display:none;">
+                    <div class="quiz-progress" id="quizProgress"></div>
+                    <div class="question-text" id="quizQuestionText"></div>
+                    <div class="options" id="quizOptions"></div>
+                    <button class="btn" id="quizNextBtn" data-i18n="btnNext">Weiter</button>
+                    <div class="quiz-result" id="quizResult" style="display:none;"></div>
+                </div>
+            </div>
+
+            <div class="card" id="selftestCard">
+                <h2><span class="icon">🧠</span><span data-i18n="selftestTitle">Selbsttest: Wie gehst du mit Mobbing um?</span></h2>
+                <p data-i18n="selftestIntro">
+                    Hier kannst du einschätzen, wie du im Moment mit dem Thema Mobbing umgehst – als Betroffene:r,
+                    Zuschauer:in oder Unterstützer:in.
+                </p>
+                <button class="btn btn-secondary" id="startSelftestBtn" data-i18n="btnStartSelftest">
+                    Selbsttest starten
+                </button>
+
+                <div class="selftest-container" id="selftestContainer" style="display:none;">
+                    <div class="quiz-progress" id="selftestProgress"></div>
+                    <div class="question-text" id="selftestQuestionText"></div>
+                    <div class="options" id="selftestOptions"></div>
+                    <button class="btn" id="selftestNextBtn" data-i18n="btnNext">Weiter</button>
+
+                    <div id="selftestResultContainer" style="display:none;">
+                        <div class="certificate" id="certificate">
+                            <h3 data-i18n="certificateTitle">Deine Mobbing-Kompetenz-Urkunde</h3>
+                            <p class="score" id="selftestScoreText"></p>
+                            <p id="selftestLevelText"></p>
+                            <p class="tips-title" data-i18n="certificateTipsTitle">Unsere Tipps für dich:</p>
+                            <ul id="selftestTipsList"></ul>
+                        </div>
+                        <button class="btn-outline btn" id="printCertificateBtn" data-i18n="btnPrint">
+                            Urkunde drucken / als PDF speichern
+                        </button>
+                        <p class="print-hint" data-i18n="printHint">
+                            Tipp: Klicke auf „Drucken“ und wähle dann „Als PDF speichern“, um deine Urkunde zu Hause zu zeigen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- Modal: Hilfe/Tipps -->
+<div class="modal-backdrop" id="helpModalBackdrop">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 data-i18n="helpModalTitle">Was kannst du konkret tun?</h3>
+            <button class="close-btn" data-close-modal="helpModalBackdrop">&times;</button>
+        </div>
+        <div>
+            <p data-i18n="helpModalP1">
+                1. Bleib nicht alleine: Sprich mit Menschen, denen du vertraust – Eltern, Freund:innen,
+                Schulsozialarbeit, Lehrkräfte.
+            </p>
+            <p data-i18n="helpModalP2">
+                2. Hol dir Unterstützung: Viele Schulen haben Vertrauenslehrer:innen oder Schulsozialarbeiter:innen,
+                die dir zuhören und helfen.
+            </p>
+            <p data-i18n="helpModalP3">
+                3. Dokumentiere: Mach Screenshots und notiere dir, was passiert ist – das hilft beim Klären.
+            </p>
+            <p data-i18n="helpModalP4">
+                4. Wenn du zuschaust: Du bist wichtig! Du kannst die betroffene Person ansprechen und Hilfe holen.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Kontinent-Infos -->
+<div class="modal-backdrop" id="continentModalBackdrop">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="continentModalTitle"></h3>
+            <button class="close-btn" data-close-modal="continentModalBackdrop">&times;</button>
+        </div>
+        <div id="continentModalBody"></div>
+    </div>
+</div>
+
+<script>
+    // ---------------------------
+    // Übersetzungen
+    // ---------------------------
+
+    const translations = {
+        de: {
+            title: "Mobbing? Nicht mit uns!",
+            subtitle: "Interaktive Seite für Schüler:innen, Eltern und Lehrkräfte",
+            languageLabel: "Sprache / Language:",
+            badge: "Gemeinsam gegen Mobbing",
+
+            whatIsTitle: "Was ist Mobbing?",
+            whatIsIntro: "Mobbing bedeutet, dass eine Person immer wieder fertiggemacht, ausgeschlossen oder verletzt wird – über längere Zeit und oft vor anderen.",
+
+            accordionSignsTitle: "Woran erkennt man Mobbing?",
+            accordionSigns1: "Jemand wird immer wieder ausgelacht oder beleidigt.",
+            accordionSigns2: "Jemand wird ausgeschlossen – in der Pause, in Chats oder bei Spielen.",
+            accordionSigns3: "Gerüchte werden verbreitet oder peinliche Bilder werden verschickt.",
+
+            accordionOnlineTitle: "Cybermobbing – was ist anders?",
+            accordionOnlineText: "Im Internet können Bilder und Nachrichten sich schnell verbreiten und bleiben oft lange sichtbar. Manchmal fühlen sich Täter:innen „unsichtbar“, weil sie hinter einem Bildschirm sitzen.",
+
+            accordionHelpTitle: "Was kannst du tun?",
+            accordionHelpText: "Du musst mit Mobbing nicht alleine bleiben: Sprich mit Vertrauenslehrer:innen, deinen Eltern oder Freund:innen. Beweise (Screenshots) sichern hilft beim Klären.",
+            btnMoreHelp: "Mehr Tipps anzeigen",
+
+            imagePlaceholder1: "Platz für Comics oder Beispiele aus dem Schulalltag",
+            imagePlaceholder2: "Platz für Infografik: „Das kannst du tun“",
+
+            worldTitle: "Wie gehen andere Länder mit Mobbing um?",
+            worldIntro: "Klicke auf einen Kontinent, um zu sehen, wie dort mit Mobbing umgegangen wird und welche Ideen wir uns abschauen können.",
+            europeTitle: "Europa",
+            europeShort: "Schulprogramme, Klassenregeln, Anti-Mobbing-Tage",
+            northAmericaTitle: "Nordamerika",
+            northAmericaShort: "Schulgesetze, anonyme Meldestellen, Peer-Programme",
+            southAmericaTitle: "Südamerika",
+            southAmericaShort: "Gemeinschaftsprojekte, Elternarbeit, Theaterarbeit",
+            asiaTitle: "Asien",
+            asiaShort: "Respekt-Kampagnen, Klassenverträge, digitale Kurse",
+            africaTitle: "Afrika",
+            africaShort: "Programme zu Zusammenhalt und Vielfalt",
+            oceaniaTitle: "Ozeanien",
+            oceaniaShort: "„No Bullying“-Regeln, Online-Sicherheitstrainings",
+
+            quizTitle: "Quiz: Wie gut kennst du dich aus?",
+            quizIntro: "Teste dein Wissen rund um Mobbing und Cybermobbing.",
+            btnStartQuiz: "Quiz starten",
+            btnNext: "Weiter",
+
+            selftestTitle: "Selbsttest: Wie gehst du mit Mobbing um?",
+            selftestIntro: "Hier kannst du einschätzen, wie du im Moment mit dem Thema Mobbing umgehst – als Betroffene:r, Zuschauer:in oder Unterstützer:in.",
+            btnStartSelftest: "Selbsttest starten",
+
+            certificateTitle: "Deine Mobbing-Kompetenz-Urkunde",
+            certificateTipsTitle: "Unsere Tipps für dich:",
+            btnPrint: "Urkunde drucken / als PDF speichern",
+            printHint: "Tipp: Klicke auf „Drucken“ und wähle dann „Als PDF speichern“, um deine Urkunde zu Hause zu zeigen.",
+
+            helpModalTitle: "Was kannst du konkret tun?",
+            helpModalP1: "1. Bleib nicht alleine: Sprich mit Menschen, denen du vertraust – Eltern, Freund:innen, Schulsozialarbeit, Lehrkräfte.",
+            helpModalP2: "2. Hol dir Unterstützung: Viele Schulen haben Vertrauenslehrer:innen oder Schulsozialarbeiter:innen, die dir zuhören und helfen.",
+            helpModalP3: "3. Dokumentiere: Mach Screenshots und notiere dir, was passiert ist – das hilft beim Klären.",
+            helpModalP4: "4. Wenn du zuschaust: Du bist wichtig! Du kannst die betroffene Person ansprechen und Hilfe holen."
+        },
+
+        en: {
+            title: "Bullying? Not with us!",
+            subtitle: "Interactive page for students, parents and teachers",
+            languageLabel: "Sprache / Language:",
+            badge: "Together against bullying",
+
+            whatIsTitle: "What is bullying?",
+            whatIsIntro: "Bullying means that a person is repeatedly hurt, excluded or insulted – over a longer period of time and often in front of others.",
+
+            accordionSignsTitle: "How can you recognise bullying?",
+            accordionSigns1: "Someone is repeatedly laughed at or insulted.",
+            accordionSigns2: "Someone is excluded – during breaks, in chats or in games.",
+            accordionSigns3: "Rumours are spread or embarrassing pictures are shared.",
+
+            accordionOnlineTitle: "Cyberbullying – what is different?",
+            accordionOnlineText: "Online, pictures and messages can spread very fast and often stay visible for a long time. Bullies sometimes feel 'invisible' because they sit behind a screen.",
+
+            accordionHelpTitle: "What can you do?",
+            accordionHelpText: "You don't have to deal with bullying on your own: talk to trusted teachers, your parents or friends. Saving evidence (screenshots) helps to solve the situation.",
+            btnMoreHelp: "Show more tips",
+
+            imagePlaceholder1: "Space for comics or examples from school life",
+            imagePlaceholder2: "Space for infographic: \"What you can do\"",
+
+            worldTitle: "How do other countries deal with bullying?",
+            worldIntro: "Click on a continent to see how bullying is handled there and which ideas we can learn from.",
+            europeTitle: "Europe",
+            europeShort: "School programmes, class rules, anti-bullying days",
+            northAmericaTitle: "North America",
+            northAmericaShort: "School laws, anonymous reporting, peer programmes",
+            southAmericaTitle: "South America",
+            southAmericaShort: "Community projects, parent work, theatre methods",
+            asiaTitle: "Asia",
+            asiaShort: "Respect campaigns, class contracts, digital courses",
+            africaTitle: "Africa",
+            africaShort: "Programmes for cohesion and diversity",
+            oceaniaTitle: "Oceania",
+            oceaniaShort: "\"No bullying\" rules, online safety trainings",
+
+            quizTitle: "Quiz: How much do you know?",
+            quizIntro: "Test your knowledge about bullying and cyberbullying.",
+            btnStartQuiz: "Start quiz",
+            btnNext: "Next",
+
+            selftestTitle: "Self-test: How do you deal with bullying?",
+            selftestIntro: "Here you can check how you currently deal with bullying – as a victim, bystander or supporter.",
+            btnStartSelftest: "Start self-test",
+
+            certificateTitle: "Your anti-bullying skills certificate",
+            certificateTipsTitle: "Our tips for you:",
+            btnPrint: "Print certificate / save as PDF",
+            printHint: "Tip: Click on \"Print\" and choose \"Save as PDF\" to show your certificate at home.",
+
+            helpModalTitle: "What can you do exactly?",
+            helpModalP1: "1. Don't stay alone: talk to people you trust – parents, friends, social workers, teachers.",
+            helpModalP2: "2. Get support: many schools have trusted teachers or school social workers who will listen and help.",
+            helpModalP3: "3. Document: take screenshots and note what happened – this helps to solve the problem.",
+            helpModalP4: "4. If you are watching: you matter! You can talk to the person who is bullied and get help."
+        }
+    };
+
+    let currentLang = "de";
+
+    function applyTranslations() {
+        const elements = document.querySelectorAll("[data-i18n]");
+        elements.forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (translations[currentLang] && translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+    }
+
+    // ---------------------------
+    // Quiz-Daten
+    // ---------------------------
+
+    const quizQuestions = [
+        {
+            id: 1,
+            text: {
+                de: "Ab wann spricht man von Mobbing?",
+                en: "When do we speak of bullying?"
+            },
+            options: [
+                {
+                    id: "a",
+                    text: {
+                        de: "Wenn jemand einmal beleidigt wird.",
+                        en: "When someone is insulted once."
+                    },
+                    correct: false
+                },
+                {
+                    id: "b",
+                    text: {
+                        de: "Wenn jemand immer wieder über längere Zeit fertiggemacht wird.",
+                        en: "When someone is repeatedly hurt over a longer period of time."
+                    },
+                    correct: true
+                },
+                {
+                    id: "c",
+                    text: {
+                        de: "Wenn zwei Personen sich streiten.",
+                        en: "When two people have an argument."
+                    },
+                    correct: false
+                }
+            ]
+        },
+        {
+            id: 2,
+            text: {
+                de: "Was ist ein Beispiel für Cybermobbing?",
+                en: "What is an example of cyberbullying?"
+            },
+            options: [
+                {
+                        id: "a",
+                        text: {
+                            de: "Jemand hilft einer Mitschülerin bei den Hausaufgaben.",
+                            en: "Someone helps a classmate with homework."
+                        },
+                        correct: false
+                },
+                {
+                        id: "b",
+                        text: {
+                            de: "Peinliche Fotos werden ohne Erlaubnis in einem Chat geteilt.",
+                            en: "Embarrassing photos are shared in a chat without permission."
+                        },
+                        correct: true
+                },
+                {
+                        id: "c",
+                        text: {
+                            de: "Jemand fragt nach der Uhrzeit.",
+                            en: "Someone asks for the time."
+                        },
+                        correct: false
+                }
+            ]
+        },
+        {
+            id: 3,
+            text: {
+                de: "Was kannst du tun, wenn du Mobbing beobachtest?",
+                en: "What can you do if you see bullying?"
+            },
+            options: [
+                {
+                    id: "a",
+                    text: {
+                        de: "Nichts, es geht dich nichts an.",
+                        en: "Nothing, it's none of your business."
+                    },
+                    correct: false
+                },
+                {
+                    id: "b",
+                    text: {
+                        de: "Die betroffene Person unterstützen und Hilfe holen.",
+                        en: "Support the person who is bullied and get help."
+                    },
+                    correct: true
+                },
+                {
+                    id: "c",
+                    text: {
+                        de: "Mitscherzen, damit du dazugehörst.",
+                        en: "Join in so you belong."
+                    },
+                    correct: false
+                }
+            ]
+        }
+    ];
+
+    // ---------------------------
+    // Selbsttest-Daten
+    // ---------------------------
+
+    const selftestQuestions = [
+        {
+            id: 1,
+            text: {
+                de: "Wenn jemand in der Klasse ausgelacht wird, wie reagierst du meistens?",
+                en: "If someone in class is laughed at, how do you usually react?"
+            },
+            options: [
+                {
+                    id: "a",
+                    score: 1,
+                    text: {
+                        de: "Ich schaue weg und tue so, als ginge es mich nichts an.",
+                        en: "I look away and pretend it's none of my business."
+                    }
+                },
+                {
+                    id: "b",
+                    score: 2,
+                    text: {
+                        de: "Ich fühle mich unwohl, mache aber meistens trotzdem nichts.",
+                        en: "I feel uncomfortable but usually do nothing."
+                    }
+                },
+                {
+                    id: "c",
+                    score: 3,
+                    text: {
+                        de: "Ich versuche, der Person zu helfen oder hole Hilfe.",
+                        en: "I try to help the person or get help."
+                    }
+                }
+            ]
+        },
+        {
+            id: 2,
+            text: {
+                de: "Wie leicht fällt es dir, mit Erwachsenen über Mobbing zu sprechen?",
+                en: "How easy is it for you to talk to adults about bullying?"
+            },
+            options: [
+                {
+                    id: "a",
+                    score: 1,
+                    text: {
+                        de: "Sehr schwer. Ich behalte es lieber für mich.",
+                        en: "Very difficult. I prefer to keep it to myself."
+                    }
+                },
+                {
+                    id: "b",
+                    score: 2,
+                    text: {
+                        de: "Es geht, aber ich weiß oft nicht, wen ich ansprechen soll.",
+                        en: "It's okay, but I often don't know who to talk to."
+                    }
+                },
+                {
+                    id: "c",
+                    score: 3,
+                    text: {
+                        de: "Ich kann mit mindestens einer Person gut darüber reden.",
+                        en: "I can talk well about it with at least one person."
+                    }
+                }
+            ]
+        },
+        {
+            id: 3,
+            text: {
+                de: "Wie gut kennst du deine Rechte im Internet (z.B. bei Bildern und Chats)?",
+                en: "How well do you know your rights online (e.g. pictures and chats)?"
+            },
+            options: [
+                {
+                    id: "a",
+                    score: 1,
+                    text: {
+                        de: "Nicht wirklich. Das ist mir bisher egal gewesen.",
+                        en: "Not really. I didn't care much about it so far."
+                    }
+                },
+                {
+                    id: "b",
+                    score: 2,
+                    text: {
+                        de: "Ein bisschen, aber einiges ist mir unklar.",
+                        en: "A little, but some things are unclear to me."
+                    }
+                },
+                {
+                    id: "c",
+                    score: 3,
+                    text: {
+                        de: "Ziemlich gut – ich weiß, was erlaubt ist und was nicht.",
+                        en: "Quite well – I know what is allowed and what isn't."
+                    }
+                }
+            ]
+        }
+    ];
+
+    // ---------------------------
+    // Sprache initialisieren
+    // ---------------------------
+
+    const languageSelect = document.getElementById("languageSelect");
+    languageSelect.addEventListener("change", () => {
+        currentLang = languageSelect.value;
+        localStorage.setItem("lang", currentLang);
+        applyTranslations();
+        renderQuizQuestion();
+        renderSelftestQuestion();
+    });
+
+    (function initLanguage() {
+        const saved = localStorage.getItem("lang");
+        if (saved && translations[saved]) {
+            currentLang = saved;
+            languageSelect.value = saved;
+        }
+        applyTranslations();
+    })();
+
+    // ---------------------------
+    // Akkordeon
+    // ---------------------------
+
+    document.querySelectorAll(".accordion-header").forEach(header => {
+        header.addEventListener("click", () => {
+            const item = header.parentElement;
+            const content = item.querySelector(".accordion-content");
+            const toggle = header.querySelector(".toggle");
+
+            if (item.classList.contains("open")) {
+                item.classList.remove("open");
+                content.style.maxHeight = "0";
+                toggle.textContent = "+";
+            } else {
+                // optional: nur ein Item geöffnet halten
+                const accordion = item.parentElement;
+                accordion.querySelectorAll(".accordion-item").forEach(i => {
+                    if (i !== item) {
+                        i.classList.remove("open");
+                        i.querySelector(".accordion-content").style.maxHeight = "0";
+                        i.querySelector(".toggle").textContent = "+";
+                    }
+                });
+
+                item.classList.add("open");
+                content.style.maxHeight = content.scrollHeight + "px";
+                toggle.textContent = "–";
+            }
+        });
+    });
+
+    // ---------------------------
+    // Modale Fenster
+    // ---------------------------
+
+    document.querySelectorAll("[data-open-modal]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-open-modal");
+            const backdrop = document.getElementById(id + "Backdrop");
+            if (backdrop) {
+                backdrop.style.display = "flex";
+            }
+        });
+    });
+
+    document.querySelectorAll("[data-close-modal]").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-close-modal");
+            const backdrop = document.getElementById(id);
+            if (backdrop) {
+                backdrop.style.display = "none";
+            }
+        });
+    });
+
+    // Klick auf Hintergrund schließt Modal
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+        backdrop.addEventListener("click", e => {
+            if (e.target === backdrop) {
+                backdrop.style.display = "none";
+            }
+        });
+    });
+
+    // ---------------------------
+    // Kontinente – Infos
+    // ---------------------------
+
+    const continentInfos = {
+        europe: {
+            title: {
+                de: "Europa: Schulprogramme und klare Regeln",
+                en: "Europe: School programmes and clear rules"
+            },
+            body: {
+                de: `
+                    <p>In vielen europäischen Ländern gibt es Anti-Mobbing-Programme an Schulen. Klassen erarbeiten
+                    gemeinsam Regeln für einen respektvollen Umgang. Oft gibt es Projekttage oder Aktionswochen
+                    gegen Mobbing.</p>
+                    <p><strong>Idee für deine Schule:</strong> Einen „Respekt-Vertrag“ für die Klasse schreiben
+                    und sichtbar im Klassenraum aufhängen.</p>
+                `,
+                en: `
+                    <p>In many European countries there are anti-bullying programmes at schools. Classes create rules
+                    for respectful behaviour together. Often there are project days or action weeks against bullying.</p>
+                    <p><strong>Idea for your school:</strong> Write a class \"respect contract\" and hang it up in the classroom.</p>
+                `
+            }
+        },
+        northamerica: {
+            title: {
+                de: "Nordamerika: Gesetze und anonyme Meldestellen",
+                en: "North America: Laws and anonymous reporting"
+            },
+            body: {
+                de: `
+                    <p>In vielen Teilen Nordamerikas gibt es Gesetze gegen Mobbing an Schulen. Einige Schulen bieten
+                    Online-Formulare an, mit denen Schüler:innen Mobbing anonym melden können.</p>
+                    <p><strong>Idee für deine Schule:</strong> Eine anonyme „Melde-Box“ (offline oder online),
+                    in die Schüler:innen Probleme einwerfen können.</p>
+                `,
+                en: `
+                    <p>In many parts of North America there are laws against bullying at schools. Some schools offer
+                    online forms where students can report bullying anonymously.</p>
+                    <p><strong>Idea for your school:</strong> Create an anonymous \"report box\" (offline or online) where students can report problems.</p>
+                `
+            }
+        },
+        southamerica: {
+            title: {
+                de: "Südamerika: Gemeinschaft und Theater",
+                en: "South America: Community and theatre"
+            },
+            body: {
+                de: `
+                    <p>In einigen südamerikanischen Ländern werden Theaterprojekte und Rollenspiele genutzt, um
+                    Mobbing erlebbar zu machen. Dabei wird gemeinsam überlegt, wie man sich gegenseitig stärken kann.</p>
+                    <p><strong>Idee für deine Schule:</strong> Ein kleines Theaterstück oder Rollenspiel zum Thema
+                    Mobbing in der Klasse einüben.</p>
+                `,
+                en: `
+                    <p>In some South American countries, theatre projects and role plays are used to make bullying visible.
+                    Students think together about how to strengthen each other.</p>
+                    <p><strong>Idea for your school:</strong> Prepare a small play or role play about bullying in class.</p>
+                `
+            }
+        },
+        asia: {
+            title: {
+                de: "Asien: Respekt und digitale Kurse",
+                en: "Asia: Respect and digital courses"
+            },
+            body: {
+                de: `
+                    <p>In verschiedenen asiatischen Ländern wird viel Wert auf gegenseitigen Respekt gelegt.
+                    Es gibt Online-Kurse, in denen Schüler:innen lernen, wie sie sich im Netz schützen können.</p>
+                    <p><strong>Idee für deine Schule:</strong> Gemeinsam einen kurzen Online-Kurs oder ein Video
+                    zum Thema Cybermobbing anschauen und darüber sprechen.</p>
+                `,
+                en: `
+                    <p>In several Asian countries, mutual respect is very important.
+                    There are online courses where students learn how to protect themselves online.</p>
+                    <p><strong>Idea for your school:</strong> Watch a short online course or video about cyberbullying together and discuss it.</p>
+                `
+            }
+        },
+        africa: {
+            title: {
+                de: "Afrika: Zusammenhalt und Vielfalt",
+                en: "Africa: Cohesion and diversity"
+            },
+            body: {
+                de: `
+                    <p>In manchen afrikanischen Projekten geht es darum, Zusammenhalt zu stärken und Unterschiede
+                    als Stärke zu sehen – egal welche Herkunft, Hautfarbe oder Religion jemand hat.</p>
+                    <p><strong>Idee für deine Schule:</strong> Eine Aktion „Wir sind bunt“ mit Plakaten oder Collagen
+                    zu Vielfalt und Respekt gestalten.</p>
+                `,
+                en: `
+                    <p>In some African projects, the focus is on strengthening cohesion and viewing differences as a strength –
+                    no matter what origin, skin colour or religion someone has.</p>
+                    <p><strong>Idea for your school:</strong> Create a \"We are colourful\" campaign with posters or collages about diversity and respect.</p>
+                `
+            }
+        },
+        oceania: {
+            title: {
+                de: "Ozeanien: „No Bullying“-Regeln und Online-Sicherheit",
+                en: "Oceania: \"No bullying\" rules and online safety"
+            },
+            body: {
+                de: `
+                    <p>In Australien und Neuseeland haben viele Schulen klare „No Bullying“-Regeln, die allen bekannt sind.
+                    Es gibt Programme zur sicheren Nutzung von Social Media.</p>
+                    <p><strong>Idee für deine Schule:</strong> Einen Klassen-Workshop dazu machen, wie man freundlich
+                    in Chats und Gruppen schreibt.</p>
+                `,
+                en: `
+                    <p>In Australia and New Zealand, many schools have clear \"no bullying\" rules that everyone knows.
+                    There are programmes on safe use of social media.</p>
+                    <p><strong>Idea for your school:</strong> Organise a class workshop on how to communicate kindly in chats and groups.</p>
+                `
+            }
+        }
+    };
+
+    document.querySelectorAll(".continent-card").forEach(card => {
+        card.addEventListener("click", () => {
+            const id = card.getAttribute("data-continent");
+            const info = continentInfos[id];
+            if (!info) return;
+
+            const titleEl = document.getElementById("continentModalTitle");
+            const bodyEl = document.getElementById("continentModalBody");
+            titleEl.textContent = info.title[currentLang];
+            bodyEl.innerHTML = info.body[currentLang];
+
+            const backdrop = document.getElementById("continentModalBackdrop");
+            backdrop.style.display = "flex";
+        });
+    });
+
+    // ---------------------------
+    // Quiz-Logik
+    // ---------------------------
+
+    let quizIndex = 0;
+    let quizScore = 0;
+
+    const startQuizBtn = document.getElementById("startQuizBtn");
+    const quizContainer = document.getElementById("quizContainer");
+    const quizQuestionText = document.getElementById("quizQuestionText");
+    const quizOptions = document.getElementById("quizOptions");
+    const quizProgress = document.getElementById("quizProgress");
+    const quizNextBtn = document.getElementById("quizNextBtn");
+    const quizResult = document.getElementById("quizResult");
+
+    startQuizBtn.addEventListener("click", () => {
+        quizIndex = 0;
+        quizScore = 0;
+        quizContainer.style.display = "block";
+        quizResult.style.display = "none";
+        renderQuizQuestion();
+    });
+
+    function renderQuizQuestion() {
+        if (!quizContainer || quizContainer.style.display === "none") return;
+        if (quizIndex >= quizQuestions.length) {
+            showQuizResult();
+            return;
+        }
+
+        const q = quizQuestions[quizIndex];
+        quizQuestionText.textContent = q.text[currentLang];
+        quizProgress.textContent = `${quizIndex + 1} / ${quizQuestions.length}`;
+        quizOptions.innerHTML = "";
+
+        q.options.forEach(opt => {
+            const label = document.createElement("label");
+            label.className = "option-label";
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = "quizOption";
+            input.value = opt.id;
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(" " + opt.text[currentLang]));
+            quizOptions.appendChild(label);
+        });
+    }
+
+    quizNextBtn.addEventListener("click", () => {
+        if (quizIndex >= quizQuestions.length) return;
+        const selected = document.querySelector("input[name='quizOption']:checked");
+        if (!selected) {
+            alert(currentLang === "de" ? "Bitte wähle eine Antwort aus." : "Please select an answer.");
+            return;
+        }
+        const q = quizQuestions[quizIndex];
+        const chosen = q.options.find(o => o.id === selected.value);
+        if (chosen && chosen.correct) {
+            quizScore++;
+        }
+        quizIndex++;
+        if (quizIndex < quizQuestions.length) {
+            renderQuizQuestion();
+        } else {
+            showQuizResult();
+        }
+    });
+
+    function showQuizResult() {
+        quizContainer.style.display = "block";
+        quizResult.style.display = "block";
+        quizQuestionText.textContent = "";
+        quizOptions.innerHTML = "";
+        quizProgress.textContent = "";
+
+        const total = quizQuestions.length;
+        const percent = Math.round((quizScore / total) * 100);
+        if (currentLang === "de") {
+            quizResult.textContent = `Du hast ${quizScore} von ${total} Fragen richtig beantwortet (${percent} %). ${
+                percent >= 80
+                    ? "Stark! Du kennst dich richtig gut aus."
+                    : percent >= 50
+                        ? "Gut gemacht! Noch ein bisschen üben – schau dir die Infos auf der Seite an."
+                        : "Kein Problem – nutze die Infos auf der Seite und versuche das Quiz später noch einmal."
+            }`;
+        } else {
+            quizResult.textContent = `You answered ${quizScore} out of ${total} questions correctly (${percent}%). ${
+                percent >= 80
+                    ? "Great! You really know a lot."
+                    : percent >= 50
+                        ? "Well done! A bit more practice – check the information on this page."
+                        : "No problem – use the information on this page and try the quiz again later."
+            }`;
+        }
+    }
+
+    // ---------------------------
+    // Selbsttest-Logik
+    // ---------------------------
+
+    let selftestIndex = 0;
+    let selftestScore = 0;
+
+    const startSelftestBtn = document.getElementById("startSelftestBtn");
+    const selftestContainer = document.getElementById("selftestContainer");
+    const selftestQuestionText = document.getElementById("selftestQuestionText");
+    const selftestOptions = document.getElementById("selftestOptions");
+    const selftestProgress = document.getElementById("selftestProgress");
+    const selftestNextBtn = document.getElementById("selftestNextBtn");
+    const selftestResultContainer = document.getElementById("selftestResultContainer");
+
+    const selftestScoreText = document.getElementById("selftestScoreText");
+    const selftestLevelText = document.getElementById("selftestLevelText");
+    const selftestTipsList = document.getElementById("selftestTipsList");
+    const printCertificateBtn = document.getElementById("printCertificateBtn");
+
+    startSelftestBtn.addEventListener("click", () => {
+        selftestIndex = 0;
+        selftestScore = 0;
+        selftestContainer.style.display = "block";
+        selftestResultContainer.style.display = "none";
+        renderSelftestQuestion();
+        // zu Karte scrollen, damit die Schüler:innen alles sehen
+        document.getElementById("selftestCard").scrollIntoView({ behavior: "smooth" });
+    });
+
+    function renderSelftestQuestion() {
+        if (!selftestContainer || selftestContainer.style.display === "none") return;
+        if (selftestIndex >= selftestQuestions.length) {
+            showSelftestResult();
+            return;
+        }
+
+        const q = selftestQuestions[selftestIndex];
+        selftestQuestionText.textContent = q.text[currentLang];
+        selftestProgress.textContent = `${selftestIndex + 1} / ${selftestQuestions.length}`;
+        selftestOptions.innerHTML = "";
+
+        q.options.forEach(opt => {
+            const label = document.createElement("label");
+            label.className = "option-label";
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = "selftestOption";
+            input.value = opt.id;
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(" " + opt.text[currentLang]));
+            selftestOptions.appendChild(label);
+        });
+    }
+
+    selftestNextBtn.addEventListener("click", () => {
+        if (selftestIndex >= selftestQuestions.length) return;
+        const selected = document.querySelector("input[name='selftestOption']:checked");
+        if (!selected) {
+            alert(currentLang === "de" ? "Bitte wähle eine Antwort aus." : "Please select an answer.");
+            return;
+        }
+        const q = selftestQuestions[selftestIndex];
+        const chosen = q.options.find(o => o.id === selected.value);
+        selftestScore += chosen ? chosen.score : 0;
+        selftestIndex++;
+        if (selftestIndex < selftestQuestions.length) {
+            renderSelftestQuestion();
+        } else {
+            showSelftestResult();
+        }
+    });
+
+    function showSelftestResult() {
+        const maxScore = selftestQuestions.length * 3;
+        const percent = Math.round((selftestScore / maxScore) * 100);
+
+        selftestResultContainer.style.display = "block";
+
+        // Urkunden-Text je nach Ergebnis
+        let levelText, tips;
+        if (percent >= 80) {
+            levelText = currentLang === "de"
+                ? "Stark! Du gehst sehr bewusst mit Mobbing um und bist für andere eine wichtige Unterstützung."
+                : "Great! You deal very consciously with bullying and are an important support for others.";
+            tips = currentLang === "de"
+                ? [
+                    "Bleib aufmerksam: Deine Haltung kann anderen Mut machen.",
+                    "Überlege, mit wem du zusammen Anti-Mobbing-Ideen in deiner Klasse umsetzen kannst.",
+                    "Teile dein Wissen mit Freund:innen oder deiner Familie."
+                ]
+                : [
+                    "Stay aware: Your attitude can encourage others.",
+                    "Think about who you could work with on anti-bullying ideas in your class.",
+                    "Share your knowledge with friends or your family."
+                ];
+        } else if (percent >= 50) {
+            levelText = currentLang === "de"
+                ? "Du bist auf einem guten Weg und hast schon viele gute Ideen, wie man mit Mobbing umgehen kann."
+                : "You are on a good way and already have many good ideas on how to deal with bullying.";
+            tips = currentLang === "de"
+                ? [
+                    "Such dir eine erwachsene Person, mit der du gut über solche Themen sprechen kannst.",
+                    "Überlege dir einen Satz, den du sagen kannst, wenn jemand gemein behandelt wird.",
+                    "Informiere dich noch genauer über deine Rechte im Internet."
+                ]
+                : [
+                    "Find an adult you can talk to about these topics.",
+                    "Think of a sentence you can say when someone is treated badly.",
+                    "Learn more about your rights online."
+                ];
+        } else {
+            levelText = currentLang === "de"
+                ? "Du musst mit Mobbing nicht alleine bleiben. Es ist mutig, dass du den Test gemacht hast."
+                : "You don't have to deal with bullying on your own. It is brave that you took this test.";
+            tips = currentLang === "de"
+                ? [
+                    "Überlege, wem du von deinen Sorgen erzählen kannst – es muss nicht perfekt formuliert sein.",
+                    "Notiere dir Situationen, die dir unangenehm sind, und nimm sie zu einem Gespräch mit.",
+                    "Nimm dir vor, beim nächsten Mal mindestens eine Person um Hilfe zu bitten."
+                ]
+                : [
+                    "Think about who you could tell about your worries – it doesn't have to be perfect.",
+                    "Write down situations that feel bad for you and bring them to a conversation.",
+                    "Decide that next time you will ask at least one person for help."
+                ];
+        }
+
+        selftestScoreText.textContent = currentLang === "de"
+            ? `Dein Ergebnis: ${selftestScore} von ${maxScore} Punkten (${percent} %)`
+            : `Your result: ${selftestScore} out of ${maxScore} points (${percent}%)`;
+        selftestLevelText.textContent = levelText;
+
+        selftestTipsList.innerHTML = "";
+        tips.forEach(t => {
+            const li = document.createElement("li");
+            li.textContent = t;
+            selftestTipsList.appendChild(li);
+        });
+
+        // zur Urkunde scrollen
+        document.getElementById("certificate").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Urkunde drucken (nur Urkunden-Teil)
+    printCertificateBtn.addEventListener("click", () => {
+        const certificate = document.getElementById("certificate").cloneNode(true);
+        const newWindow = window.open("", "_blank");
+        const doc = newWindow.document;
+        doc.write("<html><head><title>Urkunde</title></head><body>");
+        doc.body.appendChild(certificate);
+        doc.write("</body></html>");
+        doc.close();
+        newWindow.focus();
+        newWindow.print();
+    });
+</script>
+</body>
+</html>
