@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Die 7R gegen Lebensmittelverschwendung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root{
+      --bg:#f7fafc;
+      --bg-alt:#edf2f7;
+      --card:#ffffff;
+      --primary:#2f855a;
+      --primary-light:#68d391;
+      --primary-dark:#22543d;
+      --accent:#e6b800;
+      --accent-soft:#faf089;
+      --danger:#e53e3e;
+      --text:#1a202c;
+      --muted:#4a5568;
+      --shadow:0 4px 8px rgba(0,0,0,0.08);
+      --radius:12px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    header{
+      background:linear-gradient(130deg,var(--primary),var(--primary-dark));
+      color:#fff;
+      padding:1rem 1rem 0.5rem;
+    }
+    .header-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .logo-wrap{
+      display:flex;
+      align-items:center;
+      gap:0.8rem;
+    }
+    .logo-circle{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:1.4rem;
+    }
+    .header-text h1{font-size:1.5rem;margin-bottom:0.1rem;}
+    .header-text p{font-size:0.9rem;opacity:0.9;}
+    .lang-row{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:0.4rem;
+    }
+    .lang-row label{
+      font-size:0.85rem;
+    }
+    select{
+      padding:0.3rem 0.75rem;
+      border-radius:999px;
+      border:none;
+      font-size:0.9rem;
+    }
+    .badge{
+      font-size:0.75rem;
+      padding:0.25rem 0.7rem;
+      border-radius:999px;
+      background:rgba(255,255,255,0.16);
+      display:inline-block;
+    }
+    nav{
+      max-width:1100px;
+      margin:0.4rem auto 0.4rem;
+      padding:0 1rem 0.6rem;
+    }
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.4rem;
+      list-style:none;
+    }
+    .nav-links a{
+      text-decoration:none;
+      color:#edf2f7;
+      font-size:0.85rem;
+      padding:0.25rem 0.7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.25);
+    }
+    .nav-links a.active{
+      background:#fff;
+      color:var(--primary-dark);
+    }
+
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:1.2rem 1rem 2rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:2fr 1.4fr;
+      gap:1.2rem;
+    }
+    @media(max-width:900px){
+      .header-inner{flex-direction:column;align-items:flex-start;}
+      .lang-row{align-items:flex-start;}
+      .grid{grid-template-columns:1fr;}
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:0.9rem 1rem;
+      margin-bottom:0.9rem;
+    }
+    .card-header{
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      margin-bottom:0.5rem;
+    }
+    .card-header span.icon{
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      background:var(--primary-light);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1rem;
+      color:#1a202c;
+    }
+    h2{font-size:1.1rem;}
+    p{font-size:0.93rem;margin-bottom:0.4rem;}
+    ul{padding-left:1.1rem;margin-bottom:0.4rem;font-size:0.9rem;}
+    li+li{margin-top:0.1rem;}
+    .muted{color:var(--muted);font-size:0.85rem;}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0.4rem 0.9rem;
+      border-radius:999px;
+      border:none;
+      font-size:0.9rem;
+      cursor:pointer;
+      gap:0.3rem;
+      margin:0.15rem 0.15rem 0.15rem 0;
+      box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      transition:transform .1s ease,box-shadow .1s ease,background .15s ease;
+    }
+    .btn-primary{background:var(--primary);color:#fff;}
+    .btn-primary:hover{background:var(--primary-dark);}
+    .btn-secondary{background:var(--accent);color:#1a202c;}
+    .btn-secondary:hover{background:#d69e2e;}
+    .btn-outline{
+      background:transparent;
+      color:var(--primary-dark);
+      border:1px solid var(--primary);
+      box-shadow:none;
+    }
+    .btn-outline:hover{background:rgba(56,161,105,0.06);}
+    .btn:active{transform:translateY(1px);box-shadow:0 1px 2px rgba(0,0,0,0.2);}
+
+    .accordion{
+      border-radius:var(--radius);
+      border:1px solid #e2e8f0;
+      overflow:hidden;
+      margin-top:0.4rem;
+    }
+    .acc-item+.acc-item{border-top:1px solid #e2e8f0;}
+    .acc-head{
+      background:var(--bg-alt);
+      padding:0.5rem 0.8rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+    }
+    .acc-head h3{font-size:0.95rem;}
+    .acc-toggle{font-weight:700;}
+    .acc-body{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+      background:#fff;
+    }
+    .acc-body-inner{padding:0.5rem 0.8rem 0.6rem;font-size:0.9rem;}
+    .acc-item.open .acc-body{padding-bottom:0.6rem;}
+
+    .video-wrap{
+      margin-top:0.4rem;
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:#000;
+      position:relative;
+      padding-top:56.25%;
+    }
+    .video-wrap video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .image-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.5rem;
+      margin-top:0.5rem;
+    }
+    .image-placeholder{
+      flex:1;
+      min-width:120px;
+      height:90px;
+      border-radius:10px;
+      background:repeating-linear-gradient(45deg,#edf2f7,#edf2f7 8px,#e2e8f0 8px,#e2e8f0 16px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.8rem;
+      color:var(--muted);
+      text-align:center;
+      padding:0.3rem;
+    }
+
+    .world-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:0.5rem;
+      margin-top:0.4rem;
+    }
+    @media(max-width:650px){
+      .world-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    .continent-card{
+      background:linear-gradient(135deg,#edf2f7,#e6fffa);
+      border-radius:10px;
+      padding:0.55rem 0.65rem;
+      border:1px solid #cbd5f5;
+      cursor:pointer;
+      position:relative;
+      transition:transform .1s ease,box-shadow .1s ease,border .1s ease;
+    }
+    .continent-card h4{font-size:0.9rem;margin-bottom:0.15rem;}
+    .continent-card p{font-size:0.78rem;color:var(--muted);}
+    .continent-tag{
+      position:absolute;
+      top:4px;
+      right:6px;
+      font-size:0.7rem;
+    }
+    .continent-card:hover{
+      transform:translateY(-1px);
+      box-shadow:0 5px 10px rgba(0,0,0,0.12);
+      border-color:var(--primary-light);
+    }
+
+    .quiz-progress{
+      font-size:0.78rem;
+      color:var(--muted);
+      margin-bottom:0.3rem;
+    }
+    .question-text{font-weight:600;font-size:0.95rem;margin-bottom:0.4rem;}
+    .options{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:0.4rem;}
+    .option-label{
+      display:flex;
+      align-items:center;
+      gap:0.4rem;
+      padding:0.35rem 0.5rem;
+      border-radius:8px;
+      border:1px solid #e2e8f0;
+      font-size:0.9rem;
+      cursor:pointer;
+    }
+    .option-label input{accent-color:var(--primary);}
+    .quiz-result{
+      margin-top:0.4rem;
+      font-size:0.9rem;
+      padding:0.5rem 0.6rem;
+      border-radius:8px;
+      background:#f0fff4;
+      border:1px solid #c6f6d5;
+    }
+
+    .certificate{
+      border-radius:14px;
+      border:2px solid var(--accent);
+      background:var(--accent-soft);
+      padding:0.8rem 1rem;
+      margin-top:0.6rem;
+      position:relative;
+    }
+    .certificate::before{
+      content:"★";
+      position:absolute;
+      top:-14px;
+      right:12px;
+      font-size:1.6rem;
+      color:#d69e2e;
+    }
+    .certificate h3{
+      text-align:center;
+      font-size:1rem;
+      margin-bottom:0.3rem;
+    }
+    .certificate p{font-size:0.9rem;margin-bottom:0.3rem;}
+    .certificate .score{
+      text-align:center;
+      font-weight:700;
+      margin-bottom:0.3rem;
+    }
+    .certificate ul{font-size:0.88rem;margin-top:0.1rem;}
+    .print-hint{
+      font-size:0.75rem;
+      color:var(--muted);
+      margin-top:0.2rem;
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:30;
+    }
+    .modal{
+      background:#fff;
+      border-radius:12px;
+      max-width:520px;
+      width:90%;
+      max-height:90vh;
+      overflow-y:auto;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      padding:0.9rem 1rem 1rem;
+    }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:0.4rem;
+    }
+    .modal-header h3{font-size:1rem;}
+    .close-btn{
+      background:transparent;
+      border:none;
+      font-size:1.2rem;
+      cursor:pointer;
+    }
+
+    .toast{
+      position:fixed;
+      bottom:1rem;
+      right:1rem;
+      background:#2d3748;
+      color:#fff;
+      padding:0.5rem 0.8rem;
+      border-radius:8px;
+      font-size:0.85rem;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(8px);
+      transition:opacity .2s ease,transform .2s ease;
+      z-index:40;
+    }
+    .toast.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-circle">7R</div>
+      <div class="header-text">
+        <h1 data-i18n="title">Die 7R gegen Lebensmittelverschwendung</h1>
+        <p data-i18n="subtitle">Interaktive Seite zu Rethink, Reduce, Reuse und mehr</p>
+      </div>
+    </div>
+    <div class="lang-row">
+      <label for="langSelect" data-i18n="languageLabel">Sprache / Language:</label>
+      <select id="langSelect">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="pl">Polski</option>
+        <option value="ar">العربية</option>
+        <option value="ru">Русский</option>
+        <option value="nl">Nederlands</option>
+        <option value="tr">Türkçe</option>
+      </select>
+      <span class="badge" data-i18n="badge">Gemeinsam gegen Lebensmittelverschwendung</span>
+    </div>
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#video" class="nav-link active" data-i18n="navVideo">Video</a></li>
+      <li><a href="#rs" class="nav-link" data-i18n="nav7R">Die 7R</a></li>
+      <li><a href="#quiz" class="nav-link" data-i18n="navQuiz">Quiz</a></li>
+      <li><a href="#selftest" class="nav-link" data-i18n="navSelftest">Selbsttest</a></li>
+      <li><a href="#world" class="nav-link" data-i18n="navWorld">Weltweit</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="grid">
+    <section>
+      <div class="card" id="video">
+        <div class="card-header">
+          <span class="icon">🎥</span>
+          <h2 data-i18n="videoTitle">7‑Tage‑Experiment: Wie viel Essen retten wir?</h2>
+        </div>
+        <p data-i18n="videoIntro">
+          Schau dir zuerst das Video an. Es zeigt ein echtes Experiment über eine Woche zu Hause und wie viel
+          Lebensmittel man retten kann, wenn man anders denkt.
+        </p>
+        <div class="video-wrap">
+          <video controls>
+            <source src="e.mp4" type="video/mp4" />
+            Dein Browser unterstützt dieses Video nicht.
+          </video>
+        </div>
+        <p class="muted" data-i18n="videoHint">
+          Tipp: Notiere dir beim Schauen, welche R‑Begriffe im Video vorkommen.
+        </p>
+      </div>
+
+      <div class="card" id="rs">
+        <div class="card-header">
+          <span class="icon">♻️</span>
+          <h2 data-i18n="rsTitle">Die 7R – vom Denken bis zum Recyceln</h2>
+        </div>
+        <p data-i18n="rsIntro">
+          Die 7R helfen dir, weniger Lebensmittel wegzuwerfen – und Ressourcen wie Wasser, Energie und Boden zu
+          schützen. Klicke auf ein R, um mehr zu erfahren.
+        </p>
+
+        <div class="accordion">
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r1Title">1. Rethink – Überdenken</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r1Text">
+                  Rethink heißt: Stopp, bevor du einkaufst oder wegwirfst. Plane deine Woche, schreibe eine Liste und
+                  überlege: Was brauche ich wirklich? Gehe nicht hungrig einkaufen.
+                </p>
+                <button class="btn btn-outline" data-open-modal="r1Modal" data-i18n="btnExamples">
+                  Beispiele ansehen
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r2Title">2. Reduce – Reduzieren</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r2Text">
+                  Reduce bedeutet, Abfall von Anfang an zu vermeiden: passende Portionsgrößen, richtige Lagerung und
+                  „First in – First out“ im Kühlschrank.
+                </p>
+                <button class="btn btn-outline" data-open-modal="r2Modal" data-i18n="btnTips">
+                  Kühlschrank‑Tipps
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r3Title">3. Reuse – Wiederverwenden</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r3Text">
+                  Reuse heißt: Reste nicht wegwerfen, sondern kreativ nutzen – z.B. Restetag, Pfannengerichte,
+                  Smoothies oder Einfrieren.
+                </p>
+                <button class="btn btn-outline" data-open-modal="r3Modal" data-i18n="btnRecipes">
+                  Resterezepte
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r4Title">4. Repair – Reparieren</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r4Text">
+                  Repair passt vor allem zu Gegenständen: Vorratsbehälter, Gefrierfächer oder Küchengeräte reparieren,
+                  statt neu zu kaufen – damit Lebensmittel besser geschützt sind.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r5Title">5. Refuse – Ablehnen</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r5Text">
+                  Refuse bedeutet: Nein sagen zu Dingen, die du nicht brauchst – z.B. „2 für 1“-Angebote, wenn du es
+                  realistisch nicht aufbrauchst.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r6Title">6. Recycle – Recyceln</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r6Text">
+                  Recycle heißt: Müll richtig trennen, damit Verpackungen und Bioabfall wieder zu neuen Produkten oder
+                  Energie werden können.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head">
+              <h3 data-i18n="r7Title">7. Recover – Zurückgewinnen</h3>
+              <span class="acc-toggle">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p data-i18n="r7Text">
+                  Recover nutzt das, was gar nicht mehr essbar ist: z.B. Biogasanlagen oder Kompost, die aus
+                  Lebensmittelresten Energie und neue Nährstoffe machen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-row">
+          <div class="image-placeholder" data-i18n="imgSmoothie">
+            Platz für Foto: Smoothie aus Resten
+          </div>
+          <div class="image-placeholder" data-i18n="imgFridge">
+            Platz für Skizze: Kühlschrank‑Zonen
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="world">
+        <div class="card-header">
+          <span class="icon">🌍</span>
+          <h2 data-i18n="worldTitle">7R weltweit – wie machen es andere?</h2>
+        </div>
+        <p data-i18n="worldIntro">
+          Klicke auf einen Kontinent und sieh dir an, wie dort mit Lebensmittelverschwendung umgegangen wird – und
+          welche Ideen wir übernehmen können.
+        </p>
+        <div class="world-grid">
+          <div class="continent-card" data-continent="europe">
+            <span class="continent-tag">EU</span>
+            <h4 data-i18n="euTitle">Europa</h4>
+            <p data-i18n="euShort">R‑Strategien in Supermärkten, Retterkisten, Apps</p>
+          </div>
+          <div class="continent-card" data-continent="northamerica">
+            <span class="continent-tag">NA</span>
+            <h4 data-i18n="naTitle">Nordamerika</h4>
+            <p data-i18n="naShort">Food banks, „ugly food“, Bildungsprogramme</p>
+          </div>
+          <div class="continent-card" data-continent="southamerica">
+            <span class="continent-tag">SA</span>
+            <h4 data-i18n="saTitle">Südamerika</h4>
+            <p data-i18n="saShort">Gemeinschaftsküchen, Märkte mit Restware</p>
+          </div>
+          <div class="continent-card" data-continent="asia">
+            <span class="continent-tag">AS</span>
+            <h4 data-i18n="asTitle">Asien</h4>
+            <p data-i18n="asShort">Kampagnen gegen Buffetreste, Apps, Schulprojekte</p>
+          </div>
+          <div class="continent-card" data-continent="africa">
+            <span class="continent-tag">AF</span>
+            <h4 data-i18n="afTitle">Afrika</h4>
+            <p data-i18n="afShort">Solartrocknung, bessere Lagerung, Kompost</p>
+          </div>
+          <div class="continent-card" data-continent="oceania">
+            <span class="continent-tag">OC</span>
+            <h4 data-i18n="ocTitle">Ozeanien</h4>
+            <p data-i18n="ocShort">Zero‑Waste‑Kampagnen, Schulprogramme</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside>
+      <div class="card" id="quiz">
+        <div class="card-header">
+          <span class="icon">❓</span>
+          <h2 data-i18n="quizTitle">Quiz: Wie gut kennst du die 7R?</h2>
+        </div>
+        <p data-i18n="quizIntro">
+          Teste dein Wissen rund um Lebensmittelverschwendung und die 7R.
+        </p>
+        <button class="btn btn-secondary" id="startQuizBtn" data-i18n="btnStartQuiz">Quiz starten</button>
+        <div id="quizContainer" style="display:none;margin-top:0.5rem;">
+          <div class="quiz-progress" id="quizProgress"></div>
+          <div class="question-text" id="quizQuestionText"></div>
+          <div class="options" id="quizOptions"></div>
+          <button class="btn btn-primary" id="quizNextBtn" data-i18n="btnNext">Weiter</button>
+          <div class="quiz-result" id="quizResult" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="card" id="selftest">
+        <div class="card-header">
+          <span class="icon">🧠</span>
+          <h2 data-i18n="selftestTitle">Selbsttest: Wie 7R‑fit ist dein Haushalt?</h2>
+        </div>
+        <p data-i18n="selftestIntro">
+          Beantworte ein paar Fragen und sieh am Ende deine persönliche 7R‑Urkunde mit Tipps, die du ausdrucken kannst.
+        </p>
+        <button class="btn btn-secondary" id="startSelftestBtn" data-i18n="btnStartSelftest">Selbsttest starten</button>
+        <div id="selftestContainer" style="display:none;margin-top:0.5rem;">
+          <div class="quiz-progress" id="selftestProgress"></div>
+          <div class="question-text" id="selftestQuestionText"></div>
+          <div class="options" id="selftestOptions"></div>
+          <button class="btn btn-primary" id="selftestNextBtn" data-i18n="btnNext">Weiter</button>
+          <div id="selftestResultWrap" style="display:none;">
+            <div class="certificate" id="certificate">
+              <h3 data-i18n="certTitle">7R‑Urkunde für deinen Haushalt</h3>
+              <p class="score" id="selftestScoreText"></p>
+              <p id="selftestLevelText"></p>
+              <p data-i18n="certTipsTitle" style="font-weight:600;margin-top:0.2rem;">Unsere Tipps für dich:</p>
+              <ul id="selftestTipsList"></ul>
+            </div>
+            <button class="btn btn-outline" id="printCertificateBtn" data-i18n="btnPrint">
+              Urkunde drucken / als PDF speichern
+            </button>
+            <p class="print-hint" data-i18n="printHint">
+              Tipp: Beim Drucken „Als PDF speichern“ wählen und die Urkunde zu Hause mit den Eltern anschauen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="r1ModalBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 data-i18n="r1ModalTitle">Rethink – Beispiel aus dem Video</h3>
+      <button class="close-btn" data-close-modal="r1ModalBackdrop">&times;</button>
+    </div>
+    <div>
+      <p data-i18n="r1ModalText1">
+        Im Experiment wurden Bananen, Blaubeeren und Skyr nicht weggeworfen, sondern in einen Smoothie verwandelt.
+        Rethink heißt: Erst denken, dann wegwerfen.
+      </p>
+      <p data-i18n="r1ModalText2">
+        Überlege: Was kannst du diese Woche anders planen? Schreibe 3 Dinge auf, die du weglassen oder besser nutzen
+        möchtest.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="r2ModalBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 data-i18n="r2ModalTitle">Reduce – Kühlschrank‑Check</h3>
+      <button class="close-btn" data-close-modal="r2ModalBackdrop">&times;</button>
+    </div>
+    <div>
+      <ul>
+        <li data-i18n="r2ModalLi1">„First in – First out“: Altes nach vorne, Neues nach hinten.</li>
+        <li data-i18n="r2ModalLi2">Unten ist es am kältesten – hier lagern Fleisch und Fisch.</li>
+        <li data-i18n="r2ModalLi3">Mittelbereich: Milchprodukte wie Skyr.</li>
+        <li data-i18n="r2ModalLi4">Obst und Gemüse ins Gemüsefach – möglichst unverpackt.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="r3ModalBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 data-i18n="r3ModalTitle">Reuse – Ideen für Restetage</h3>
+      <button class="close-btn" data-close-modal="r3ModalBackdrop">&times;</button>
+    </div>
+    <div>
+      <ul>
+        <li data-i18n="r3ModalLi1">Nudeln vom Vortag + Ei + Gemüse = Restepfanne.</li>
+        <li data-i18n="r3ModalLi2">Braune Bananen + Joghurt + Obst = Smoothie.</li>
+        <li data-i18n="r3ModalLi3">Hartes Brot = Croutons oder Semmelbrösel.</li>
+        <li data-i18n="r3ModalLi4">Früchte einkochen = Kompott oder Apfelmus.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="continentModalBackdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="continentModalTitle"></h3>
+      <button class="close-btn" data-close-modal="continentModalBackdrop">&times;</button>
+    </div>
+    <div id="continentModalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const translations={
+    de:{
+      title:"Die 7R gegen Lebensmittelverschwendung",
+      subtitle:"Interaktive Seite zu Rethink, Reduce, Reuse und mehr",
+      languageLabel:"Sprache / Language:",
+      badge:"Gemeinsam gegen Lebensmittelverschwendung",
+      navVideo:"Video",
+      nav7R:"Die 7R",
+      navQuiz:"Quiz",
+      navSelftest:"Selbsttest",
+      navWorld:"Weltweit",
+
+      videoTitle:"7‑Tage‑Experiment: Wie viel Essen retten wir?",
+      videoIntro:"Schau dir zuerst das Video an. Es zeigt ein echtes Experiment über eine Woche zu Hause und wie viel Lebensmittel man retten kann, wenn man anders denkt.",
+      videoHint:"Tipp: Notiere dir beim Schauen, welche R‑Begriffe im Video vorkommen.",
+
+      rsTitle:"Die 7R – vom Denken bis zum Recyceln",
+      rsIntro:"Die 7R helfen dir, weniger Lebensmittel wegzuwerfen – und Ressourcen wie Wasser, Energie und Boden zu schützen. Klicke auf ein R, um mehr zu erfahren.",
+      r1Title:"1. Rethink – Überdenken",
+      r1Text:"Rethink heißt: Stopp, bevor du einkaufst oder wegwirfst. Plane deine Woche, schreibe eine Liste und überlege: Was brauche ich wirklich? Gehe nicht hungrig einkaufen.",
+      r2Title:"2. Reduce – Reduzieren",
+      r2Text:"Reduce bedeutet, Abfall von Anfang an zu vermeiden: passende Portionsgrößen, richtige Lagerung und „First in – First out“ im Kühlschrank.",
+      r3Title:"3. Reuse – Wiederverwenden",
+      r3Text:"Reuse heißt: Reste nicht wegwerfen, sondern kreativ nutzen – z.B. Restetag, Pfannengerichte, Smoothies oder Einfrieren.",
+      r4Title:"4. Repair – Reparieren",
+      r4Text:"Repair passt vor allem zu Gegenständen: Vorratsbehälter, Gefrierfächer oder Küchengeräte reparieren, statt neu zu kaufen – damit Lebensmittel besser geschützt sind.",
+      r5Title:"5. Refuse – Ablehnen",
+      r5Text:"Refuse bedeutet: Nein sagen zu Dingen, die du nicht brauchst – z.B. „2 für 1“-Angebote, wenn du es realistisch nicht aufbrauchst.",
+      r6Title:"6. Recycle – Recyceln",
+      r6Text:"Recycle heißt: Müll richtig trennen, damit Verpackungen und Bioabfall wieder zu neuen Produkten oder Energie werden können.",
+      r7Title:"7. Recover – Zurückgewinnen",
+      r7Text:"Recover nutzt das, was gar nicht mehr essbar ist: z.B. Biogasanlagen oder Kompost, die aus Lebensmittelresten Energie und neue Nährstoffe machen.",
+
+      btnExamples:"Beispiele ansehen",
+      btnTips:"Kühlschrank‑Tipps",
+      btnRecipes:"Resterezepte",
+
+      imgSmoothie:"Platz für Foto: Smoothie aus Resten",
+      imgFridge:"Platz für Skizze: Kühlschrank‑Zonen",
+
+      worldTitle:"7R weltweit – wie machen es andere?",
+      worldIntro:"Klicke auf einen Kontinent und sieh dir an, wie dort mit Lebensmittelverschwendung umgegangen wird – und welche Ideen wir übernehmen können.",
+      euTitle:"Europa",
+      euShort:"R‑Strategien in Supermärkten, Retterkisten, Apps",
+      naTitle:"Nordamerika",
+      naShort:"Food banks, „ugly food“, Bildungsprogramme",
+      saTitle:"Südamerika",
+      saShort:"Gemeinschaftsküchen, Märkte mit Restware",
+      asTitle:"Asien",
+      asShort:"Kampagnen gegen Buffetreste, Apps, Schulprojekte",
+      afTitle:"Afrika",
+      afShort:"Solartrocknung, bessere Lagerung, Kompost",
+      ocTitle:"Ozeanien",
+      ocShort:"Zero‑Waste‑Kampagnen, Schulprogramme",
+
+      quizTitle:"Quiz: Wie gut kennst du die 7R?",
+      quizIntro:"Teste dein Wissen rund um Lebensmittelverschwendung und die 7R.",
+      btnStartQuiz:"Quiz starten",
+      btnNext:"Weiter",
+
+      selftestTitle:"Selbsttest: Wie 7R‑fit ist dein Haushalt?",
+      selftestIntro:"Beantworte ein paar Fragen und sieh am Ende deine persönliche 7R‑Urkunde mit Tipps, die du ausdrucken kannst.",
+      btnStartSelftest:"Selbsttest starten",
+
+      certTitle:"7R‑Urkunde für deinen Haushalt",
+      certTipsTitle:"Unsere Tipps für dich:",
+      btnPrint:"Urkunde drucken / als PDF speichern",
+      printHint:"Tipp: Beim Drucken „Als PDF speichern“ wählen und die Urkunde zu Hause mit den Eltern anschauen.",
+
+      r1ModalTitle:"Rethink – Beispiel aus dem Video",
+      r1ModalText1:"Im Experiment wurden Bananen, Blaubeeren und Skyr nicht weggeworfen, sondern in einen Smoothie verwandelt. Rethink heißt: Erst denken, dann wegwerfen.",
+      r1ModalText2:"Überlege: Was kannst du diese Woche anders planen? Schreibe 3 Dinge auf, die du weglassen oder besser nutzen möchtest.",
+
+      r2ModalTitle:"Reduce – Kühlschrank‑Check",
+      r2ModalLi1:"„First in – First out“: Altes nach vorne, Neues nach hinten.",
+      r2ModalLi2:"Unten ist es am kältesten – hier lagern Fleisch und Fisch.",
+      r2ModalLi3:"Mittelbereich: Milchprodukte wie Skyr.",
+      r2ModalLi4:"Obst und Gemüse ins Gemüsefach – möglichst unverpackt.",
+
+      r3ModalTitle:"Reuse – Ideen für Restetage",
+      r3ModalLi1:"Nudeln vom Vortag + Ei + Gemüse = Restepfanne.",
+      r3ModalLi2:"Braune Bananen + Joghurt + Obst = Smoothie.",
+      r3ModalLi3:"Hartes Brot = Croutons oder Semmelbrösel.",
+      r3ModalLi4:"Früchte einkochen = Kompott oder Apfelmus."
+    },
+    en:{
+      title:"The 7R against food waste",
+      subtitle:"Interactive page about Rethink, Reduce, Reuse and more",
+      languageLabel:"Sprache / Language:",
+      badge:"Together against food waste",
+      navVideo:"Video",
+      nav7R:"The 7R",
+      navQuiz:"Quiz",
+      navSelftest:"Self‑test",
+      navWorld:"Worldwide",
+
+      videoTitle:"7‑day experiment: How much food can we save?",
+      videoIntro:"Watch the video first. It shows a real one‑week experiment at home and how much food can be saved if we think differently.",
+      videoHint:"Tip: While watching, note which R words appear in the video.",
+
+      rsTitle:"The 7R – from thinking to recycling",
+      rsIntro:"The 7R help you throw away less food – and protect resources like water, energy and soil. Click on an R to learn more.",
+      r1Title:"1. Rethink",
+      r1Text:"Rethink means: stop before you buy or throw away. Plan your week, write a list and think: what do I really need? Don’t go shopping when you are hungry.",
+      r2Title:"2. Reduce",
+      r2Text:"Reduce means avoiding waste from the beginning: right portion sizes, correct storage and “first in – first out” in the fridge.",
+      r3Title:"3. Reuse",
+      r3Text:"Reuse means: don’t throw leftovers away – use them creatively: leftover days, pan dishes, smoothies or freezing.",
+      r4Title:"4. Repair",
+      r4Text:"Repair is mainly about things: repair containers, freezers or kitchen devices instead of buying new ones – so food is better protected.",
+      r5Title:"5. Refuse",
+      r5Text:"Refuse means saying no to things you don’t need – for example “2 for 1” offers, if you realistically cannot use it.",
+      r6Title:"6. Recycle",
+      r6Text:"Recycle means separating waste correctly so that packaging and organic waste can become new products or energy.",
+      r7Title:"7. Recover",
+      r7Text:"Recover uses what is no longer edible at all: biogas plants or compost that turn food waste into energy and new nutrients.",
+
+      btnExamples:"Show examples",
+      btnTips:"Fridge tips",
+      btnRecipes:"Leftovers recipes",
+
+      imgSmoothie:"Space for photo: smoothie made from leftovers",
+      imgFridge:"Space for sketch: fridge zones",
+
+      worldTitle:"7R worldwide – how do others do it?",
+      worldIntro:"Click on a continent to see how food waste is handled there – and which ideas we can use.",
+      euTitle:"Europe",
+      euShort:"R strategies in supermarkets, rescue boxes, apps",
+      naTitle:"North America",
+      naShort:"Food banks, \"ugly food\", education programmes",
+      saTitle:"South America",
+      saShort:"Community kitchens, markets with leftover food",
+      asTitle:"Asia",
+      asShort:"Campaigns against buffet waste, apps, school projects",
+      afTitle:"Africa",
+      afShort:"Solar drying, better storage, compost",
+      ocTitle:"Oceania",
+      ocShort:"Zero‑waste campaigns, school programmes",
+
+      quizTitle:"Quiz: How well do you know the 7R?",
+      quizIntro:"Test your knowledge about food waste and the 7R.",
+      btnStartQuiz:"Start quiz",
+      btnNext:"Next",
+
+      selftestTitle:"Self‑test: How 7R‑fit is your home?",
+      selftestIntro:"Answer a few questions and see your personal 7R certificate with tips that you can print.",
+      btnStartSelftest:"Start self‑test",
+
+      certTitle:"7R certificate for your home",
+      certTipsTitle:"Our tips for you:",
+      btnPrint:"Print certificate / save as PDF",
+      printHint:"Tip: When printing choose \"Save as PDF\" and show the certificate at home.",
+
+      r1ModalTitle:"Rethink – example from the video",
+      r1ModalText1:"In the experiment, bananas, blueberries and skyr were not thrown away but turned into a smoothie. Rethink means: think first, then throw away.",
+      r1ModalText2:"Think: what can you plan differently this week? Write down 3 things you want to avoid or use better.",
+
+      r2ModalTitle:"Reduce – fridge check",
+      r2ModalLi1:"“First in – first out”: old to the front, new to the back.",
+      r2ModalLi2:"Bottom is coldest – store meat and fish here.",
+      r2ModalLi3:"Middle: dairy products like skyr.",
+      r2ModalLi4:"Fruit and vegetables in the crisper drawer – preferably unpackaged.",
+
+      r3ModalTitle:"Reuse – ideas for leftover days",
+      r3ModalLi1:"Pasta from yesterday + egg + vegetables = leftover pan.",
+      r3ModalLi2:"Brown bananas + yoghurt + fruit = smoothie.",
+      r3ModalLi3:"Hard bread = croutons or breadcrumbs.",
+      r3ModalLi4:"Cook fruit = compote or apple sauce."
+    },
+    pl:{},
+    ar:{},
+    ru:{},
+    nl:{},
+    tr:{}
+  };
+
+  const quizQuestions=[
+    {
+      text:{de:"Was bedeutet Rethink im Video?",en:"What does Rethink mean in the video?"},
+      options:[
+        {id:"a",correct:false,text:{de:"Mehr spontan kaufen.",en:"Buy more spontaneously."}},
+        {id:"b",correct:true,text:{de:"Bewusst planen und überlegen, was man wirklich braucht.",en:"Plan consciously and think about what you really need."}},
+        {id:"c",correct:false,text:{de:"Nur Angebote mitnehmen.",en:"Only buy special offers."}}
+      ]
+    },
+    {
+      text:{de:"Was ist ein Beispiel für Reuse?",en:"What is an example of Reuse?"},
+      options:[
+        {id:"a",correct:true,text:{de:"Aus alten Bananen und Skyr einen Smoothie machen.",en:"Making a smoothie from old bananas and skyr."}},
+        {id:"b",correct:false,text:{de:"Hartes Brot wegwerfen.",en:"Throwing away hard bread."}},
+        {id:"c",correct:false,text:{de:"Mehr Nudeln kochen als nötig.",en:"Cooking more pasta than needed."}}
+      ]
+    },
+    {
+      text:{de:"Was hilft beim Reduce zu Hause?",en:"What helps to reduce waste at home?"},
+      options:[
+        {id:"a",correct:false,text:{de:"Nie in den Kühlschrank schauen.",en:"Never look into the fridge."}},
+        {id:"b",correct:true,text:{de:"„First in – First out“ im Kühlschrank anwenden.",en:"Use \"first in – first out\" in the fridge."}},
+        {id:"c",correct:false,text:{de:"Immer die größte Packung kaufen.",en:"Always buy the biggest package."}}
+      ]
+    }
+  ];
+
+  const selftestQuestions=[
+    {
+      text:{de:"Wie oft wirfst du zu Hause essbare Reste weg?",en:"How often do you throw away edible leftovers at home?"},
+      options:[
+        {id:"a",score:1,text:{de:"Mehrmals pro Woche.",en:"Several times a week."}},
+        {id:"b",score:2,text:{de:"Manchmal, aber nicht so oft.",en:"Sometimes, but not very often."}},
+        {id:"c",score:3,text:{de:"Selten, ich versuche Reste zu nutzen.",en:"Rarely, I try to use leftovers."}}
+      ]
+    },
+    {
+      text:{de:"Wie planst du deine Einkäufe?",en:"How do you plan your shopping?"},
+      options:[
+        {id:"a",score:1,text:{de:"Ich gehe ohne Plan los.",en:"I go without any plan."}},
+        {id:"b",score:2,text:{de:"Ich habe eine grobe Idee.",en:"I have a rough idea."}},
+        {id:"c",score:3,text:{de:"Ich nutze Einkaufslisten und checke den Vorrat.",en:"I use shopping lists and check what we already have."}}
+      ]
+    },
+    {
+      text:{de:"Wie gut trennst du Müll (besonders Bioabfall)?",en:"How well do you separate waste (especially organic waste)?"},
+      options:[
+        {id:"a",score:1,text:{de:"Kaum, alles kommt zusammen.",en:"Hardly, everything goes together."}},
+        {id:"b",score:2,text:{de:"Teilweise, manchmal vergesse ich es.",en:"Partly, sometimes I forget."}},
+        {id:"c",score:3,text:{de:"Sehr gut, Bioabfall und Verpackungen trenne ich.",en:"Very well, I separate organic waste and packaging."}}
+      ]
+    }
+  ];
+
+  const continentInfos={
+    europe:{
+      de:{
+        title:"Europa: Apps und Retterkisten",
+        body:`<p>In vielen europäischen Ländern gibt es Supermärkte mit eigenen Regalen für Lebensmittel kurz vor dem Mindesthaltbarkeitsdatum. Außerdem arbeiten sie mit Apps wie „Too Good To Go“ zusammen.</p>
+        <p><strong>Idee für euch:</strong> Schaut nach, ob es in eurer Stadt solche Angebote gibt und testet eine Rettertüte.</p>`
+      },
+      en:{
+        title:"Europe: Apps and rescue boxes",
+        body:`<p>In many European countries supermarkets have special shelves for food close to the best‑before date. They also work with apps like \"Too Good To Go\".</p>
+        <p><strong>Idea for you:</strong> Check if there are such offers in your city and try a rescue bag.</p>`
+      }
+    },
+    northamerica:{
+      de:{
+        title:"Nordamerika: Food banks und „ugly food“",
+        body:`<p>In Nordamerika spenden Supermärkte überschüssige Lebensmittel an Food banks. Es gibt auch „ugly food“, also krummes Obst und Gemüse, das bewusst verkauft wird.</p>`
+      },
+      en:{
+        title:"North America: Food banks and \"ugly food\"",
+        body:`<p>In North America supermarkets donate surplus food to food banks. There is also \"ugly food\", crooked fruit and vegetables that are sold on purpose.</p>`
+      }
+    },
+    southamerica:{
+      de:{
+        title:"Südamerika: Gemeinschaftsküchen",
+        body:`<p>In manchen Städten Südamerikas gibt es Gemeinschaftsküchen, in denen überschüssige Lebensmittel gesammelt und gemeinsam gekocht werden.</p>`
+      },
+      en:{
+        title:"South America: Community kitchens",
+        body:`<p>In some South American cities there are community kitchens where surplus food is collected and cooked together.</p>`
+      }
+    },
+    asia:{
+      de:{
+        title:"Asien: Kampagnen gegen Buffetreste",
+        body:`<p>In einigen asiatischen Ländern gibt es Kampagnen, damit in Restaurants weniger Reste am Buffet bleiben. Gäste werden ermutigt, nur so viel zu nehmen, wie sie essen.</p>`
+      },
+      en:{
+        title:"Asia: Campaigns against buffet waste",
+        body:`<p>In some Asian countries there are campaigns so that less food is left on buffet plates. Guests are encouraged to only take as much as they can eat.</p>`
+      }
+    },
+    africa:{
+      de:{
+        title:"Afrika: Lagerung und Solartrocknung",
+        body:`<p>In Teilen Afrikas wird viel daran gearbeitet, Lebensmittel besser zu lagern und zu trocknen, damit sie länger haltbar sind – zum Beispiel mit Solartrocknern.</p>`
+      },
+      en:{
+        title:"Africa: Storage and solar drying",
+        body:`<p>In parts of Africa a lot is done to store and dry food better so that it lasts longer – for example with solar dryers.</p>`
+      }
+    },
+    oceania:{
+      de:{
+        title:"Ozeanien: Zero‑Waste‑Ideen",
+        body:`<p>In Australien und Neuseeland gibt es Zero‑Waste‑Kampagnen und Schulprojekte, die zeigen, wie man im Alltag Abfall vermeidet.</p>`
+      },
+      en:{
+        title:"Oceania: Zero‑waste ideas",
+        body:`<p>In Australia and New Zealand there are zero‑waste campaigns and school projects that show how to avoid waste in everyday life.</p>`
+      }
+    }
+  };
+
+  let currentLang="de";
+
+  function applyLanguage(lang){
+    currentLang=lang;
+    const dict=translations[lang]||translations["de"];
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key=el.getAttribute("data-i18n");
+      if(dict[key]) el.textContent=dict[key];
+    });
+    renderNavActive();
+    if(document.getElementById("quizContainer").style.display!=="none") renderQuizQuestion();
+    if(document.getElementById("selftestContainer").style.display!=="none") renderSelftestQuestion();
+  }
+
+  document.getElementById("langSelect").addEventListener("change",function(){
+    localStorage.setItem("lang",this.value);
+    applyLanguage(this.value);
+    showToast("Sprache geändert");
+  });
+
+  (function initLang(){
+    const saved=localStorage.getItem("lang");
+    if(saved && translations[saved]) document.getElementById("langSelect").value=saved;
+    applyLanguage(document.getElementById("langSelect").value);
+  })();
+
+  document.querySelectorAll(".acc-head").forEach(head=>{
+    head.addEventListener("click",()=>{
+      const item=head.parentElement;
+      const body=item.querySelector(".acc-body");
+      const toggle=head.querySelector(".acc-toggle");
+      const acc=item.parentElement;
+      acc.querySelectorAll(".acc-item").forEach(i=>{
+        if(i!==item){
+          i.classList.remove("open");
+          i.querySelector(".acc-body").style.maxHeight="0";
+          i.querySelector(".acc-toggle").textContent="+";
+        }
+      });
+      if(item.classList.contains("open")){
+        item.classList.remove("open");
+        body.style.maxHeight="0";
+        toggle.textContent="+";
+      }else{
+        item.classList.add("open");
+        body.style.maxHeight=body.scrollHeight+"px";
+        toggle.textContent="–";
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-open-modal]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const id=btn.getAttribute("data-open-modal");
+      const backdrop=document.getElementById(id+"Backdrop");
+      if(backdrop) backdrop.style.display="flex";
+    });
+  });
+  document.querySelectorAll("[data-close-modal]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const id=btn.getAttribute("data-close-modal");
+      const backdrop=document.getElementById(id);
+      if(backdrop) backdrop.style.display="none";
+    });
+  });
+  document.querySelectorAll(".modal-backdrop").forEach(backdrop=>{
+    backdrop.addEventListener("click",e=>{
+      if(e.target===backdrop) backdrop.style.display="none";
+    });
+  });
+
+  document.querySelectorAll(".continent-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      const id=card.getAttribute("data-continent");
+      const info=continentInfos[id];
+      if(!info) return;
+      const lang=currentLang in info ? currentLang : "de";
+      document.getElementById("continentModalTitle").textContent=info[lang].title;
+      document.getElementById("continentModalBody").innerHTML=info[lang].body;
+      document.getElementById("continentModalBackdrop").style.display="flex";
+    });
+  });
+
+  function renderNavActive(){
+    const sections=document.querySelectorAll("main section, aside .card");
+    const navLinks=document.querySelectorAll(".nav-link");
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          navLinks.forEach(l=>l.classList.remove("active"));
+          const id=e.target.id;
+          const link=[...navLinks].find(l=>l.getAttribute("href")==="#"+id);
+          if(link) link.classList.add("active");
+        }
+      });
+    },{threshold:0.4});
+    sections.forEach(s=>observer.observe(s));
+  }
+
+  const toastEl=document.getElementById("toast");
+  function showToast(msg){
+    toastEl.textContent=msg;
+    toastEl.classList.add("show");
+    setTimeout(()=>toastEl.classList.remove("show"),2500);
+  }
+
+  let quizIndex=0,quizScore=0;
+  const quizContainer=document.getElementById("quizContainer");
+  const quizQuestionText=document.getElementById("quizQuestionText");
+  const quizOptions=document.getElementById("quizOptions");
+  const quizProgress=document.getElementById("quizProgress");
+  const quizResult=document.getElementById("quizResult");
+
+  document.getElementById("startQuizBtn").addEventListener("click",()=>{
+    quizIndex=0;quizScore=0;
+    quizContainer.style.display="block";
+    quizResult.style.display="none";
+    renderQuizQuestion();
+  });
+
+  function renderQuizQuestion(){
+    if(quizIndex>=quizQuestions.length){showQuizResult();return;}
+    const q=quizQuestions[quizIndex];
+    quizQuestionText.textContent=q.text[currentLang]||q.text["de"];
+    quizProgress.textContent=(quizIndex+1)+"/"+quizQuestions.length;
+    quizOptions.innerHTML="";
+    q.options.forEach(o=>{
+      const label=document.createElement("label");
+      label.className="option-label";
+      const input=document.createElement("input");
+      input.type="radio";
+      input.name="quizOption";
+      input.value=o.id;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(" "+(o.text[currentLang]||o.text["de"])));
+      quizOptions.appendChild(label);
+    });
+  }
+
+  document.getElementById("quizNextBtn").addEventListener("click",()=>{
+    if(quizIndex>=quizQuestions.length)return;
+    const sel=document.querySelector("input[name='quizOption']:checked");
+    if(!sel){
+      alert(currentLang==="de"?"Bitte wähle eine Antwort.":"Please select an answer.");
+      return;
+    }
+    const q=quizQuestions[quizIndex];
+    const opt=q.options.find(o=>o.id===sel.value);
+    if(opt && opt.correct) quizScore++;
+    quizIndex++;
+    if(quizIndex<quizQuestions.length) renderQuizQuestion(); else showQuizResult();
+  });
+
+  function showQuizResult(){
+    const total=quizQuestions.length;
+    const percent=Math.round(quizScore/total*100);
+    quizResult.style.display="block";
+    let text;
+    if(currentLang==="de"){
+      if(percent>=80) text=`Super! Du hast ${quizScore} von ${total} Fragen richtig (${percent} %). Du kennst die 7R schon sehr gut.`;
+      else if(percent>=50) text=`Gut gemacht! ${quizScore} von ${total} Fragen (${percent} %). Schau dir die Infos noch einmal an und probiere das Quiz später erneut.`;
+      else text=`Du hast ${quizScore} von ${total} Fragen richtig (${percent} %). Kein Problem – nutze das Video und die 7R‑Erklärungen und starte das Quiz noch einmal.`;
+    }else{
+      if(percent>=80) text=`Great! You answered ${quizScore} of ${total} questions correctly (${percent}%). You already know the 7R very well.`;
+      else if(percent>=50) text=`Well done! ${quizScore} of ${total} questions (${percent}%). Check the information again and try the quiz later.`;
+      else text=`You answered ${quizScore} of ${total} questions correctly (${percent}%). No problem – use the video and 7R explanations and start again.`;
+    }
+    quizQuestionText.textContent="";
+    quizOptions.innerHTML="";
+    quizProgress.textContent="";
+    quizResult.textContent=text;
+  }
+
+  let selftestIndex=0,selftestScore=0;
+  const selftestContainer=document.getElementById("selftestContainer");
+  const selftestProgress=document.getElementById("selftestProgress");
+  const selftestQuestionText=document.getElementById("selftestQuestionText");
+  const selftestOptions=document.getElementById("selftestOptions");
+  const selftestResultWrap=document.getElementById("selftestResultWrap");
+  const selftestScoreText=document.getElementById("selftestScoreText");
+  const selftestLevelText=document.getElementById("selftestLevelText");
+  const selftestTipsList=document.getElementById("selftestTipsList");
+
+  document.getElementById("startSelftestBtn").addEventListener("click",()=>{
+    selftestIndex=0;selftestScore=0;
+    selftestContainer.style.display="block";
+    selftestResultWrap.style.display="none";
+    renderSelftestQuestion();
+    document.getElementById("selftest").scrollIntoView({behavior:"smooth"});
+  });
+
+  function renderSelftestQuestion(){
+    if(selftestIndex>=selftestQuestions.length){showSelftestResult();return;}
+    const q=selftestQuestions[selftestIndex];
+    selftestQuestionText.textContent=q.text[currentLang]||q.text["de"];
+    selftestProgress.textContent=(selftestIndex+1)+"/"+selftestQuestions.length;
+    selftestOptions.innerHTML="";
+    q.options.forEach(o=>{
+      const label=document.createElement("label");
+      label.className="option-label";
+      const input=document.createElement("input");
+      input.type="radio";
+      input.name="selftestOption";
+      input.value=o.id;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(" "+(o.text[currentLang]||o.text["de"])));
+      selftestOptions.appendChild(label);
+    });
+  }
+
+  document.getElementById("selftestNextBtn").addEventListener("click",()=>{
+    if(selftestIndex>=selftestQuestions.length)return;
+    const sel=document.querySelector("input[name='selftestOption']:checked");
+    if(!sel){
+      alert(currentLang==="de"?"Bitte wähle eine Antwort.":"Please select an answer.");
+      return;
+    }
+    const q=selftestQuestions[selftestIndex];
+    const opt=q.options.find(o=>o.id===sel.value);
+    selftestScore+=opt?opt.score:0;
+    selftestIndex++;
+    if(selftestIndex<selftestQuestions.length) renderSelftestQuestion(); else showSelftestResult();
+  });
+
+  function showSelftestResult(){
+    const max=selftestQuestions.length*3;
+    const percent=Math.round(selftestScore/max*100);
+    selftestResultWrap.style.display="block";
+    let levelText,tips;
+    if(currentLang==="de"){
+      if(percent>=80){
+        levelText="Stark! Euer Haushalt nutzt die 7R schon sehr bewusst. Ihr seid echte Lebensmittelretter:innen.";
+        tips=[
+          "Teilt eure Tipps mit Freunden oder in der Klasse.",
+          "Probiert jede Woche ein neues Resterezept.",
+          "Überlegt gemeinsam, wie ihr auch Verpackungsmüll weiter reduzieren könnt."
+        ];
+      }else if(percent>=50){
+        levelText="Ihr seid auf einem guten Weg. Mit ein paar Veränderungen könnt ihr noch viel mehr retten.";
+        tips=[
+          "Führt einen festen Restetag pro Woche ein.",
+          "Nutzt Einkaufslisten und schaut vor dem Einkaufen in den Kühlschrank.",
+          "Überlegt, wie ihr Mülltrennung zu Hause einfacher machen könnt (z.B. extra Behälter)."
+        ];
+      }else{
+        levelText="Ihr habt mit dem Test einen wichtigen Schritt gemacht. Jetzt könnt ihr anfangen, euren Alltag nach den 7R zu verändern.";
+        tips=[
+          "Sucht euch eine Sache aus dem Video, die ihr ab dieser Woche ändern wollt.",
+          "Schreibt auf, welche Lebensmittel bei euch oft im Müll landen – und warum.",
+          "Redet mit eurer Familie darüber, wie ihr gemeinsam weniger wegwerfen könnt."
+        ];
+      }
+    }else{
+      if(percent>=80){
+        levelText="Great! Your household already uses the 7R very consciously. You are real food savers.";
+        tips=[
+          "Share your tips with friends or in class.",
+          "Try a new leftover recipe every week.",
+          "Think about how you can further reduce packaging waste."
+        ];
+      }else if(percent>=50){
+        levelText="You are on a good way. With a few changes you can save much more.";
+        tips=[
+          "Introduce a regular leftover day once a week.",
+          "Use shopping lists and check the fridge before shopping.",
+          "Make waste separation easier at home (e.g. extra bins)."
+        ];
+      }else{
+        levelText="By taking this test you made an important first step. Now you can start to change your everyday life with the 7R.";
+        tips=[
+          "Choose one idea from the video that you want to try from this week on.",
+          "Write down which foods you often throw away and why.",
+          "Talk with your family about how to throw away less food together."
+        ];
+      }
+    }
+    selftestScoreText.textContent=(currentLang==="de"
+      ?`Dein Ergebnis: ${selftestScore} von ${max} Punkten (${percent} %)`
+      :`Your result: ${selftestScore} of ${max} points (${percent}%)`);
+    selftestLevelText.textContent=levelText;
+    selftestTipsList.innerHTML="";
+    tips.forEach(t=>{
+      const li=document.createElement("li");
+      li.textContent=t;
+      selftestTipsList.appendChild(li);
+    });
+    document.getElementById("certificate").scrollIntoView({behavior:"smooth"});
+  }
+
+  document.getElementById("printCertificateBtn").addEventListener("click",()=>{
+    const cert=document.getElementById("certificate").cloneNode(true);
+    const w=window.open("","_blank");
+    w.document.write("<html><head><title>7R‑Urkunde</title></head><body style='font-family:sans-serif;padding:1rem;background:#fff;'>");
+    w.document.body.appendChild(cert);
+    w.document.write("</body></html>");
+    w.document.close();
+    w.focus();
+    w.print();
+  });
+</script>
+</body>
+</html>
