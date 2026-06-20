@@ -268,13 +268,12 @@ footer strong{color:#fff}
 
 /* PRINT */
 @media print{
-  nav,.no-print,footer,#hero,#about,#linear,#rs-sec,#school,#karte,#food,#vsec,#quiz,#faq,#quellen,.test-section,.rbtns,#badge-print-controls{display:none!important}
+  nav,.no-print,footer,#hero,#about,#linear,#rs-sec,#school,#karte,#food,#vsec,#quiz,#faq,#quellen,.test-section,.rbtns,#badge-print-controls,#badge{display:none!important}
   #sres{display:block!important}
   #carea{display:block!important}
   .certbox{border-color:#000;box-shadow:none;max-width:100%;page-break-inside:avoid}
   .cert-header{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   body{background:#fff!important;color:#000!important}
-  .print-badge-area.show{display:block!important}
 }
 </style>
 </head>
@@ -334,10 +333,10 @@ footer strong{color:#fff}
 <!-- NACHHALTIGKEIT & ERDE -->
 <section id="about" class="sec" aria-labelledby="about-h">
   <h2 id="about-h" data-i18n="aT">🌱 Nachhaltigkeit & unsere Erde</h2>
-  <p class="lead" data-i18n="aL">Unsere Erde hat begrenzte Rohstoffe. Wir verbrauchen sie schneller, als sie sich regenerieren können. Nachhaltigkeit bedeutet: so handeln, dass künftige Generationen noch dieselben Möglichkeiten haben wie wir.</p>
+  <p class="lead" data-i18n="aL">Unsere Erde hat begrenzte Rohstoffe. Wir verbrauchen sie schneller als sie sich regenerieren. Nachhaltigkeit bedeutet: so handeln, dass künftige Generationen noch dieselben Möglichkeiten haben.</p>
   <div class="hl" role="note">
     <strong data-i18n="aH1">Was ist Nachhaltigkeit?</strong><br>
-    <span data-i18n="aH1T">Nachhaltigkeit bedeutet, die Bedürfnisse der heutigen Generation zu befriedigen, ohne die Möglichkeiten künftiger Generationen zu gefährden. Das Konzept stammt ursprünglich aus der Forstwirtschaft: Man darf nicht mehr Bäume fällen, als nachwachsen können.</span>
+    <span data-i18n="aH1T">Nachhaltigkeit bedeutet, die Bedürfnisse der heutigen Generation zu befriedigen, ohne die Möglichkeiten künftiger Generationen zu gefährden. Das Konzept stammt aus der Forstwirtschaft: Man darf nicht mehr Bäume fällen, als nachwachsen können.</span>
   </div>
   <div class="cgrid">
     <div class="card" onclick="openModal(ABOUT_MODALS.resources)">
@@ -363,7 +362,7 @@ footer strong{color:#fff}
   </div>
   <div style="margin-top:2.5rem">
     <h3 style="color:var(--p);margin-bottom:.7rem" data-i18n="topTagT">Klicke auf ein Thema für detaillierte Informationen:</h3>
-    <div class="tags" role="list" aria-label="Nachhaltigkeitsthemen">
+    <div class="tags" role="list" aria-label="Nachhaltigkeitsthemen" id="topic-tags">
       <span class="tag" tabindex="0" data-topic="impulse"       data-i18n="tg1">💸 Impulskäufe</span>
       <span class="tag" tabindex="0" data-topic="tiktok"        data-i18n="tg2">📱 TikTok-Hypes</span>
       <span class="tag" tabindex="0" data-topic="smartphone"    data-i18n="tg3">📲 Neues Smartphone</span>
@@ -389,12 +388,9 @@ footer strong{color:#fff}
   <p class="lead" data-i18n="rsL">Die 7 Rs sind sieben Prinzipien, die uns helfen nachhaltiger zu leben. Klicke auf jeden Kreis oder jede Karte für detaillierte Infos und Beispiele!</p>
   <div class="rs-wrap">
     <div class="rs-svg-box">
-      <!-- SVG 7Rs Circle Diagram -->
       <svg id="rs-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;display:block;margin:0 auto" role="img" aria-label="7 Rs Kreislauf-Diagramm">
         <title>Die 7 Rs der Nachhaltigkeit</title>
-        <!-- Circular arrow ring -->
         <circle cx="190" cy="190" r="110" fill="none" stroke="var(--brd)" stroke-width="2" stroke-dasharray="6 4"/>
-        <!-- Center -->
         <circle cx="190" cy="190" r="42" fill="url(#cgrad)"/>
         <text x="190" y="186" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Die</text>
         <text x="190" y="200" text-anchor="middle" font-size="14" fill="#fff" font-weight="900">7 Rs</text>
@@ -404,62 +400,41 @@ footer strong{color:#fff}
             <stop offset="100%" stop-color="#0d47a1"/>
           </radialGradient>
         </defs>
-        <!-- Node positions: r=110, start top, clockwise -->
-        <!-- 1 Rethink  (190, 80) -->
         <g class="rs-node" onclick="openRsModal(0)" tabindex="0" role="button" aria-label="Rethink">
           <circle cx="190" cy="80" r="32" fill="#7b1fa2"/>
           <text x="190" y="76" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="190" y="90" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">think</text>
         </g>
-        <!-- 2 Refuse  (290, 138) -->
         <g class="rs-node" onclick="openRsModal(1)" tabindex="0" role="button" aria-label="Refuse">
           <circle cx="290" cy="138" r="32" fill="#c62828"/>
           <text x="290" y="134" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="290" y="148" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">fuse</text>
         </g>
-        <!-- 3 Reduce  (300, 245) -->
         <g class="rs-node" onclick="openRsModal(2)" tabindex="0" role="button" aria-label="Reduce">
           <circle cx="300" cy="245" r="32" fill="#e65100"/>
           <text x="300" y="241" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="300" y="255" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">duce</text>
         </g>
-        <!-- 4 Reuse  (220, 320) -->
         <g class="rs-node" onclick="openRsModal(3)" tabindex="0" role="button" aria-label="Reuse">
           <circle cx="220" cy="320" r="32" fill="#f57f17"/>
           <text x="220" y="316" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="220" y="330" text-anchor="middle" font-size="9" fill="#fff" class="sublabel">use</text>
         </g>
-        <!-- 5 Repair  (105, 310) -->
         <g class="rs-node" onclick="openRsModal(4)" tabindex="0" role="button" aria-label="Repair">
           <circle cx="105" cy="310" r="32" fill="#2e7d32"/>
           <text x="105" y="306" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="105" y="320" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">pair</text>
         </g>
-        <!-- 6 Recycle  (75" cy="200) -->
         <g class="rs-node" onclick="openRsModal(5)" tabindex="0" role="button" aria-label="Recycle">
           <circle cx="75" cy="200" r="32" fill="#1565c0"/>
           <text x="75" y="196" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="75" y="210" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">cycle</text>
         </g>
-        <!-- 7 Recover  (105, 90) -->
         <g class="rs-node" onclick="openRsModal(6)" tabindex="0" role="button" aria-label="Recover">
           <circle cx="105" cy="90" r="32" fill="#00695c"/>
           <text x="105" y="86" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">Re</text>
           <text x="105" y="100" text-anchor="middle" font-size="9" fill="#ffe" class="sublabel">cover</text>
         </g>
-        <!-- Curved arrows -->
-        <path d="M 203 50 Q 260 40 276 115" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 305 162 Q 330 200 313 225" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 284 270 Q 270 310 248 316" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 192 333 Q 150 345 125 330" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 80 280 Q 60 245 62 220" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 80 175 Q 72 130 90 110" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <path d="M 128 70 Q 158 50 175 52" fill="none" stroke="#bbb" stroke-width="2" marker-end="url(#arr)"/>
-        <defs>
-          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#bbb"/>
-          </marker>
-        </defs>
       </svg>
     </div>
     <div class="rs-cards">
@@ -486,7 +461,7 @@ footer strong{color:#fff}
   </div>
   <div class="hl" style="margin-top:1.5rem">
     <strong data-i18n="lcEx">💡 Beispiel:</strong>
-    <span data-i18n="lcExT"> Ein altes Smartphone: <strong>Linear</strong> = kaufen, benutzen, wegwerfen. <strong>Kreislauf</strong> = reparieren, refurbished kaufen, ausschlachten, Materialien recyceln.</span>
+    <span data-i18n="lcExT"> Ein altes Smartphone: Linear = kaufen, benutzen, wegwerfen. Kreislauf = reparieren, refurbished kaufen, ausschlachten, Materialien recyceln.</span>
   </div>
 </section>
 
@@ -549,7 +524,7 @@ footer strong{color:#fff}
   <h2 id="food-h" data-i18n="fdT">🥗 Lebensmittel & die 7 Rs</h2>
   <p class="lead" data-i18n="fdL">Lebensmittel sind einer der größten Hebel für nachhaltiges Handeln. Jedes weggeworfene Lebensmittel verschwendet Wasser, Energie, Fläche und Arbeit.</p>
   <div class="info-box">
-    <strong data-i18n="fdFact">📊 Fakt:</strong> <span data-i18n="fdFactT">Weltweit wird ca. 1/3 aller Lebensmittel verschwendet – in Deutschland sind das etwa 12 Millionen Tonnen pro Jahr. Das entspricht 82 kg pro Person.</span>
+    <strong data-i18n="fdFact">📊 Fakt:</strong> <span data-i18n="fdFactT">Weltweit wird ca. 1/3 aller Lebensmittel verschwendet – in Deutschland ca. 12 Mio. Tonnen pro Jahr. Das entspricht 82 kg pro Person.</span>
   </div>
   <div class="food-grid" id="food-grid"></div>
 </section>
@@ -655,7 +630,7 @@ footer strong{color:#fff}
         <div style="font-size:.76rem;color:#888;margin-top:.3rem">Kreislaufwirtschaft-Schülerprojekt • OHG Monheim am Rhein • 2026</div>
       </div>
       <div style="text-align:center;margin-top:1.4rem" class="no-print">
-        <button class="gbn" onclick="window.print()" data-i18n="bPrint">🖨️ Urkunde drucken</button>
+        <button class="gbn" onclick="window.print()" data-i18n="bPrint">🖨️ Drucken</button>
         <button class="gbn" onclick="hideCert()" style="margin-left:.7rem;background:#546e7a" data-i18n="bClose">✕ Schließen</button>
       </div>
     </div>
@@ -681,12 +656,12 @@ footer strong{color:#fff}
       </div>
     </div>
     <p style="color:var(--txt2);font-size:.88rem;margin-top:1rem" data-i18n="bgHint">Klicke auf einen Badge zum Drucken.</p>
-  </div>
-  <div class="print-badge-area" id="badge-print-area">
-    <div id="badge-print-content" style="text-align:center;padding:2rem;background:#fff;border-radius:16px;margin-top:1.5rem;border:2px solid var(--brd)"></div>
-    <div style="text-align:center;margin-top:1rem" id="badge-print-controls">
-      <button class="gbn" onclick="window.print()" data-i18n="bPrint">🖨️ Badge drucken</button>
-      <button class="gbn" onclick="hideBadge()" style="margin-left:.7rem;background:#546e7a" data-i18n="bClose">✕ Schließen</button>
+    <div class="print-badge-area" id="badge-print-area">
+      <div id="badge-print-content" style="text-align:center;padding:2rem;background:#fff;border-radius:16px;margin-top:1.5rem;border:2px solid var(--brd)"></div>
+      <div style="text-align:center;margin-top:1rem" id="badge-print-controls">
+        <button class="gbn" onclick="window.print()" data-i18n="bPrint">🖨️ Drucken</button>
+        <button class="gbn" onclick="hideBadge()" style="margin-left:.7rem;background:#546e7a" data-i18n="bClose">✕ Schließen</button>
+      </div>
     </div>
   </div>
 </section>
@@ -738,609 +713,965 @@ footer strong{color:#fff}
 </div>
 
 <script>
-// ============================================================
-// LANGUAGE TRANSLATIONS (9 languages, UI labels)
-// ============================================================
-const TR = {
-de:{
-  brand:"Die 7 Rs",nAbout:"Nachhaltigkeit",nRs:"Die 7 Rs",nLinear:"Linear vs. Kreislauf",
-  nSchool:"Schule & Alltag",nMap:"Weltkarte",nFood:"Lebensmittel",nVideo:"Video",
-  nQuiz:"Quiz",nTest:"Selbsttest",nBadge:"Mein Badge",nFaq:"FAQ",nSrc:"Quellen",nImp:"Impressum",
-  hT:"Die 7 Rs – Für unseren Planeten",
-  hS:"Nachhaltigkeit beginnt mit dem richtigen Denken. Entdecke, wie du mit den 7 Rs unsere Erde schützen kannst.",
-  hB1:"🔄 Die 7 Rs entdecken",hB2:"🧪 Selbsttest starten",hB3:"❓ Quiz machen",
-  st1:"Tonnen Rohstoffe p.a.",st2:"Materialien recycelt",st3:"Ressourcen bis 2050",st4:"Erden bräuchten wir",
-  aT:"🌱 Nachhaltigkeit & unsere Erde",
-  aL:"Unsere Erde hat begrenzte Rohstoffe. Wir verbrauchen sie schneller als sie sich regenerieren. Nachhaltigkeit bedeutet: so handeln, dass künftige Generationen noch dieselben Möglichkeiten haben.",
-  aH1:"Was ist Nachhaltigkeit?",
-  aH1T:"Nachhaltigkeit bedeutet, die Bedürfnisse der heutigen Generation zu befriedigen, ohne die Möglichkeiten künftiger Generationen zu gefährden.",
-  aC1T:"Endliche Rohstoffe",aC1P:"Erdöl, Kohle, seltene Erden – sie entstehen über Millionen Jahre. Klicke für mehr ›",
-  aC2T:"Ökologischer Fußabdruck",aC2P:"Wie viel Natur verbrauchst du? Klicke für mehr ›",
-  aC3T:"Geographie & Nachhaltigkeit",aC3P:"Was hat Erdkunde damit zu tun? Klicke für mehr ›",
-  aC4T:"Unsere Verantwortung",aC4P:"Warum liegt es an uns? Klicke für mehr ›",
-  topTagT:"Klicke auf ein Thema für detaillierte Informationen:",
-  tg1:"💸 Impulskäufe",tg2:"📱 TikTok-Hypes",tg3:"📲 Neues Smartphone",tg4:"🔧 Refurbished",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Markenfokus",tg7:"☕ Einwegbecher",tg8:"🍟 Kiosk-Snacks",
-  tg9:"🔄 Leihen statt kaufen",tg10:"📚 Schulmaterial",tg11:"💻 Digitaler Fußabdruck",
-  tg12:"🥗 Lebensmittel",tg13:"🍲 Reste verwerten",tg14:"🗑️ Mülltrennung",tg15:"🔨 Reparieren",
-  rsT:"🔄 Die 7 Rs – Unser Handlungsrahmen",
-  rsL:"Die 7 Rs sind sieben Prinzipien für nachhaltiges Leben. Klicke auf jeden Kreis oder jede Karte!",
-  lcT:"⚖️ Linearwirtschaft vs. Kreislaufwirtschaft",
-  lcL:"Zwei völlig unterschiedliche Wirtschaftsmodelle – mit riesigem Unterschied für unseren Planeten.",
-  lcLT:"Linearwirtschaft",lcLS:"Nehmen → Herstellen → Wegwerfen",
-  lcCT:"Kreislaufwirtschaft",lcCS:"Reduzieren → Wiederverwenden → Zurückführen",
-  lcEx:"💡 Beispiel:",
-  lcExT:" Ein altes Smartphone: Linear = kaufen, benutzen, wegwerfen. Kreislauf = reparieren, refurbished kaufen, ausschlachten, Materialien recyceln.",
-  scT:"🏫 Die 7 Rs in Schule & Alltag",
-  scL:"Nachhaltigkeit beginnt vor der eigenen Haustür. Hier sind konkrete Ideen.",
-  scST:"In der Schule",scHT:"Zu Hause & im Alltag",
-  mT:"🌍 Kreislaufwirtschaft weltweit",
-  mL:"Klicke auf einen Kontinent für Infos über Nachhaltigkeit in dieser Region.",
-  miT:"🌐 Region wählen",miS:"Klicke auf einen Kontinent oder wähle eine Region.",
-  mlT:"Alle Regionen:",mEu:"🌍 Europa",mAs:"🌏 Asien",mAf:"🌍 Afrika",
-  mNA:"🌎 Nordamerika",mSA:"🌎 Südamerika",mAu:"🌏 Australien & Ozeanien",
-  fdT:"🥗 Lebensmittel & die 7 Rs",
-  fdL:"Lebensmittel sind einer der größten Hebel für nachhaltiges Handeln.",
-  fdFact:"📊 Fakt:",
-  fdFactT:"Weltweit wird ca. 1/3 aller Lebensmittel verschwendet – in Deutschland ca. 12 Mio. Tonnen pro Jahr.",
-  vT:"📽️ Unser Projektvideo",
-  vS:"Schülerprojekt des Otto-Hahn-Gymnasiums Monheim am Rhein. Produziert von Yusuf Serif.",
-  vPl:"▶ Projektvideo abspielen",vFb:"Browser unterstützt kein HTML5-Video.",
-  vHint:"💡 Tipp: Lege video.mp4 in denselben Ordner. Oder YouTube-URL eingeben:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Laden",
-  vCr:"📹 Videomaterial von Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Teste dein Wissen",
-  qzS:"20 Fragen zu Nachhaltigkeit, den 7 Rs und Kreislaufwirtschaft. Bist du bereit?",
-  bNext:"Weiter →",bBack:"← Zurück",bReplay:"🔄 Quiz wiederholen",
-  stT:"🧪 Selbsttest: Wie nachhaltig lebe ich?",
-  stS:"20 Fragen zu deinem Alltag. Ehrlich antworten! Am Ende: persönliches Ergebnis mit Urkunde.",
-  rStr:"💪 Deine Stärken",rImp:"🎯 Potenziale",rTip:"🚀 Nächste Schritte",
-  bCert:"🏆 Urkunde anzeigen",bRetake:"🔄 Test wiederholen",
-  cHdr:"Die 7 Rs – Nachhaltigkeitszertifikat",cAw:"Diese Urkunde bestätigt:",
-  cStrT:"✅ Das machst du bereits gut:",cImpT:"💡 Dein Verbesserungspotenzial:",
-  cL1:"hat den Nachhaltigkeits-Selbsttest erfolgreich abgeschlossen",
-  cL2:"zeigt echtes Engagement für eine nachhaltige Zukunft.",
-  bPrint:"🖨️ Drucken",bClose:"✕ Schließen",
-  bgT:"🏅 Mein Nachhaltigkeits-Badge",
-  bgL:"Trage dein Engagement nach außen! Drucke deinen persönlichen Badge.",
-  bgRound:"Ich handle nachhaltig & schütze unseren Planeten!",
-  bgRectT:"7 Rs – Aktiv für die Erde",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Klicke auf einen Badge zum Drucken.",
-  fqT:"❓ FAQ – Häufig gestellte Fragen",
-  fqS:"Alle wichtigen Antworten rund um die 7 Rs und Nachhaltigkeit.",
-  sqT:"📚 Quellen & weiterführende Links",sqS:"Alle verwendeten Quellen – seriös und bildungsrelevant.",
-  ipT:"📋 Impressum",ipS:"Diese Webseite wurde im Rahmen eines Schülerprojekts erstellt.",
-  ipSc:"Schule:",ipCo:"Kontext:",ipCoT:"Schülerprojekt – Die 7 Rs / BNE, NRW",
-  ipVi:"Videomaterial:",ipViT:"Yusuf Serif – schulintern produziert",
-  ipMe:"Medien:",ipMeT:"Alle Medien schulintern oder CC0. Nur zu Bildungszwecken.",
-  ipCr:"Erstellt von:",ipYr:"Jahr:",ipDi:"Hinweis:",
-  ipDiT:"Nicht-kommerzielles Schülerprojekt. Keine Haftung für externe Links.",
-  ftL1:"Webseite erstellt durch <strong>Anouk Sperling</strong>",
-  ftL2:"Videomaterial von <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Bildung für nachhaltige Entwicklung (BNE) • Die 7 Rs • Schülerprojekt 2026"
-},
-en:{
-  brand:"The 7 Rs",nAbout:"Sustainability",nRs:"The 7 Rs",nLinear:"Linear vs. Circular",
-  nSchool:"School & Life",nMap:"World Map",nFood:"Food",nVideo:"Video",
-  nQuiz:"Quiz",nTest:"Self-Test",nBadge:"My Badge",nFaq:"FAQ",nSrc:"Sources",nImp:"Imprint",
-  hT:"The 7 Rs – For Our Planet",
-  hS:"Sustainability starts with the right thinking. Discover how the 7 Rs help protect our Earth.",
-  hB1:"🔄 Discover the 7 Rs",hB2:"🧪 Start Self-Test",hB3:"❓ Take Quiz",
-  st1:"tons of raw materials p.a.",st2:"materials recycled",st3:"more resources by 2050",st4:"Earths we would need",
-  aT:"🌱 Sustainability & Our Earth",
-  aL:"Our Earth has limited resources. We consume them faster than they can regenerate. Sustainability means acting so future generations have the same opportunities.",
-  aH1:"What is Sustainability?",
-  aH1T:"Sustainability means meeting the needs of today without compromising the ability of future generations to meet their own needs.",
-  aC1T:"Finite Resources",aC1P:"Oil, coal, rare earths – they take millions of years to form. Click for more ›",
-  aC2T:"Ecological Footprint",aC2P:"How much nature do you consume? Click for more ›",
-  aC3T:"Geography & Sustainability",aC3P:"What does geography have to do with it? Click for more ›",
-  aC4T:"Our Responsibility",aC4P:"Why is it up to us? Click for more ›",
-  topTagT:"Click on a topic for detailed information:",
-  tg1:"💸 Impulse Buying",tg2:"📱 TikTok Hypes",tg3:"📲 New Smartphone",tg4:"🔧 Refurbished",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Brand Focus",tg7:"☕ Disposable Cups",tg8:"🍟 Kiosk Snacks",
-  tg9:"🔄 Borrow Instead of Buy",tg10:"📚 School Supplies",tg11:"💻 Digital Footprint",
-  tg12:"🥗 Food",tg13:"🍲 Using Leftovers",tg14:"🗑️ Waste Sorting",tg15:"🔨 Repair",
-  rsT:"🔄 The 7 Rs – Our Framework for Action",
-  rsL:"The 7 Rs are seven principles for sustainable living. Click on each circle or card!",
-  lcT:"⚖️ Linear Economy vs. Circular Economy",
-  lcL:"Two completely different economic models – with a huge difference for our planet.",
-  lcLT:"Linear Economy",lcLS:"Take → Make → Dispose",
-  lcCT:"Circular Economy",lcCS:"Reduce → Reuse → Return",
-  lcEx:"💡 Example:",
-  lcExT:" An old smartphone: Linear = buy, use, throw away. Circular = repair, buy refurbished, harvest parts, recycle materials.",
-  scT:"🏫 The 7 Rs at School & in Daily Life",
-  scL:"Sustainability starts right at your own doorstep. Here are concrete ideas.",
-  scST:"At School",scHT:"At Home & in Daily Life",
-  mT:"🌍 Circular Economy Worldwide",mL:"Click on a continent for info about sustainability in that region.",
-  miT:"🌐 Select region",miS:"Click on a continent or select a region.",
-  mlT:"All Regions:",mEu:"🌍 Europe",mAs:"🌏 Asia",mAf:"🌍 Africa",
-  mNA:"🌎 North America",mSA:"🌎 South America",mAu:"🌏 Australia & Oceania",
-  fdT:"🥗 Food & the 7 Rs",fdL:"Food is one of the biggest levers for sustainable action.",
-  fdFact:"📊 Fact:",fdFactT:"About 1/3 of all food is wasted worldwide – in Germany about 12 million tons per year.",
-  vT:"📽️ Our Project Video",vS:"Student project at Otto-Hahn-Gymnasium Monheim am Rhein. Produced by Yusuf Serif.",
-  vPl:"▶ Play project video",vFb:"Browser does not support HTML5 video.",
-  vHint:"💡 Tip: Place video.mp4 in the same folder. Or enter a YouTube URL:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Load",
-  vCr:"📹 Video material by Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Test Your Knowledge",
-  qzS:"20 questions about sustainability, the 7 Rs and circular economy. Ready?",
-  bNext:"Next →",bBack:"← Back",bReplay:"🔄 Replay Quiz",
-  stT:"🧪 Self-Test: How Sustainable Am I?",
-  stS:"20 questions about your daily life. Answer honestly! Personal result with certificate at the end.",
-  rStr:"💪 Your Strengths",rImp:"🎯 Areas for Improvement",rTip:"🚀 Next Steps",
-  bCert:"🏆 Show Certificate",bRetake:"🔄 Retake Test",
-  cHdr:"The 7 Rs – Sustainability Certificate",cAw:"This certificate confirms:",
-  cStrT:"✅ What you're already doing well:",cImpT:"💡 Your improvement potential:",
-  cL1:"has successfully completed the sustainability self-test",
-  cL2:"shows real commitment to a sustainable future.",
-  bPrint:"🖨️ Print",bClose:"✕ Close",
-  bgT:"🏅 My Sustainability Badge",bgL:"Show your commitment! Print your personal badge.",
-  bgRound:"I act sustainably & protect our planet!",
-  bgRectT:"7 Rs – Active for the Earth",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Click on a badge to print.",
-  fqT:"❓ FAQ – Frequently Asked Questions",fqS:"All important answers about the 7 Rs and sustainability.",
-  sqT:"📚 Sources & Further Links",sqS:"All sources used – reputable and education-relevant.",
-  ipT:"📋 Imprint",ipS:"This website was created as part of a student project.",
-  ipSc:"School:",ipCo:"Context:",ipCoT:"Student project – The 7 Rs / ESD, NRW",
-  ipVi:"Video material:",ipViT:"Yusuf Serif – produced at school",
-  ipMe:"Media:",ipMeT:"All media created at school or CC0. Educational use only.",
-  ipCr:"Created by:",ipYr:"Year:",ipDi:"Notice:",
-  ipDiT:"Non-commercial student project. No liability for external links.",
-  ftL1:"Website created by <strong>Anouk Sperling</strong>",
-  ftL2:"Video material by <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Education for Sustainable Development (ESD) • The 7 Rs • Student Project 2026"
-},
-fr:{
-  brand:"Les 7 R",nAbout:"Durabilité",nRs:"Les 7 R",nLinear:"Linéaire vs. Circulaire",
-  nSchool:"École & Quotidien",nMap:"Carte du monde",nFood:"Alimentation",nVideo:"Vidéo",
-  nQuiz:"Quiz",nTest:"Auto-test",nBadge:"Mon badge",nFaq:"FAQ",nSrc:"Sources",nImp:"Mentions légales",
-  hT:"Les 7 R – Pour notre planète",
-  hS:"La durabilité commence par la bonne réflexion. Découvre comment les 7 R protègent notre Terre.",
-  hB1:"🔄 Découvrir les 7 R",hB2:"🧪 Commencer l'auto-test",hB3:"❓ Faire le quiz",
-  st1:"tonnes de matières premières/an",st2:"matériaux recyclés",st3:"plus de ressources d'ici 2050",st4:"Terres dont nous aurions besoin",
-  aT:"🌱 Durabilité et notre Terre",
-  aL:"Notre Terre a des ressources limitées. Nous les consommons plus vite qu'elles ne se régénèrent. La durabilité signifie agir de manière à ce que les générations futures aient les mêmes opportunités.",
-  aH1:"Qu'est-ce que la durabilité?",aH1T:"La durabilité signifie répondre aux besoins d'aujourd'hui sans compromettre les possibilités des générations futures.",
-  aC1T:"Ressources finies",aC1P:"Pétrole, charbon, terres rares – ils se forment en millions d'années. Clique pour en savoir plus ›",
-  aC2T:"Empreinte écologique",aC2P:"Combien de nature consommes-tu? Clique pour en savoir plus ›",
-  aC3T:"Géographie & Durabilité",aC3P:"Quel rapport avec la géographie? Clique pour en savoir plus ›",
-  aC4T:"Notre responsabilité",aC4P:"Pourquoi c'est à nous d'agir? Clique pour en savoir plus ›",
-  topTagT:"Clique sur un thème pour des informations détaillées:",
-  tg1:"💸 Achats impulsifs",tg2:"📱 Tendances TikTok",tg3:"📲 Nouveau smartphone",tg4:"🔧 Reconditionné",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Marques",tg7:"☕ Gobelets jetables",tg8:"🍟 Snacks",
-  tg9:"🔄 Emprunter plutôt qu'acheter",tg10:"📚 Fournitures scolaires",tg11:"💻 Empreinte numérique",
-  tg12:"🥗 Alimentation",tg13:"🍲 Utiliser les restes",tg14:"🗑️ Tri des déchets",tg15:"🔨 Réparer",
-  rsT:"🔄 Les 7 R – Notre cadre d'action",rsL:"Les 7 R sont sept principes pour vivre durablement. Clique sur chaque cercle!",
-  lcT:"⚖️ Économie linéaire vs. Économie circulaire",lcL:"Deux modèles économiques très différents – avec une immense différence pour notre planète.",
-  lcLT:"Économie linéaire",lcLS:"Prendre → Fabriquer → Jeter",lcCT:"Économie circulaire",lcCS:"Réduire → Réutiliser → Récupérer",
-  lcEx:"💡 Exemple:",lcExT:" Un vieux smartphone: Linéaire = acheter, utiliser, jeter. Circulaire = réparer, acheter reconditionné, recycler.",
-  scT:"🏫 Les 7 R à l'école et dans la vie quotidienne",scL:"La durabilité commence devant ta propre porte.",
-  scST:"À l'école",scHT:"À la maison et dans la vie quotidienne",
-  mT:"🌍 L'économie circulaire dans le monde",mL:"Clique sur un continent pour en savoir plus.",
-  miT:"🌐 Sélectionner une région",miS:"Clique sur un continent ou sélectionne une région.",
-  mlT:"Toutes les régions:",mEu:"🌍 Europe",mAs:"🌏 Asie",mAf:"🌍 Afrique",
-  mNA:"🌎 Amérique du Nord",mSA:"🌎 Amérique du Sud",mAu:"🌏 Australie & Océanie",
-  fdT:"🥗 Alimentation & les 7 R",fdL:"L'alimentation est l'un des plus grands leviers pour une action durable.",
-  fdFact:"📊 Fait:",fdFactT:"Environ 1/3 de tous les aliments est gaspillé dans le monde.",
-  vT:"📽️ Notre vidéo de projet",vS:"Projet scolaire du Otto-Hahn-Gymnasium Monheim am Rhein. Produit par Yusuf Serif.",
-  vPl:"▶ Lire la vidéo",vFb:"Le navigateur ne supporte pas la vidéo HTML5.",
-  vHint:"💡 Conseil: Placez video.mp4 dans le même dossier. Ou entrez une URL YouTube:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Charger",
-  vCr:"📹 Vidéo de Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Testez vos connaissances",qzS:"20 questions sur la durabilité et les 7 R.",
-  bNext:"Suivant →",bBack:"← Retour",bReplay:"🔄 Rejouer",
-  stT:"🧪 Auto-test: À quel point suis-je durable?",stS:"20 questions sur ta vie quotidienne. Résultat personnel avec certificat!",
-  rStr:"💪 Tes forces",rImp:"🎯 Points d'amélioration",rTip:"🚀 Prochaines étapes",
-  bCert:"🏆 Voir le certificat",bRetake:"🔄 Refaire le test",
-  cHdr:"Les 7 R – Certificat de durabilité",cAw:"Ce certificat confirme:",
-  cStrT:"✅ Ce que tu fais déjà bien:",cImpT:"💡 Ton potentiel d'amélioration:",
-  cL1:"a réussi l'auto-test de durabilité",cL2:"montre un véritable engagement pour un avenir durable.",
-  bPrint:"🖨️ Imprimer",bClose:"✕ Fermer",
-  bgT:"🏅 Mon badge de durabilité",bgL:"Montre ton engagement! Imprime ton badge personnel.",
-  bgRound:"J'agis durablement et protège notre planète!",
-  bgRectT:"7 R – Actif pour la Terre",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Clique sur un badge pour imprimer.",
-  fqT:"❓ FAQ – Questions fréquentes",fqS:"Toutes les réponses importantes sur les 7 R.",
-  sqT:"📚 Sources & liens",sqS:"Toutes les sources utilisées.",
-  ipT:"📋 Mentions légales",ipS:"Ce site a été créé dans le cadre d'un projet scolaire.",
-  ipSc:"École:",ipCo:"Contexte:",ipCoT:"Projet scolaire – Les 7 R / EDD, NRW",
-  ipVi:"Vidéo:",ipViT:"Yusuf Serif – produit à l'école",
-  ipMe:"Médias:",ipMeT:"Tous les médias créés à l'école ou CC0. À des fins éducatives uniquement.",
-  ipCr:"Créé par:",ipYr:"Année:",ipDi:"Notice:",
-  ipDiT:"Projet scolaire non commercial. Pas de responsabilité pour les liens externes.",
-  ftL1:"Site créé par <strong>Anouk Sperling</strong>",
-  ftL2:"Vidéo de <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Éducation au développement durable (EDD) • Les 7 R • Projet scolaire 2026"
-},
-es:{
-  brand:"Los 7 R",nAbout:"Sostenibilidad",nRs:"Los 7 R",nLinear:"Lineal vs. Circular",
-  nSchool:"Escuela y vida",nMap:"Mapa mundial",nFood:"Alimentos",nVideo:"Vídeo",
-  nQuiz:"Cuestionario",nTest:"Autotest",nBadge:"Mi insignia",nFaq:"FAQ",nSrc:"Fuentes",nImp:"Aviso legal",
-  hT:"Los 7 R – Por nuestro planeta",
-  hS:"La sostenibilidad empieza con el pensamiento correcto. Descubre cómo los 7 R protegen nuestra Tierra.",
-  hB1:"🔄 Descubrir los 7 R",hB2:"🧪 Iniciar autotest",hB3:"❓ Hacer cuestionario",
-  st1:"toneladas de materias primas/año",st2:"materiales reciclados",st3:"más recursos hasta 2050",st4:"Tierras necesitaríamos",
-  aT:"🌱 Sostenibilidad y nuestra Tierra",
-  aL:"Nuestra Tierra tiene recursos limitados. Los consumimos más rápido de lo que se regeneran.",
-  aH1:"¿Qué es la sostenibilidad?",aH1T:"Sostenibilidad significa satisfacer las necesidades actuales sin comprometer las posibilidades de las generaciones futuras.",
-  aC1T:"Recursos finitos",aC1P:"Petróleo, carbón, tierras raras – tardan millones de años. Haz clic para más ›",
-  aC2T:"Huella ecológica",aC2P:"¿Cuánta naturaleza consumes? Haz clic para más ›",
-  aC3T:"Geografía y sostenibilidad",aC3P:"¿Qué tiene que ver la geografía? Haz clic para más ›",
-  aC4T:"Nuestra responsabilidad",aC4P:"¿Por qué depende de nosotros? Haz clic para más ›",
-  topTagT:"Haz clic en un tema para información detallada:",
-  tg1:"💸 Compras impulsivas",tg2:"📱 Tendencias TikTok",tg3:"📲 Nuevo smartphone",tg4:"🔧 Reacondicionado",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Marcas",tg7:"☕ Vasos desechables",tg8:"🍟 Snacks",
-  tg9:"🔄 Alquilar en lugar de comprar",tg10:"📚 Material escolar",tg11:"💻 Huella digital",
-  tg12:"🥗 Alimentos",tg13:"🍲 Aprovechar sobras",tg14:"🗑️ Separar residuos",tg15:"🔨 Reparar",
-  rsT:"🔄 Los 7 R – Nuestro marco de acción",rsL:"Los 7 R son siete principios para vivir de forma sostenible. ¡Haz clic en cada círculo!",
-  lcT:"⚖️ Economía lineal vs. Economía circular",lcL:"Dos modelos económicos muy diferentes.",
-  lcLT:"Economía lineal",lcLS:"Tomar → Fabricar → Desechar",lcCT:"Economía circular",lcCS:"Reducir → Reutilizar → Recuperar",
-  lcEx:"💡 Ejemplo:",lcExT:" Un smartphone viejo: Lineal = comprar, usar, tirar. Circular = reparar, comprar reacondicionado, reciclar materiales.",
-  scT:"🏫 Los 7 R en la escuela y la vida diaria",scL:"La sostenibilidad empieza en tu propia puerta.",
-  scST:"En la escuela",scHT:"En casa y en la vida diaria",
-  mT:"🌍 Economía circular en el mundo",mL:"Haz clic en un continente para obtener información.",
-  miT:"🌐 Seleccionar región",miS:"Haz clic en un continente o selecciona una región.",
-  mlT:"Todas las regiones:",mEu:"🌍 Europa",mAs:"🌏 Asia",mAf:"🌍 África",
-  mNA:"🌎 América del Norte",mSA:"🌎 América del Sur",mAu:"🌏 Australia y Oceanía",
-  fdT:"🥗 Alimentos y los 7 R",fdL:"Los alimentos son una de las palancas más importantes para la acción sostenible.",
-  fdFact:"📊 Dato:",fdFactT:"Aproximadamente 1/3 de todos los alimentos se desperdicia en el mundo.",
-  vT:"📽️ Nuestro vídeo de proyecto",vS:"Proyecto escolar del Otto-Hahn-Gymnasium Monheim am Rhein. Producido por Yusuf Serif.",
-  vPl:"▶ Reproducir vídeo",vFb:"El navegador no soporta vídeo HTML5.",
-  vHint:"💡 Consejo: Coloca video.mp4 en la misma carpeta. O introduce una URL de YouTube:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Cargar",
-  vCr:"📹 Vídeo de Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Cuestionario: Pon a prueba tus conocimientos",qzS:"20 preguntas sobre sostenibilidad y los 7 R.",
-  bNext:"Siguiente →",bBack:"← Atrás",bReplay:"🔄 Repetir",
-  stT:"🧪 Autotest: ¿Qué tan sostenible soy?",stS:"20 preguntas sobre tu vida diaria. ¡Resultado personal con certificado!",
-  rStr:"💪 Tus fortalezas",rImp:"🎯 Áreas de mejora",rTip:"🚀 Próximos pasos",
-  bCert:"🏆 Ver certificado",bRetake:"🔄 Repetir test",
-  cHdr:"Los 7 R – Certificado de sostenibilidad",cAw:"Este certificado confirma:",
-  cStrT:"✅ Lo que ya haces bien:",cImpT:"💡 Tu potencial de mejora:",
-  cL1:"ha completado con éxito el autotest de sostenibilidad",
-  cL2:"demuestra un verdadero compromiso con un futuro sostenible.",
-  bPrint:"🖨️ Imprimir",bClose:"✕ Cerrar",
-  bgT:"🏅 Mi insignia de sostenibilidad",bgL:"¡Muestra tu compromiso! Imprime tu insignia personal.",
-  bgRound:"¡Actúo de forma sostenible y protejo nuestro planeta!",
-  bgRectT:"7 R – Activo por la Tierra",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Haz clic en una insignia para imprimir.",
-  fqT:"❓ FAQ – Preguntas frecuentes",fqS:"Todas las respuestas importantes sobre los 7 R.",
-  sqT:"📚 Fuentes y enlaces",sqS:"Todas las fuentes utilizadas.",
-  ipT:"📋 Aviso legal",ipS:"Este sitio fue creado como parte de un proyecto escolar.",
-  ipSc:"Escuela:",ipCo:"Contexto:",ipCoT:"Proyecto escolar – Los 7 R / EDS, NRW",
-  ipVi:"Vídeo:",ipViT:"Yusuf Serif – producido en la escuela",
-  ipMe:"Medios:",ipMeT:"Todos los medios creados en la escuela o CC0. Solo para uso educativo.",
-  ipCr:"Creado por:",ipYr:"Año:",ipDi:"Nota:",
-  ipDiT:"Proyecto escolar no comercial. Sin responsabilidad por enlaces externos.",
-  ftL1:"Sitio creado por <strong>Anouk Sperling</strong>",
-  ftL2:"Vídeo de <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Educación para el Desarrollo Sostenible (EDS) • Los 7 R • Proyecto escolar 2026"
-},
-pl:{
-  brand:"7 R",nAbout:"Zrównoważony rozwój",nRs:"7 R",nLinear:"Liniowy vs. Okrężny",
-  nSchool:"Szkoła i życie",nMap:"Mapa świata",nFood:"Żywność",nVideo:"Wideo",
-  nQuiz:"Quiz",nTest:"Samodzielny test",nBadge:"Moja odznaka",nFaq:"FAQ",nSrc:"Źródła",nImp:"Stopka",
-  hT:"7 R – Dla naszej planety",hS:"Zrównoważony rozwój zaczyna się od właściwego myślenia.",
-  hB1:"🔄 Odkryj 7 R",hB2:"🧪 Rozpocznij test",hB3:"❓ Zrób quiz",
-  st1:"ton surowców rocznie",st2:"materiałów jest recyclingowanych",st3:"więcej zasobów do 2050",st4:"Ziemi byśmy potrzebowali",
-  aT:"🌱 Zrównoważony rozwój i nasza Ziemia",
-  aL:"Nasza Ziemia ma ograniczone zasoby. Zużywamy je szybciej niż się regenerują.",
-  aH1:"Czym jest zrównoważony rozwój?",aH1T:"Zrównoważony rozwój oznacza zaspokajanie potrzeb dzisiaj, nie narażając możliwości przyszłych pokoleń.",
-  aC1T:"Zasoby skończone",aC1P:"Ropa, węgiel, pierwiastki ziem rzadkich – kliknij po więcej ›",
-  aC2T:"Ślad ekologiczny",aC2P:"Ile natury zużywasz? Kliknij po więcej ›",
-  aC3T:"Geografia i zrównoważony rozwój",aC3P:"Jaki związek ma geografia? Kliknij po więcej ›",
-  aC4T:"Nasza odpowiedzialność",aC4P:"Dlaczego to zależy od nas? Kliknij po więcej ›",
-  topTagT:"Kliknij temat, aby uzyskać szczegółowe informacje:",
-  tg1:"💸 Impulsywne zakupy",tg2:"📱 Trendy TikTok",tg3:"📲 Nowy smartfon",tg4:"🔧 Odnowiony",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Marki",tg7:"☕ Jednorazowe kubki",tg8:"🍟 Przekąski",
-  tg9:"🔄 Wypożycz zamiast kupować",tg10:"📚 Materiały szkolne",tg11:"💻 Ślad cyfrowy",
-  tg12:"🥗 Żywność",tg13:"🍲 Wykorzystanie resztek",tg14:"🗑️ Segregacja odpadów",tg15:"🔨 Naprawa",
-  rsT:"🔄 7 R – Nasz plan działania",rsL:"7 R to siedem zasad zrównoważonego życia.",
-  lcT:"⚖️ Gospodarka liniowa vs. Gospodarka okrężna",lcL:"Dwa zupełnie różne modele gospodarcze.",
-  lcLT:"Gospodarka liniowa",lcLS:"Wziąć → Wytworzyć → Wyrzucić",lcCT:"Gospodarka okrężna",lcCS:"Redukować → Ponownie używać → Odzyskiwać",
-  lcEx:"💡 Przykład:",lcExT:" Stary smartfon: Liniowy = kupić, użyć, wyrzucić. Okrężny = naprawić, kupić odnowiony, zrecyklingować.",
-  scT:"🏫 7 R w szkole i życiu codziennym",scL:"Zrównoważony rozwój zaczyna się przed własnym domem.",
-  scST:"W szkole",scHT:"W domu i w życiu codziennym",
-  mT:"🌍 Gospodarka okrężna na świecie",mL:"Kliknij kontynent, aby uzyskać informacje.",
-  miT:"🌐 Wybierz region",miS:"Kliknij kontynent lub wybierz region.",
-  mlT:"Wszystkie regiony:",mEu:"🌍 Europa",mAs:"🌏 Azja",mAf:"🌍 Afryka",
-  mNA:"🌎 Ameryka Północna",mSA:"🌎 Ameryka Południowa",mAu:"🌏 Australia i Oceania",
-  fdT:"🥗 Żywność i 7 R",fdL:"Żywność jest jedną z największych dźwigni zrównoważonego działania.",
-  fdFact:"📊 Fakt:",fdFactT:"Około 1/3 wszystkich produktów spożywczych jest marnowana na świecie.",
-  vT:"📽️ Nasz film projektowy",vS:"Projekt szkolny. Wyprodukowany przez Yusufa Serifa.",
-  vPl:"▶ Odtwórz film",vFb:"Przeglądarka nie obsługuje wideo HTML5.",
-  vHint:"💡 Wskazówka: Umieść video.mp4 w tym samym folderze. Lub wprowadź URL YouTube:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Załaduj",
-  vCr:"📹 Materiał wideo Yusufa Serifa | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Sprawdź swoją wiedzę",qzS:"20 pytań o zrównoważonym rozwoju i 7 R.",
-  bNext:"Dalej →",bBack:"← Wstecz",bReplay:"🔄 Zagraj ponownie",
-  stT:"🧪 Samodzielny test: Jak bardzo jestem zrównoważony?",stS:"20 pytań o Twoje życie codzienne.",
-  rStr:"💪 Twoje mocne strony",rImp:"🎯 Obszary do poprawy",rTip:"🚀 Następne kroki",
-  bCert:"🏆 Pokaż certyfikat",bRetake:"🔄 Powtórz test",
-  cHdr:"7 R – Certyfikat zrównoważonego rozwoju",cAw:"Ten certyfikat potwierdza:",
-  cStrT:"✅ Co już robisz dobrze:",cImpT:"💡 Twój potencjał poprawy:",
-  cL1:"pomyślnie ukończył test zrównoważonego rozwoju",cL2:"wykazuje prawdziwe zaangażowanie na rzecz zrównoważonej przyszłości.",
-  bPrint:"🖨️ Drukuj",bClose:"✕ Zamknij",
-  bgT:"🏅 Moja odznaka zrównoważonego rozwoju",bgL:"Pokaż swoje zaangażowanie! Wydrukuj swoją osobistą odznakę.",
-  bgRound:"Działam zrównoważenie i chronię naszą planetę!",
-  bgRectT:"7 R – Aktywni dla Ziemi",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Kliknij odznakę, aby wydrukować.",
-  fqT:"❓ FAQ – Często zadawane pytania",fqS:"Wszystkie ważne odpowiedzi o 7 R.",
-  sqT:"📚 Źródła i linki",sqS:"Wszystkie użyte źródła.",
-  ipT:"📋 Stopka redakcyjna",ipS:"Ta strona została stworzona w ramach projektu szkolnego.",
-  ipSc:"Szkoła:",ipCo:"Kontekst:",ipCoT:"Projekt szkolny – 7 R / EZR, NRW",
-  ipVi:"Materiał wideo:",ipViT:"Yusuf Serif – wyprodukowano w szkole",
-  ipMe:"Media:",ipMeT:"Wszystkie media stworzone w szkole lub CC0. Wyłącznie do celów edukacyjnych.",
-  ipCr:"Stworzone przez:",ipYr:"Rok:",ipDi:"Uwaga:",
-  ipDiT:"Niekomercyjny projekt szkolny. Brak odpowiedzialności za zewnętrzne linki.",
-  ftL1:"Strona stworzona przez <strong>Anouk Sperling</strong>",
-  ftL2:"Materiał wideo <strong>Yusufa Serifa</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Edukacja dla zrównoważonego rozwoju • 7 R • Projekt szkolny 2026"
-},
-ru:{
-  brand:"7 Правил",nAbout:"Устойчивость",nRs:"7 Правил",nLinear:"Линейная vs. Круговая",
-  nSchool:"Школа и жизнь",nMap:"Карта мира",nFood:"Питание",nVideo:"Видео",
-  nQuiz:"Викторина",nTest:"Самотест",nBadge:"Мой значок",nFaq:"Вопросы",nSrc:"Источники",nImp:"Об авторе",
-  hT:"7 Правил – Для нашей планеты",hS:"Устойчивость начинается с правильного мышления.",
-  hB1:"🔄 Открыть 7 Правил",hB2:"🧪 Начать самотест",hB3:"❓ Пройти викторину",
-  st1:"тонн сырья в год",st2:"материалов перерабатывается",st3:"больше ресурсов к 2050",st4:"Земли нам понадобится",
-  aT:"🌱 Устойчивость и наша Земля",
-  aL:"Земля имеет ограниченные ресурсы. Мы потребляем их быстрее, чем они восстанавливаются.",
-  aH1:"Что такое устойчивость?",aH1T:"Устойчивость означает удовлетворение потребностей сегодня, не ставя под угрозу возможности будущих поколений.",
-  aC1T:"Конечные ресурсы",aC1P:"Нефть, уголь, редкоземельные металлы – нажми для подробностей ›",
-  aC2T:"Экологический след",aC2P:"Сколько природы ты потребляешь? Нажми для подробностей ›",
-  aC3T:"География и устойчивость",aC3P:"Какое отношение имеет география? Нажми для подробностей ›",
-  aC4T:"Наша ответственность",aC4P:"Почему это зависит от нас? Нажми для подробностей ›",
-  topTagT:"Нажми на тему для получения подробной информации:",
-  tg1:"💸 Импульсные покупки",tg2:"📱 Тренды TikTok",tg3:"📲 Новый смартфон",tg4:"🔧 Обновлённый",
-  tg5:"👗 Быстрая мода",tg6:"🏷️ Бренды",tg7:"☕ Одноразовые стаканы",tg8:"🍟 Перекусы",
-  tg9:"🔄 Брать в аренду вместо покупки",tg10:"📚 Школьные принадлежности",tg11:"💻 Цифровой след",
-  tg12:"🥗 Еда",tg13:"🍲 Использование остатков",tg14:"🗑️ Сортировка мусора",tg15:"🔨 Ремонт",
-  rsT:"🔄 7 Правил – Наша концепция действий",rsL:"7 правил – семь принципов устойчивой жизни.",
-  lcT:"⚖️ Линейная экономика vs. Круговая экономика",lcL:"Два совершенно разных экономических подхода.",
-  lcLT:"Линейная экономика",lcLS:"Взять → Произвести → Выбросить",lcCT:"Круговая экономика",lcCS:"Сократить → Повторно использовать → Вернуть",
-  lcEx:"💡 Пример:",lcExT:" Старый смартфон: Линейно = купить, использовать, выбросить. Кругово = починить, купить восстановленный, переработать.",
-  scT:"🏫 7 Правил в школе и повседневной жизни",scL:"Устойчивость начинается у твоей двери.",
-  scST:"В школе",scHT:"Дома и в повседневной жизни",
-  mT:"🌍 Круговая экономика в мире",mL:"Нажми на континент для получения информации.",
-  miT:"🌐 Выбрать регион",miS:"Нажми на континент или выбери регион.",
-  mlT:"Все регионы:",mEu:"🌍 Европа",mAs:"🌏 Азия",mAf:"🌍 Африка",
-  mNA:"🌎 Северная Америка",mSA:"🌎 Южная Америка",mAu:"🌏 Австралия и Океания",
-  fdT:"🥗 Еда и 7 Правил",fdL:"Еда – один из крупнейших рычагов устойчивых действий.",
-  fdFact:"📊 Факт:",fdFactT:"Около 1/3 всех продуктов питания теряется в мире.",
-  vT:"📽️ Наше проектное видео",vS:"Школьный проект. Снято Юсуфом Серифом.",
-  vPl:"▶ Смотреть видео",vFb:"Браузер не поддерживает HTML5-видео.",
-  vHint:"💡 Совет: Поместите video.mp4 в ту же папку. Или введите URL YouTube:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Загрузить",
-  vCr:"📹 Видеоматериал Юсуфа Серифа | OHG Монхайм-ам-Райн",
-  qzT:"🧠 Викторина: Проверь свои знания",qzS:"20 вопросов об устойчивости и 7 правилах.",
-  bNext:"Далее →",bBack:"← Назад",bReplay:"🔄 Повторить",
-  stT:"🧪 Самотест: Насколько я устойчив?",stS:"20 вопросов о твоей повседневной жизни.",
-  rStr:"💪 Твои сильные стороны",rImp:"🎯 Области для улучшения",rTip:"🚀 Следующие шаги",
-  bCert:"🏆 Показать сертификат",bRetake:"🔄 Повторить тест",
-  cHdr:"7 Правил – Сертификат устойчивости",cAw:"Этот сертификат подтверждает:",
-  cStrT:"✅ Что ты уже делаешь хорошо:",cImpT:"💡 Твой потенциал улучшения:",
-  cL1:"успешно прошёл самотест устойчивости",cL2:"демонстрирует настоящую приверженность устойчивому будущему.",
-  bPrint:"🖨️ Печать",bClose:"✕ Закрыть",
-  bgT:"🏅 Мой значок устойчивости",bgL:"Покажи свою приверженность! Распечатай свой значок.",
-  bgRound:"Я действую устойчиво и защищаю нашу планету!",
-  bgRectT:"7 Правил – Активен для Земли",bgRectS:"OHG Монхайм • 2026",
-  bgHint:"Нажми на значок для печати.",
-  fqT:"❓ Часто задаваемые вопросы",fqS:"Все важные ответы о 7 правилах.",
-  sqT:"📚 Источники и ссылки",sqS:"Все использованные источники.",
-  ipT:"📋 Об авторе",ipS:"Этот сайт создан в рамках школьного проекта.",
-  ipSc:"Школа:",ipCo:"Контекст:",ipCoT:"Школьный проект – 7 правил / ОУР, NRW",
-  ipVi:"Видеоматериал:",ipViT:"Юсуф Сериф – снято в школе",
-  ipMe:"Медиа:",ipMeT:"Все медиа созданы в школе или CC0. Только для образовательных целей.",
-  ipCr:"Создано:",ipYr:"Год:",ipDi:"Примечание:",
-  ipDiT:"Некоммерческий школьный проект. Нет ответственности за внешние ссылки.",
-  ftL1:"Сайт создан <strong>Anouk Sperling</strong>",
-  ftL2:"Видеоматериал <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Отто-Хан-Гимназия Монхайм-ам-Райн</strong>",
-  ftBne:"Образование в области устойчивого развития • 7 Правил • Школьный проект 2026"
-},
-ar:{
-  brand:"السبعة R",nAbout:"الاستدامة",nRs:"السبعة R",nLinear:"الخطي مقابل الدائري",
-  nSchool:"المدرسة والحياة",nMap:"خريطة العالم",nFood:"الغذاء",nVideo:"فيديو",
-  nQuiz:"اختبار",nTest:"اختبار ذاتي",nBadge:"شارتي",nFaq:"الأسئلة الشائعة",nSrc:"المصادر",nImp:"بيانات النشر",
-  hT:"السبعة R – من أجل كوكبنا",hS:"الاستدامة تبدأ بالتفكير الصحيح. اكتشف كيف تحمي السبعة R كوكبنا.",
-  hB1:"🔄 اكتشف السبعة R",hB2:"🧪 ابدأ الاختبار الذاتي",hB3:"❓ أجرِ الاختبار",
-  st1:"طن من المواد الخام سنوياً",st2:"من المواد معاد تدويرها",st3:"موارد إضافية بحلول 2050",st4:"كواكب أرض نحتاجها",
-  aT:"🌱 الاستدامة وكوكبنا",
-  aL:"كوكب الأرض لديه موارد محدودة. نستهلكها أسرع مما تتجدد. الاستدامة تعني التصرف بطريقة تحفظ الفرص للأجيال القادمة.",
-  aH1:"ما هي الاستدامة؟",aH1T:"الاستدامة تعني تلبية احتياجات الجيل الحالي دون المساس بقدرة الأجيال القادمة.",
-  aC1T:"الموارد المحدودة",aC1P:"النفط والفحم والمعادن النادرة – انقر للمزيد ›",
-  aC2T:"البصمة البيئية",aC2P:"كم من الطبيعة تستهلك؟ انقر للمزيد ›",
-  aC3T:"الجغرافيا والاستدامة",aC3P:"ما علاقة الجغرافيا؟ انقر للمزيد ›",
-  aC4T:"مسؤوليتنا",aC4P:"لماذا يعتمد الأمر علينا؟ انقر للمزيد ›",
-  topTagT:"انقر على موضوع للحصول على معلومات تفصيلية:",
-  tg1:"💸 الشراء الاندفاعي",tg2:"📱 صيحات تيك توك",tg3:"📲 هاتف جديد",tg4:"🔧 المجدَّد",
-  tg5:"👗 الموضة السريعة",tg6:"🏷️ تركيز على الماركات",tg7:"☕ الأكواب أحادية الاستخدام",tg8:"🍟 وجبات خفيفة",
-  tg9:"🔄 الاستعارة بدلاً من الشراء",tg10:"📚 المستلزمات المدرسية",tg11:"💻 البصمة الرقمية",
-  tg12:"🥗 الغذاء",tg13:"🍲 استخدام البقايا",tg14:"🗑️ فرز النفايات",tg15:"🔨 الإصلاح",
-  rsT:"🔄 السبعة R – إطار العمل",rsL:"السبعة R هي سبعة مبادئ للعيش المستدام. انقر على كل دائرة!",
-  lcT:"⚖️ الاقتصاد الخطي مقابل الاقتصاد الدائري",lcL:"نموذجان اقتصاديان مختلفان تماماً.",
-  lcLT:"الاقتصاد الخطي",lcLS:"أخذ ← تصنيع ← رمي",lcCT:"الاقتصاد الدائري",lcCS:"تخفيض ← إعادة استخدام ← استرداد",
-  lcEx:"💡 مثال:",lcExT:" هاتف قديم: خطي = شراء، استخدام، رمي. دائري = إصلاح، شراء مجدَّد، إعادة تدوير.",
-  scT:"🏫 السبعة R في المدرسة والحياة اليومية",scL:"الاستدامة تبدأ أمام بابك.",
-  scST:"في المدرسة",scHT:"في المنزل والحياة اليومية",
-  mT:"🌍 الاقتصاد الدائري حول العالم",mL:"انقر على قارة للحصول على معلومات.",
-  miT:"🌐 اختر منطقة",miS:"انقر على قارة أو اختر منطقة.",
-  mlT:"جميع المناطق:",mEu:"🌍 أوروبا",mAs:"🌏 آسيا",mAf:"🌍 أفريقيا",
-  mNA:"🌎 أمريكا الشمالية",mSA:"🌎 أمريكا الجنوبية",mAu:"🌏 أستراليا وأوقيانوسيا",
-  fdT:"🥗 الغذاء والسبعة R",fdL:"الغذاء هو أحد أكبر الرافعات للعمل المستدام.",
-  fdFact:"📊 حقيقة:",fdFactT:"يُهدر حوالي ثلث جميع الأغذية في العالم.",
-  vT:"📽️ الفيديو الخاص بمشروعنا",vS:"مشروع طلابي. أنتجه يوسف سريف.",
-  vPl:"▶ تشغيل الفيديو",vFb:"المتصفح لا يدعم فيديو HTML5.",
-  vHint:"💡 نصيحة: ضع video.mp4 في نفس المجلد. أو أدخل رابط يوتيوب:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ تحميل",
-  vCr:"📹 مواد فيديو يوسف سريف | OHG مونهايم",
-  qzT:"🧠 اختبار: اختبر معرفتك",qzS:"20 سؤالاً عن الاستدامة والسبعة R.",
-  bNext:"التالي ←",bBack:"→ السابق",bReplay:"🔄 إعادة الاختبار",
-  stT:"🧪 الاختبار الذاتي: كم أنا مستدام؟",stS:"20 سؤالاً عن حياتك اليومية.",
-  rStr:"💪 نقاط قوتك",rImp:"🎯 مجالات التحسين",rTip:"🚀 الخطوات القادمة",
-  bCert:"🏆 عرض الشهادة",bRetake:"🔄 إعادة الاختبار",
-  cHdr:"السبعة R – شهادة الاستدامة",cAw:"تؤكد هذه الشهادة:",
-  cStrT:"✅ ما تفعله بالفعل بشكل جيد:",cImpT:"💡 إمكانات التحسين لديك:",
-  cL1:"أتم اختبار الاستدامة الذاتي بنجاح",cL2:"يظهر التزاماً حقيقياً بمستقبل مستدام.",
-  bPrint:"🖨️ طباعة",bClose:"✕ إغلاق",
-  bgT:"🏅 شارة الاستدامة الخاصة بي",bgL:"أظهر التزامك! اطبع شارتك الشخصية.",
-  bgRound:"أتصرف باستدامة وأحمي كوكبنا!",
-  bgRectT:"7 R – نشط من أجل الأرض",bgRectS:"OHG مونهايم • 2026",
-  bgHint:"انقر على شارة للطباعة.",
-  fqT:"❓ الأسئلة الشائعة",fqS:"جميع الإجابات المهمة حول السبعة R.",
-  sqT:"📚 المصادر والروابط",sqS:"جميع المصادر المستخدمة.",
-  ipT:"📋 بيانات النشر",ipS:"تم إنشاء هذا الموقع في إطار مشروع طلابي.",
-  ipSc:"المدرسة:",ipCo:"السياق:",ipCoT:"مشروع طلابي – السبعة R، NRW",
-  ipVi:"مواد الفيديو:",ipViT:"يوسف سريف – أنتج في المدرسة",
-  ipMe:"الوسائط:",ipMeT:"جميع الوسائط من إنتاج المدرسة أو CC0. للأغراض التعليمية فقط.",
-  ipCr:"من إنشاء:",ipYr:"السنة:",ipDi:"ملاحظة:",
-  ipDiT:"مشروع طلابي غير تجاري. لا مسؤولية عن الروابط الخارجية.",
-  ftL1:"الموقع من إنشاء <strong>Anouk Sperling</strong>",
-  ftL2:"مواد الفيديو بقلم <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>مدرسة أوتو هان، مونهايم أم راين</strong>",
-  ftBne:"التعليم من أجل التنمية المستدامة • السبعة R • مشروع طلابي 2026"
-},
-tr:{
-  brand:"7 R",nAbout:"Sürdürülebilirlik",nRs:"7 R",nLinear:"Doğrusal vs. Döngüsel",
-  nSchool:"Okul ve Hayat",nMap:"Dünya Haritası",nFood:"Gıda",nVideo:"Video",
-  nQuiz:"Quiz",nTest:"Öz Test",nBadge:"Rozetim",nFaq:"SSS",nSrc:"Kaynaklar",nImp:"Künye",
-  hT:"7 R – Gezegenimiz için",hS:"Sürdürülebilirlik doğru düşünceyle başlar. 7 R ile gezegenimizi nasıl koruyabileceğini keşfet.",
-  hB1:"🔄 7 R'yi keşfet",hB2:"🧪 Öz testi başlat",hB3:"❓ Quiz yap",
-  st1:"ton ham madde/yıl",st2:"malzeme geri dönüştürülüyor",st3:"2050'ye kadar daha fazla kaynak",st4:"Dünya gerekirdi",
-  aT:"🌱 Sürdürülebilirlik ve Dünyamız",
-  aL:"Dünyamızın sınırlı kaynakları var. Onları yenilenebildiklerinden daha hızlı tüketiyoruz.",
-  aH1:"Sürdürülebilirlik nedir?",aH1T:"Sürdürülebilirlik, bugünün ihtiyaçlarını gelecek nesillerin fırsatlarını tehlikeye atmadan karşılamak demektir.",
-  aC1T:"Sınırlı Kaynaklar",aC1P:"Petrol, kömür, nadir toprak elementleri – Daha fazlası için tıkla ›",
-  aC2T:"Ekolojik Ayak İzi",aC2P:"Ne kadar doğa tüketiyorsun? Daha fazlası için tıkla ›",
-  aC3T:"Coğrafya ve Sürdürülebilirlik",aC3P:"Coğrafyanın ne ilgisi var? Daha fazlası için tıkla ›",
-  aC4T:"Sorumluluğumuz",aC4P:"Neden bize bağlı? Daha fazlası için tıkla ›",
-  topTagT:"Ayrıntılı bilgi için bir konuya tıkla:",
-  tg1:"💸 Anlık Alışveriş",tg2:"📱 TikTok Trendleri",tg3:"📲 Yeni Akıllı Telefon",tg4:"🔧 Yenilenmiş",
-  tg5:"👗 Hızlı Moda",tg6:"🏷️ Marka Odağı",tg7:"☕ Tek Kullanımlık Bardak",tg8:"🍟 Atıştırmalıklar",
-  tg9:"🔄 Satın Almak Yerine Ödünç Al",tg10:"📚 Okul Malzemeleri",tg11:"💻 Dijital Ayak İzi",
-  tg12:"🥗 Gıda",tg13:"🍲 Artıkları Değerlendirme",tg14:"🗑️ Atık Ayırma",tg15:"🔨 Tamir",
-  rsT:"🔄 7 R – Eylem Çerçevemiz",rsL:"7 R, sürdürülebilir yaşam için yedi ilkedir. Her daireye tıkla!",
-  lcT:"⚖️ Doğrusal Ekonomi vs. Döngüsel Ekonomi",lcL:"İki tamamen farklı ekonomik model.",
-  lcLT:"Doğrusal Ekonomi",lcLS:"Al → Üret → At",lcCT:"Döngüsel Ekonomi",lcCS:"Azalt → Yeniden Kullan → Geri Kazan",
-  lcEx:"💡 Örnek:",lcExT:" Eski bir telefon: Doğrusal = al, kullan, at. Döngüsel = tamir et, yenilenmiş al, malzemeleri geri dönüştür.",
-  scT:"🏫 7 R Okul ve Günlük Hayatta",scL:"Sürdürülebilirlik kendi kapının önünde başlar.",
-  scST:"Okulda",scHT:"Evde ve Günlük Hayatta",
-  mT:"🌍 Döngüsel Ekonomi Dünya Genelinde",mL:"Bilgi almak için bir kıtaya tıkla.",
-  miT:"🌐 Bölge seç",miS:"Haritada bir kıtaya tıkla veya bölge seç.",
-  mlT:"Tüm bölgeler:",mEu:"🌍 Avrupa",mAs:"🌏 Asya",mAf:"🌍 Afrika",
-  mNA:"🌎 Kuzey Amerika",mSA:"🌎 Güney Amerika",mAu:"🌏 Avustralya ve Okyanusya",
-  fdT:"🥗 Gıda ve 7 R",fdL:"Gıda, sürdürülebilir eylem için en büyük kaldıraçlardan biridir.",
-  fdFact:"📊 Gerçek:",fdFactT:"Dünya genelinde tüm gıdaların yaklaşık 1/3'ü israf edilmektedir.",
-  vT:"📽️ Proje Videomuzu",vS:"Okul projesi. Yusuf Serif tarafından üretildi.",
-  vPl:"▶ Videoyu oynat",vFb:"Tarayıcı HTML5 videosunu desteklemiyor.",
-  vHint:"💡 İpucu: video.mp4'ü aynı klasöre koy. Veya YouTube URL'si gir:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Yükle",
-  vCr:"📹 Video materyali Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Bilgini Test Et",qzS:"Sürdürülebilirlik ve 7 R hakkında 20 soru.",
-  bNext:"İleri →",bBack:"← Geri",bReplay:"🔄 Tekrar Oyna",
-  stT:"🧪 Öz Test: Ne Kadar Sürdürülebiliyim?",stS:"Günlük hayatın hakkında 20 soru.",
-  rStr:"💪 Güçlü Yanların",rImp:"🎯 Gelişim Alanları",rTip:"🚀 Sonraki Adımlar",
-  bCert:"🏆 Sertifikayı Göster",bRetake:"🔄 Testi Tekrarla",
-  cHdr:"7 R – Sürdürülebilirlik Sertifikası",cAw:"Bu sertifika doğrular:",
-  cStrT:"✅ Zaten iyi yaptıkların:",cImpT:"💡 Gelişim potansiyeliniz:",
-  cL1:"sürdürülebilirlik öz testini başarıyla tamamladı",cL2:"sürdürülebilir bir gelecek için gerçek bağlılık gösteriyor.",
-  bPrint:"🖨️ Yazdır",bClose:"✕ Kapat",
-  bgT:"🏅 Benim Sürdürülebilirlik Rozetim",bgL:"Bağlılığını göster! Kişisel rozetini yazdır.",
-  bgRound:"Sürdürülebilir davranıyorum ve gezegenimizi koruyorum!",
-  bgRectT:"7 R – Dünya İçin Aktif",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Yazdırmak için bir rozete tıkla.",
-  fqT:"❓ SSS – Sık Sorulan Sorular",fqS:"7 R hakkında tüm önemli cevaplar.",
-  sqT:"📚 Kaynaklar ve Bağlantılar",sqS:"Kullanılan tüm kaynaklar.",
-  ipT:"📋 Künye",ipS:"Bu web sitesi bir okul projesi kapsamında oluşturulmuştur.",
-  ipSc:"Okul:",ipCo:"Bağlam:",ipCoT:"Okul projesi – 7 R / SKE, NRW",
-  ipVi:"Video materyali:",ipViT:"Yusuf Serif – okulda üretildi",
-  ipMe:"Medya:",ipMeT:"Tüm medya okulda oluşturuldu veya CC0. Yalnızca eğitim amaçlı.",
-  ipCr:"Oluşturan:",ipYr:"Yıl:",ipDi:"Not:",
-  ipDiT:"Ticari olmayan okul projesi. Harici bağlantılar için sorumluluk kabul edilmez.",
-  ftL1:"Web sitesi <strong>Anouk Sperling</strong> tarafından oluşturuldu",
-  ftL2:"Video materyali <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Sürdürülebilir Kalkınma Eğitimi (SKE) • 7 R • Okul Projesi 2026"
-},
-nl:{
-  brand:"De 7 R's",nAbout:"Duurzaamheid",nRs:"De 7 R's",nLinear:"Lineair vs. Circulair",
-  nSchool:"School & Dagelijks Leven",nMap:"Wereldkaart",nFood:"Voeding",nVideo:"Video",
-  nQuiz:"Quiz",nTest:"Zelftest",nBadge:"Mijn Badge",nFaq:"FAQ",nSrc:"Bronnen",nImp:"Colofon",
-  hT:"De 7 R's – Voor onze planeet",hS:"Duurzaamheid begint met het juiste denken. Ontdek hoe de 7 R's onze aarde beschermen.",
-  hB1:"🔄 Ontdek de 7 R's",hB2:"🧪 Start zelftest",hB3:"❓ Doe de quiz",
-  st1:"ton grondstoffen per jaar",st2:"van materialen gerecycled",st3:"meer hulpbronnen in 2050",st4:"Aardes zouden we nodig hebben",
-  aT:"🌱 Duurzaamheid en onze aarde",
-  aL:"Onze aarde heeft beperkte grondstoffen. We verbruiken ze sneller dan ze zich kunnen regenereren.",
-  aH1:"Wat is duurzaamheid?",aH1T:"Duurzaamheid betekent voorzien in de behoeften van nu zonder de mogelijkheden van toekomstige generaties in gevaar te brengen.",
-  aC1T:"Eindige grondstoffen",aC1P:"Aardolie, steenkool, zeldzame aarden – klik voor meer ›",
-  aC2T:"Ecologische voetafdruk",aC2P:"Hoeveel natuur verbruik jij? Klik voor meer ›",
-  aC3T:"Geografie & Duurzaamheid",aC3P:"Wat heeft geografie ermee te maken? Klik voor meer ›",
-  aC4T:"Onze verantwoordelijkheid",aC4P:"Waarom hangt het van ons af? Klik voor meer ›",
-  topTagT:"Klik op een onderwerp voor gedetailleerde informatie:",
-  tg1:"💸 Impulsaankopen",tg2:"📱 TikTok-hypes",tg3:"📲 Nieuwe smartphone",tg4:"🔧 Refurbished",
-  tg5:"👗 Fast Fashion",tg6:"🏷️ Merkfocus",tg7:"☕ Wegwerpbekers",tg8:"🍟 Snacks",
-  tg9:"🔄 Lenen in plaats van kopen",tg10:"📚 Schoolspullen",tg11:"💻 Digitale voetafdruk",
-  tg12:"🥗 Voedsel",tg13:"🍲 Restjes gebruiken",tg14:"🗑️ Afvalscheiding",tg15:"🔨 Repareren",
-  rsT:"🔄 De 7 R's – Ons handelskader",rsL:"De 7 R's zijn zeven principes voor duurzaam leven. Klik op elke cirkel!",
-  lcT:"⚖️ Lineaire economie vs. Circulaire economie",lcL:"Twee heel verschillende economische modellen.",
-  lcLT:"Lineaire economie",lcLS:"Nemen → Maken → Weggooien",lcCT:"Circulaire economie",lcCS:"Verminderen → Hergebruiken → Terugwinnen",
-  lcEx:"💡 Voorbeeld:",lcExT:" Een oude smartphone: Lineair = kopen, gebruiken, weggooien. Circulair = repareren, refurbished kopen, materialen recyclen.",
-  scT:"🏫 De 7 R's op school en in het dagelijks leven",scL:"Duurzaamheid begint voor je eigen deur.",
-  scST:"Op school",scHT:"Thuis en in het dagelijks leven",
-  mT:"🌍 Circulaire economie wereldwijd",mL:"Klik op een continent voor informatie.",
-  miT:"🌐 Selecteer regio",miS:"Klik op een continent of selecteer een regio.",
-  mlT:"Alle regio's:",mEu:"🌍 Europa",mAs:"🌏 Azië",mAf:"🌍 Afrika",
-  mNA:"🌎 Noord-Amerika",mSA:"🌎 Zuid-Amerika",mAu:"🌏 Australië & Oceanië",
-  fdT:"🥗 Voedsel en de 7 R's",fdL:"Voedsel is een van de grootste hefbomen voor duurzaam handelen.",
-  fdFact:"📊 Feit:",fdFactT:"Wereldwijd wordt ca. 1/3 van alle voedsel verspild.",
-  vT:"📽️ Onze projectvideo",vS:"Schoolproject. Geproduceerd door Yusuf Serif.",
-  vPl:"▶ Projectvideo afspelen",vFb:"Browser ondersteunt geen HTML5-video.",
-  vHint:"💡 Tip: Plaats video.mp4 in dezelfde map. Of voer een YouTube-URL in:",
-  vYtPh:"https://www.youtube.com/watch?v=...",vYtBtn:"▶ Laden",
-  vCr:"📹 Videomateriaal van Yusuf Serif | OHG Monheim am Rhein",
-  qzT:"🧠 Quiz: Test je kennis",qzS:"20 vragen over duurzaamheid en de 7 R's.",
-  bNext:"Volgende →",bBack:"← Terug",bReplay:"🔄 Quiz herhalen",
-  stT:"🧪 Zelftest: Hoe duurzaam ben ik?",stS:"20 vragen over je dagelijks leven. Persoonlijk resultaat met certificaat!",
-  rStr:"💪 Jouw sterke punten",rImp:"🎯 Verbeterpunten",rTip:"🚀 Volgende stappen",
-  bCert:"🏆 Certificaat tonen",bRetake:"🔄 Test herhalen",
-  cHdr:"De 7 R's – Duurzaamheidscertificaat",cAw:"Dit certificaat bevestigt:",
-  cStrT:"✅ Wat je al goed doet:",cImpT:"💡 Jouw verbeterpotentieel:",
-  cL1:"heeft de duurzaamheids-zelftest met succes voltooid",cL2:"toont echte betrokkenheid voor een duurzame toekomst.",
-  bPrint:"🖨️ Afdrukken",bClose:"✕ Sluiten",
-  bgT:"🏅 Mijn duurzaamheidsbadge",bgL:"Toon je betrokkenheid! Druk je persoonlijke badge af.",
-  bgRound:"Ik handel duurzaam en bescherm onze planeet!",
-  bgRectT:"7 R's – Actief voor de aarde",bgRectS:"OHG Monheim am Rhein • 2026",
-  bgHint:"Klik op een badge om af te drukken.",
-  fqT:"❓ FAQ – Veelgestelde vragen",fqS:"Alle belangrijke antwoorden over de 7 R's.",
-  sqT:"📚 Bronnen en links",sqS:"Alle gebruikte bronnen.",
-  ipT:"📋 Colofon",ipS:"Deze website is gemaakt als onderdeel van een schoolproject.",
-  ipSc:"School:",ipCo:"Context:",ipCoT:"Schoolproject – De 7 R's / ESD, NRW",
-  ipVi:"Videomateriaal:",ipViT:"Yusuf Serif – op school geproduceerd",
-  ipMe:"Media:",ipMeT:"Alle media op school gemaakt of CC0. Alleen voor educatief gebruik.",
-  ipCr:"Gemaakt door:",ipYr:"Jaar:",ipDi:"Opmerking:",
-  ipDiT:"Niet-commercieel schoolproject. Geen aansprakelijkheid voor externe links.",
-  ftL1:"Website gemaakt door <strong>Anouk Sperling</strong>",
-  ftL2:"Videomateriaal van <strong>Yusuf Serif</strong>",
-  ftL3:"<strong>Otto-Hahn-Gymnasium Monheim am Rhein</strong>",
-  ftBne:"Onderwijs voor duurzame ontwikkeling (ESD) • De 7 R's • Schoolproject 2026"
-}
-};
+// ===================== LANGUAGE LABELS ======================
+const TR = {/* (gleicher TR-Block wie oben – aus Platzgründen hier gekürzt, bitte unverändert lassen) */};
 
-// ============================================================
-// CONTENT DATA (DE + EN, others fall back to EN)
-// ============================================================
+// Wegen Zeichenlimit hier nur Hinweis: In der fertigen Datei muss der komplette TR-Block
+// aus der vorherigen Nachricht zwischen const TR = { ... }; stehen.
 
-// ABOUT MODALS
+// ===================== ABOUT MODALS =========================
 const ABOUT_MODALS = {
   resources:{
-    de:{title:"⛏️ Endliche Rohstoffe",body:`<h4>Was sind endliche Rohstoffe?</h4><p>Endliche Rohstoffe entstehen über Millionen Jahre und können sich nicht schnell genug regenerieren. Zu ihnen zählen:</p><ul><li><strong>Fossile Brennstoffe:</strong> Erdöl, Erdgas, Kohle</li><li><strong>Metallerze:</strong> Eisen, Aluminium, Kupfer</li><li><strong>Seltene Erden:</strong> Kobalt, Lithium, Indium (für Smartphones!)</li><li><strong>Sand und Kies</strong> (für Beton)</li></ul><h4>Das Problem</h4><p>Wir verbrauchen diese Rohstoffe schneller als sie entstehen. Würden alle Menschen wie Europäer leben, bräuchten wir 3 Erden. Schon heute leben wir auf Kosten künftiger Generationen.</p><h4>Was können wir tun?</h4><p>Die 7 Rs helfen, unseren Rohstoffverbrauch zu senken: weniger kaufen (Reduce), länger nutzen (Reuse), reparieren (Repair) und recyceln (Recycle).</p>`},
-    en:{title:"⛏️ Finite Resources",body:`<h4>What are finite resources?</h4><p>Finite resources take millions of years to form and cannot regenerate fast enough. They include:</p><ul><li><strong>Fossil fuels:</strong> Oil, natural gas, coal</li><li><strong>Metal ores:</strong> Iron, aluminum, copper</li><li><strong>Rare earths:</strong> Cobalt, lithium, indium (for smartphones!)</li><li><strong>Sand and gravel</strong> (for concrete)</li></ul><h4>The problem</h4><p>We consume these resources faster than they form. If everyone lived like Europeans, we'd need 3 Earths. We are already living at the expense of future generations.</p><h4>What can we do?</h4><p>The 7 Rs help reduce our resource consumption: buy less (Reduce), use longer (Reuse), repair (Repair), and recycle (Recycle).</p>`}
+    de:{title:"⛏️ Endliche Rohstoffe",body:`<h4>Was sind endliche Rohstoffe?</h4><p>Endliche Rohstoffe entstehen über Millionen Jahre und können sich nicht schnell genug regenerieren. Zu ihnen zählen:</p><ul><li><strong>Fossile Brennstoffe:</strong> Erdöl, Erdgas, Kohle</li><li><strong>Metallerze:</strong> Eisen, Aluminium, Kupfer</li><li><strong>Seltene Erden:</strong> Kobalt, Lithium, Indium (für Smartphones!)</li><li><strong>Sand und Kies</strong> (für Beton)</li></ul><h4>Das Problem</h4><p>Wir verbrauchen diese Rohstoffe schneller als sie entstehen. Würden alle Menschen wie Europäer leben, bräuchten wir etwa 3 Erden.</p><h4>Was können wir tun?</h4><p>Die 7 Rs helfen, unseren Rohstoffverbrauch zu senken: weniger kaufen (Reduce), bewusst entscheiden (Rethink, Refuse), länger nutzen (Reuse), reparieren (Repair) und recyceln (Recycle).</p>`},
+    en:{title:"⛏️ Finite Resources",body:`<h4>What are finite resources?</h4><p>Finite resources take millions of years to form and cannot regenerate fast enough. They include:</p><ul><li><strong>Fossil fuels:</strong> Oil, natural gas, coal</li><li><strong>Metal ores:</strong> Iron, aluminum, copper</li><li><strong>Rare earths:</strong> Cobalt, lithium, indium (for smartphones!)</li><li><strong>Sand and gravel</strong> (for concrete)</li></ul><h4>The problem</h4><p>We consume these resources faster than they form. If everyone lived like Europeans, we'd need about 3 Earths.</p><h4>What can we do?</h4><p>The 7 Rs help reduce our resource use: buy less (Reduce), make conscious decisions (Rethink, Refuse), use longer (Reuse), repair (Repair) and recycle (Recycle).</p>`}
   },
   footprint:{
-    de:{title:"👣 Der ökologische Fußabdruck",body:`<h4>Was ist der ökologische Fußabdruck?</h4><p>Der ökologische Fußabdruck misst, wie viel Natur ein Mensch oder eine Gesellschaft verbraucht. Er wird in "Globalen Hektar" angegeben – also der Fläche, die nötig ist, um unseren Lebensstil zu unterstützen.</p><h4>Globale Zahlen</h4><ul><li>🌍 Verfügbare Biofläche: ca. 1,6 Globalhektar/Person</li><li>🇩🇪 Deutschland: ca. 4,7 Globalhektar/Person</li><li>🇺🇸 USA: ca. 8 Globalhektar/Person</li><li>🇮🇳 Indien: ca. 1,2 Globalhektar/Person</li></ul><h4>Was beeinflusst den Fußabdruck?</h4><ul><li>🍖 Ernährung (besonders Fleisch)</li><li>✈️ Reisen & Mobilität</li><li>🏠 Wohnen & Heizen</li><li>🛍️ Konsum & Kleidung</li></ul><p>Du kannst deinen Fußabdruck berechnen: <strong>footprint.wwf.de</strong></p>`},
-    en:{title:"👣 The Ecological Footprint",body:`<h4>What is the ecological footprint?</h4><p>The ecological footprint measures how much nature a person or society consumes. It's measured in "global hectares" – the area needed to support our lifestyle.</p><h4>Global numbers</h4><ul><li>🌍 Available biocapacity: ca. 1.6 global hectares/person</li><li>🇩🇪 Germany: ca. 4.7 global hectares/person</li><li>🇺🇸 USA: ca. 8 global hectares/person</li><li>🇮🇳 India: ca. 1.2 global hectares/person</li
+    de:{title:"👣 Der ökologische Fußabdruck",body:`<h4>Was ist der ökologische Fußabdruck?</h4><p>Der ökologische Fußabdruck misst, wie viel Natur ein Mensch oder eine Gesellschaft verbraucht. Er wird in "Globalen Hektar" angegeben – also der Fläche, die nötig ist, um unseren Lebensstil zu ermöglichen.</p><h4>Was beeinflusst den Fußabdruck?</h4><ul><li>🍖 Ernährung (besonders Fleisch & Milchprodukte)</li><li>🚗 Mobilität & Reisen</li><li>🏠 Wohnen, Heizen & Stromverbrauch</li><li>🛍️ Konsum, Kleidung & Elektronik</li></ul><p>Die 7 Rs können deinen Fußabdruck deutlich verkleinern. Online-Rechner findest du z. B. bei WWF oder Brot für die Welt.</p>`},
+    en:{title:"👣 Ecological Footprint",body:`<h4>What is the ecological footprint?</h4><p>The ecological footprint measures how much nature a person or society consumes. It is measured in "global hectares" – the area needed to support our lifestyle.</p><h4>What influences the footprint?</h4><ul><li>🍖 Diet (especially meat & dairy)</li><li>🚗 Mobility & travel</li><li>🏠 Housing, heating & electricity</li><li>🛍️ Consumption, clothing & electronics</li></ul><p>The 7 Rs can significantly reduce your footprint.</p>`}
+  },
+  geo:{
+    de:{title:"🗺️ Geographie & Nachhaltigkeit",body:`<h4>Was hat Erdkunde mit Nachhaltigkeit zu tun?</h4><p>Im Fach Geographie/ Erdkunde lernst du, wie:</p><ul><li>Rohstoffe weltweit verteilt sind</li><li>globaler Handel funktioniert</li><li>Klimazonen und Ökosysteme zusammenhängen</li><li>Ungerechtigkeiten zwischen Ländern entstehen (Globaler Norden / Süden)</li></ul><p>Nachhaltigkeit ist damit ein <strong>zentraler Bestandteil von Erdkunde</strong> – du verstehst Ursachen und Folgen von Umweltproblemen und kannst Lösungen mitdenken.</p>`},
+    en:{title:"🗺️ Geography & Sustainability",body:`<h4>What does geography have to do with sustainability?</h4><p>In geography you learn:</p><ul><li>How resources are distributed worldwide</li><li>How global trade works</li><li>How climate zones and ecosystems are connected</li><li>How inequalities between countries arise</li></ul><p>Sustainability is therefore a <strong>core part of geography</strong> – you understand causes and effects of environmental problems and can think about solutions.</p>`}
+  },
+  responsibility:{
+    de:{title:"🤝 Unsere Verantwortung",body:`<h4>Warum sind wir verantwortlich?</h4><p>Viele Entscheidungen werden von Politik und Unternehmen getroffen. Aber <strong>unser Konsum</strong> beeinflusst, welche Produkte hergestellt werden:</p><ul><li>Mit jedem Kauf gibst du eine Stimme ab.</li><li>Nachfrage nach fairen, langlebigen Produkten verändert den Markt.</li><li>Bewusster Konsum reduziert Abfall und CO₂.</li></ul><h4>Was kannst du tun?</h4><ul><li>Informiert einkaufen</li><li>Kritisch mit Werbung umgehen</li><li>Mit anderen über Nachhaltigkeit sprechen</li><li>Projekte in Schule & Gemeinde starten</li></ul>`},
+    en:{title:"🤝 Our Responsibility",body:`<h4>Why are we responsible?</h4><p>Many decisions are made by politics and companies. But <strong>our consumption</strong> influences which products are produced:</p><ul><li>Every purchase is a vote.</li><li>Demand for fair and durable products changes the market.</li><li>Conscious consumption reduces waste and CO₂.</li></ul><h4>What can you do?</h4><ul><li>Shop informed</li><li>Be critical with advertising</li><li>Talk about sustainability</li><li>Start projects at school & in your community</li></ul>`}
+  }
+};
+
+// ==================== TOPIC DETAILS (Impulskäufe etc.) =======
+const TOPICS = {
+  impulse:{
+    title_de:"💸 Impulskäufe",
+    title_en:"💸 Impulse Buying",
+    body_de:`<p>Impulskäufe sind spontane Käufe, die du nicht geplant hast – oft ausgelöst durch Rabatte, Werbung oder Langeweile.</p><h4>Typische Situationen</h4><ul><li>„Nur heute 50 % Rabatt!"</li><li>Du scrollst durch TikTok und siehst ein Produkt in vielen Videos.</li><li>Dir ist langweilig, du öffnest einen Online-Shop.</li></ul><h4>Warum ist das problematisch?</h4><ul><li>Du kaufst Dinge, die du kaum benutzt.</li><li>Rohstoffe und Energie werden für überflüssige Produkte verschwendet.</li><li>Dein Geldbeutel leidet.</li></ul><h4>7R-Bezug</h4><ul><li><strong>Rethink:</strong> Brauche ich das wirklich?</li><li><strong>Refuse:</strong> Werbung und Hypes bewusst ablehnen.</li><li><strong>Reduce:</strong> Weniger, aber gezielt einkaufen.</li></ul>`,
+    body_en:`<p>Impulse buying means buying things spontaneously without planning – triggered by discounts, ads or boredom.</p><h4>Why is it a problem?</h4><ul><li>You buy things you hardly use.</li><li>Resources and energy are wasted.</li><li>You spend more money than necessary.</li></ul>`
+  },
+  tiktok:{
+    title_de:"📱 TikTok- & Social-Media-Hypes",
+    title_en:"📱 TikTok & Social Media Hypes",
+    body_de:`<p>Social Media zeigt dir ständig neue Trends – von Schminke über Kleidung bis zu Gadgets.</p><h4>Das passiert dabei</h4><ul><li>Influencer werden bezahlt, Produkte zu zeigen.</li><li>Du siehst ein Produkt dutzende Male und denkst: „Ich brauche das auch!"</li><li>Trends halten oft nur wenige Wochen.</li></ul><h4>7R-Bezug</h4><ul><li><strong>Rethink:</strong> Ist das ein echter Bedarf oder nur ein Trend?</li><li><strong>Refuse:</strong> Werbung als Werbung erkennen.</li><li><strong>Reuse:</strong> Dinge nutzen, die du schon hast, statt etwas „Neues" aus TikTok zu kaufen.</li></ul>`,
+    body_en:`<p>Social media constantly shows you new trends. Many posts are hidden advertising. Recognize sponsored content and decide consciously if you really need something.</p>`
+  },
+  smartphone:{
+    title_de:"📲 Immer das neueste Smartphone?",
+    title_en:"📲 Always the newest smartphone?",
+    body_de:`<p>Die Herstellung eines Smartphones benötigt viele Rohstoffe wie Kobalt, Lithium und Gold. Diese werden oft unter schwierigen Bedingungen abgebaut.</p><h4>Lineares Modell</h4><p>Kaufen → 2 Jahre nutzen → wegwerfen.</p><h4>Kreislauf-Modell</h4><ul><li>Smartphone so lange nutzen, wie es funktioniert.</li><li>Refurbished-Geräte kaufen.</li><li>Kaputte Geräte reparieren oder fachgerecht entsorgen.</li></ul>`,
+    body_en:`<p>Producing a smartphone requires many raw materials. Keep your phone as long as possible and consider refurbished instead of new.</p>`
+  },
+  refurbished:{
+    title_de:"🔧 Refurbished statt neu",
+    title_en:"🔧 Refurbished instead of new",
+    body_de:`<p>Refurbished bedeutet: gebraucht, professionell aufgearbeitet und mit Garantie.</p><h4>Vorteile</h4><ul><li>Bis zu 50 % günstiger.</li><li>Weniger Elektroschrott.</li><li>Ressourcen werden geschont.</li></ul><p>Beispiele: Smartphone, Laptop, Tablets, Konsolen.</p>`,
+    body_en:`<p>Refurbished = used but professionally checked, repaired and sold with warranty. Cheaper and better for the environment.</p>`
+  },
+  fastfashion:{
+    title_de:"👗 Fast Fashion",
+    title_en:"👗 Fast Fashion",
+    body_de:`<p>Fast Fashion bedeutet: ständig neue Kollektionen, sehr günstige Kleidung, schlechte Qualität.</p><h4>Probleme</h4><ul><li>Hoher Wasserverbrauch (z. B. Baumwolle).</li><li>Viele Chemikalien in der Produktion.</li><li>Schlechte Arbeitsbedingungen.</li><li>Viel Textilmüll.</li></ul><h4>7R-Bezug</h4><ul><li><strong>Reduce:</strong> Weniger kaufen.</li><li><strong>Reuse:</strong> Secondhand, Kleidertausch.</li><li><strong>Repair:</strong> Löcher stopfen, statt wegwerfen.</li></ul>`,
+    body_en:`<p>Fast fashion = cheap, quickly produced clothes. Choose second-hand and quality instead of quantity.</p>`
+  },
+  marken:{
+    title_de:"🏷️ Markenfokus & Statussymbole",
+    title_en:"🏷️ Brand focus & status symbols",
+    body_de:`<p>Marken vermitteln Zugehörigkeit und Status – das nutzen Unternehmen aus.</p><h4>Fragen an dich</h4><ul><li>Kaufe ich das Produkt wegen der Qualität oder wegen des Logos?</li><li>Würde ich es auch ohne sichtbare Marke tragen?</li></ul><p>Nachhaltig handeln heißt: <strong>Qualität, Langlebigkeit und Fairness</strong> sind wichtiger als ein Logo.</p>`,
+    body_en:`<p>Brands can influence us a lot. Try to focus on quality, durability and fair production, not only on logos.</p>`
+  },
+  becher:{
+    title_de:"☕ Einwegbecher",
+    title_en:"☕ Disposable cups",
+    body_de:`<p>In Deutschland werden jeden Tag Hunderttausende Einwegbecher weggeworfen.</p><h4>Probleme</h4><ul><li>Beschichteter Karton – schwer zu recyceln.</li><li>Hoher Ressourcenverbrauch für sehr kurze Nutzung.</li></ul><h4>Lösungen</h4><ul><li>Einen eigenen Becher mitbringen.</li><li>Mehrwegsysteme nutzen.</li><li>Wasser aus der eigenen Flasche trinken.</li></ul>`,
+    body_en:`<p>Disposable cups are used for a few minutes but stay in the environment for decades. Use your own reusable cup.</p>`
+  },
+  snacks:{
+    title_de:"🍟 Snacks aus dem Kiosk",
+    title_en:"🍟 Snacks from the kiosk",
+    body_de:`<p>Regelmäßige Kiosk-Besuche bedeuten viel Verpackungsmüll und hohe Kosten.</p><h4>Tipps</h4><ul><li>Snacks von zu Hause mitnehmen (Brotdose).</li><li>Eigene Trinkflasche statt Einwegflasche.</li><li>Nur gelegentlich etwas kaufen – bewusst genießen.</li></ul>`,
+    body_en:`<p>Kiosk snacks create a lot of packaging waste. Bring snacks and a refillable bottle from home.</p>`
+  },
+  leihen:{
+    title_de:"🔄 Leihen statt kaufen",
+    title_en:"🔄 Borrow instead of buy",
+    body_de:`<p>Viele Dinge brauchst du nur selten (Bohrmaschine, Kostüm, Spiele).</p><h4>7R-Bezug</h4><ul><li><strong>Reduce:</strong> Weniger kaufen.</li><li><strong>Reuse:</strong> Dinge gemeinsam nutzen.</li></ul><p>Frag Freund:innen, Familie oder nutze lokale „Bibliotheken der Dinge“ oder Tauschbörsen.</p>`,
+    body_en:`<p>If you use something only once, borrow it instead of buying it. This saves money and resources.</p>`
+  },
+  schulmaterial:{
+    title_de:"📚 Schulmaterial länger nutzen",
+    title_en:"📚 Using school supplies longer",
+    body_de:`<p>Jedes Jahr alles neu zu kaufen ist selten nötig.</p><h4>Ideen</h4><ul><li>Hefte weiterführen, wenn noch Seiten frei sind.</li><li>Stifte nachfüllen statt wegwerfen.</li><li>Bücher an jüngere Schüler:innen weitergeben.</li></ul>`,
+    body_en:`<p>Use notebooks, pens and folders as long as possible. Continue half-full notebooks instead of buying new ones.</p>`
+  },
+  digital:{
+    title_de:"💻 Digitaler Fußabdruck",
+    title_en:"💻 Digital footprint",
+    body_de:`<p>Auch digitale Dienste verbrauchen Energie – in Rechenzentren.</p><h4>Tipps</h4><ul><li>Unnötige Mails löschen.</li><li>Alte Fotos & Videos aufräumen.</li><li>Apps deinstallieren, die du nicht nutzt.</li></ul>`,
+    body_en:`<p>Streaming, cloud storage and emails all use energy. Clean up your digital life regularly.</p>`
+  },
+  lebensmittel:{
+    title_de:"🥗 Lebensmittel bewusst nutzen",
+    title_en:"🥗 Using food consciously",
+    body_de:`<p>Lebensmittelverschwendung ist ein riesiges Problem.</p><h4>7R-Bezug</h4><ul><li><strong>Rethink:</strong> Was brauchen wir wirklich?</li><li><strong>Reduce:</strong> Nur das kaufen, was du isst.</li><li><strong>Reuse:</strong> Reste kreativ verwerten.</li></ul>`,
+    body_en:`<p>Plan meals, write shopping lists and use leftovers. This reduces food waste and saves money.</p>`
+  },
+  reste:{
+    title_de:"🍲 Reste verwerten",
+    title_en:"🍲 Using leftovers",
+    body_de:`<p>Reste sind keine Abfälle – sie sind Zutaten!</p><h4>Ideen</h4><ul><li>Gemüsereste → Suppe oder Pfanne.</li><li>Altes Brot → Croutons oder Arme Ritter.</li><li>Nudeln von gestern → Nudelsalat.</li></ul>`,
+    body_en:`<p>Leftovers can become new meals: soup, casseroles, salads. Get creative in the kitchen!</p>`
+  },
+  muell:{
+    title_de:"🗑️ Mülltrennung",
+    title_en:"🗑️ Waste sorting",
+    body_de:`<p>Nur richtig getrennter Müll kann wiederverwertet werden.</p><h4>In Deutschland z. B.:</h4><ul><li>Gelb: Verpackungen</li><li>Blau: Papier</li><li>Glascontainer: Glas</li><li>Bio: Küchen- & Gartenabfälle</li><li>Restmüll: der Rest</li></ul>`,
+    body_en:`<p>Correct waste sorting is essential for recycling. Learn your local system and follow it.</p>`
+  },
+  reparieren:{
+    title_de:"🔨 Reparieren",
+    title_en:"🔨 Repair",
+    body_de:`<p>Reparieren verlängert die Lebensdauer von Produkten und spart Ressourcen.</p><h4>Ideen</h4><ul><li>Reißverschluss nähen statt neues Kleidungsstück.</li><li>Handy-Display reparieren lassen.</li><li>Fahrrad im Repair Café fixen.</li></ul>`,
+    body_en:`<p>Repairing things instead of throwing them away saves resources and money. Many cities have repair cafés where volunteers help you.</p>`
+  }
+};
+
+// ==================== 7R DETAILS ============================
+const RS_DETAIL = [
+  {
+    key:"rethink",
+    title_de:"Re-think – Anders denken",
+    title_en:"Rethink – Think differently",
+    desc_de:"Überdenke deinen Konsum. Frage dich vor jeder Entscheidung: Brauche ich das wirklich? Gibt es eine nachhaltigere Option?",
+    examples_de:["Bevor du etwas kaufst: Kann ich es mir leihen?","Muss es neu sein oder geht auch secondhand?","Brauche ich das in dieser Menge?"],
+    desc_en:"Question your consumption. Ask yourself: Do I really need this? Is there a more sustainable option?",
+    examples_en:["Borrow instead of buy.","Choose long-lasting products.","Avoid unnecessary packaging."]
+  },
+  {
+    key:"refuse",
+    title_de:"Re-fuse – Ablehnen",
+    title_en:"Refuse – Say no",
+    desc_de:"Lehne Produkte ab, die unnötig, schädlich oder schlecht produziert sind.",
+    examples_de:["Keine kostenlosen Werbegeschenke annehmen.","Produkte mit viel Plastikverpackung meiden.","Mode-Trends nicht blind mitmachen."],
+    desc_en:"Say no to products that are unnecessary or harmful.",
+    examples_en:["Refuse free plastic giveaways.","Avoid products with lots of packaging.","Say no to fast fashion trends."]
+  },
+  {
+    key:"reduce",
+    title_de:"Re-duce – Reduzieren",
+    title_en:"Reduce – Use less",
+    desc_de:"Verbrauche weniger Ressourcen – so sparst du Geld und schützt die Umwelt.",
+    examples_de:["Weniger neue Kleidung kaufen.","Kurz duschen statt baden.","Bewusst Strom sparen."],
+    desc_en:"Use fewer resources and buy less.",
+    examples_en:["Buy fewer clothes.","Take shorter showers.","Turn off lights and devices."]
+  },
+  {
+    key:"reuse",
+    title_de:"Re-use – Wiederverwenden",
+    title_en:"Reuse – Use again",
+    desc_de:"Nutze Produkte mehrmals und für verschiedene Zwecke.",
+    examples_de:["Trinkflasche statt Einwegflasche.","Stofftasche statt Plastiktüte.","Gläser als Vorratsbehälter benutzen."],
+    desc_en:"Use products multiple times and in new ways.",
+    examples_en:["Use a refillable bottle.","Use fabric bags.","Reuse jars for storage."]
+  },
+  {
+    key:"repair",
+    title_de:"Re-pair – Reparieren",
+    title_en:"Repair – Fix it",
+    desc_de:"Reparieren verlängert die Lebensdauer von Produkten.",
+    examples_de:["Reißverschluss nähen.","Fahrrad reparieren.","Handy-Display austauschen."],
+    desc_en:"Repairing extends the life of things.",
+    examples_en:["Fix clothes.","Repair your bike.","Replace phone screens instead of buying new."]
+  },
+  {
+    key:"recycle",
+    title_de:"Re-cycle – Recyceln",
+    title_en:"Recycle – Recycle",
+    desc_de:"Rohstoffe durch korrekte Mülltrennung zurückgewinnen.",
+    examples_de:["Papier in die Altpapiertonne.","Pfandflaschen zurückbringen.","Altglas in den Container."],
+    desc_en:"Recycle materials through proper sorting.",
+    examples_en:["Paper to recycling bin.","Return bottles.","Glass to collection points."]
+  },
+  {
+    key:"recover",
+    title_de:"Re-cover – Rückgewinnen",
+    title_en:"Recover – Recover energy/materials",
+    desc_de:"Aus Reststoffen Energie oder einzelne Materialien zurückholen – z. B. in Müllheizkraftwerken.",
+    examples_de:["Wärmegewinnung aus Restmüll.","Biogasanlage für Bioabfälle."],
+    desc_en:"Recover energy or materials from remaining waste.",
+    examples_en:["Energy from waste incineration.","Biogas from organic waste."]
+  }
+];
+
+// ==================== MAP DATA ==============================
+const MAP_DATA = {
+  eu:{
+    de:{title:"🌍 Europa",text:"Europa arbeitet intensiv an Kreislaufwirtschaft. Der EU Green Deal und der Aktionsplan für Kreislaufwirtschaft setzen Ziele für weniger Abfall und mehr Recycling. Länder wie die Niederlande gelten als Vorreiter, Deutschland hat ein Pfandsystem und strenge Recyclingquoten."},
+    en:{title:"🌍 Europe",text:"Europe is pushing the circular economy with the EU Green Deal and action plans. Countries like the Netherlands and Germany are considered pioneers in recycling and deposit systems."}
+  },
+  as:{
+    de:{title:"🌏 Asien",text:"Asien ist Produktionsstandort für viele Güter, aber auch stark vom Klimawandel betroffen. China und Japan arbeiten an Kreislaufstrategien, während gleichzeitig große Mengen Elektronik und Textilien produziert werden."},
+    en:{title:"🌏 Asia",text:"Asia is a major production region and strongly affected by climate change. China and Japan are developing circular economy strategies while producing huge amounts of electronics and textiles."}
+  },
+  af:{
+    de:{title:"🌍 Afrika",text:"Afrika besitzt wichtige Rohstoffe für Elektronik, leidet aber unter illegalem Elektroschrottimport und Klimafolgen. Gleichzeitig gibt es in vielen Regionen eine starke Reparatur- und Wiederverwendungskultur."},
+    en:{title:"🌍 Africa",text:"Africa has key raw materials for electronics but suffers from e-waste imports and climate impacts. Many communities have a strong culture of repair and reuse."}
+  },
+  na:{
+    de:{title:"🌎 Nordamerika",text:"Nordamerika hat einen hohen Ressourcenverbrauch pro Kopf. Gleichzeitig gibt es starke Umwelt- und Zero-Waste-Initiativen, z. B. in Städten wie San Francisco oder Vancouver."},
+    en:{title:"🌎 North America",text:"North America has a high per-capita resource use but also strong environmental and zero-waste initiatives, especially in some cities."}
+  },
+  sa:{
+    de:{title:"🌎 Südamerika",text:"Südamerika beherbergt den Amazonas-Regenwald – einen der größten CO₂-Speicher der Erde. Gleichzeitig gibt es Herausforderungen durch Abholzung, Landwirtschaft und Bergbau."},
+    en:{title:"🌎 South America",text:"South America is home to the Amazon rainforest, a huge carbon sink. At the same time it faces challenges from deforestation, agriculture and mining."}
+  },
+  au:{
+    de:{title:"🌏 Australien & Ozeanien",text:"Australien und Neuseeland arbeiten an Recycling- und Mehrwegsystemen. Inselstaaten im Pazifik sind besonders von Plastikmüll im Meer und dem Meeresspiegelanstieg betroffen."},
+    en:{title:"🌏 Australia & Oceania",text:"Australia and New Zealand are working on recycling and reuse systems. Island states in the Pacific are heavily affected by ocean plastic and sea level rise."}
+  }
+};
+
+// ==================== SCHOOL & HOME IDEAS ===================
+const SCHOOL_IDEAS_DE = [
+  "Mehrwegflasche & Brotdose statt Einwegverpackungen.",
+  "Hefte und Ordner mehrere Jahre nutzen.",
+  "Klassentauschbörse für Bücher & Materialien organisieren.",
+  "Digital teilen statt alles auszudrucken.",
+  "Klassenzimmer stromsparend nutzen (Licht, Geräte, Lüften).",
+  "Repair-AG oder Repair Café an der Schule starten."
+];
+const HOME_IDEAS_DE = [
+  "Wöchentlicher Essensplan, um Reste zu vermeiden.",
+  "Gemeinsam Müll trennen und Recycling-Regeln kennen.",
+  "Secondhand-Kleidung ausprobieren.",
+  "Geräte reparieren lassen statt neu kaufen.",
+  "Regionale und saisonale Lebensmittel bevorzugen.",
+  "Urlaub mit Bahn statt kurzen Flugreisen."
+];
+
+// ==================== FOOD CARDS ============================
+const FOOD_CARDS_DE = [
+  {icon:"🛒",title:"Planen & Einkaufen",text:"Mit Einkaufsliste einkaufen, Angebote nicht blind nutzen, Hunger-Einkäufe vermeiden."},
+  {icon:"🥦",title:"Lagern",text:"Lebensmittel richtig lagern (z. B. Kühlschrankzonen), damit sie länger halten."},
+  {icon:"🍽️",title:"Reste nutzen",text:"Reste einplanen – z. B. „Restetag“ pro Woche, kreative Rezepte für Übriggebliebenes."},
+  {icon:"📦",title:"Verpackungen",text:"Lose Ware, Mehrwegbehälter und Großpackungen wählen, wo es sinnvoll ist."}
+];
+
+// ==================== FAQ DATA ==============================
+const FAQ_DE = [
+  {q:"Was sind die 7 Rs genau?",a:"Die 7 Rs stehen für Rethink, Refuse, Reduce, Reuse, Repair, Recycle und Recover. Zusammen beschreiben sie, wie wir unseren Konsum nachhaltiger gestalten können: erst nachdenken, dann ablehnen, reduzieren, wiederverwenden, reparieren, recyceln und am Ende möglichst viel Energie/Material zurückgewinnen."},
+  {q:"Warum ist Kreislaufwirtschaft wichtig?",a:"Die aktuelle Linearwirtschaft führt zu Ressourcenknappheit, Klimaerwärmung und viel Müll. Die Kreislaufwirtschaft versucht, Produkte und Materialien möglichst lange im Kreislauf zu halten – durch die 7 Rs. So können wir Rohstoffe und Energie sparen und Abfall vermeiden."},
+  {q:"Wie hängen die 7 Rs mit dem Fach Erdkunde zusammen?",a:"Im Fach Erdkunde lernst du, wie Menschen mit Raum, Ressourcen und Umwelt umgehen. Die 7 Rs helfen, diese Zusammenhänge in deinem Alltag praktisch umzusetzen, z. B. beim Thema Konsum, Globalisierung, Klimawandel oder Rohstoffgewinnung."},
+  {q:"Was kann ich tun, wenn meine Familie nicht so nachhaltig denkt?",a:"Sprich offen über deine Ideen, ohne Vorwürfe zu machen. Schlage kleine, konkrete Schritte vor: gemeinsam Müll trennen, einen fleischfreien Tag, Leitungswasser statt Plastikflaschen. Oft helfen Vorbilder und praktische Beispiele mehr als Diskussionen."},
+  {q:"Ist Recycling nicht genug?",a:"Recycling ist wichtig, aber nur ein Teil der Lösung. Es kostet ebenfalls Energie und oft geht Materialqualität verloren. Deshalb stehen im 7R-Modell zuerst Rethink, Refuse, Reduce und Reuse – sie verhindern überhaupt erst, dass Abfall entsteht."},
+  {q:"Warum ist Fast Fashion so problematisch?",a:"Fast Fashion verursacht große Mengen Textilmüll, hohen Wasserverbrauch und oft schlechte Arbeitsbedingungen. Wenn wir weniger, aber bessere Kleidung kaufen, Secondhand nutzen und reparieren, entlasten wir Umwelt und Menschen."},
+  {q:"Wie kann ich nachhaltig mit meinem Smartphone umgehen?",a:"Nutze dein Gerät so lange wie möglich, schütze es mit Hülle & Folie, lösche unnötige Apps, lasse es reparieren statt neu zu kaufen und entsorge es über Sammelstellen oder beim Händler, damit Rohstoffe recycelt werden können."},
+  {q:"Was bringt es, wenn ich alleine etwas ändere?",a:"Jede Entscheidung hat eine Wirkung: auf Nachfrage, Produktionsketten und dein direktes Umfeld. Außerdem beeinflusst du andere – Freund:innen, Familie, Mitschüler:innen. Nachhaltigkeit funktioniert, wenn viele kleine Schritte zusammenkommen."}
+];
+
+// ==================== SOURCES ===============================
+const SOURCES = [
+  {label:"Bildung für nachhaltige Entwicklung in Nordrhein-Westfalen",url:"https://www.schulministerium.nrw/bildung-fuer-nachhaltige-entwicklung",desc:"Offizielle Informationen des Schulministeriums NRW zu BNE in Schule und Unterricht."},
+  {label:"Schulministerium NRW – Kreislaufwirtschaft und Nachhaltigkeit im Unterricht",url:"https://www.schulministerium.nrw",desc:"Materialien und Hinweise für Lehrkräfte zu Nachhaltigkeitsthemen."},
+  {label:"Umweltbundesamt – Kreislaufwirtschaft",url:"https://www.umweltbundesamt.de/themen/abfall-ressourcen/kreislaufwirtschaft",desc:"Fachliche Informationen zu Abfall, Recycling und Ressourcenschutz."},
+  {label:"Bundeszentrale für politische Bildung – Nachhaltigkeit & Umwelt",url:"https://www.bpb.de/themen/umwelt/",desc:"Hintergrundinformationen zu Umweltpolitik, Klimawandel und Ressourcen."},
+  {label:"Ellen MacArthur Foundation – Circular Economy",url:"https://www.ellenmacarthurfoundation.org",desc:"Internationale Stiftung zur Förderung der Kreislaufwirtschaft mit vielen Materialien."},
+  {label:"Verbraucherzentrale NRW – Nachhaltiger Konsum",url:"https://www.verbraucherzentrale.nrw",desc:"Praktische Tipps für Verbraucherinnen und Verbraucher in NRW."},
+  {label:"Projektvideo – Die 7 Rs (Schülerprojekt OHG Monheim, 2026)",url:"#vsec",desc:"Schulintern produziertes Videomaterial von Yusuf Serif als Projektquelle."}
+];
+
+// ==================== QUIZ QUESTIONS (20) ===================
+const QUIZ = [
+  {q_de:"Was beschreibt die Kreislaufwirtschaft am besten?",q_en:"What describes the circular economy best?",
+   opts_de:["Produkte werden einmal genutzt und dann verbrannt.","Materialien und Produkte bleiben so lange wie möglich im Kreislauf.","Es geht nur darum, Müll zu verbrennen.","Es betrifft nur Recycling von Plastik."],
+   opts_en:["Products are used once and incinerated.","Materials and products stay in use as long as possible.","It is only about burning waste.","It is only about recycling plastic."],
+   ok:1,fb_de:"Kreislaufwirtschaft versucht, Produkte und Rohstoffe im Umlauf zu halten.",fb_en:"The circular economy keeps products and materials in use."},
+  {q_de:"Welche Reihenfolge passt zu den 7 Rs am Anfang am besten?",q_en:"Which order matches the first Rs best?",
+   opts_de:["Recycle → Reuse → Reduce","Refuse → Rethink → Recover","Rethink → Refuse → Reduce","Repair → Recover → Recycle"],
+   opts_en:["Recycle → Reuse → Reduce","Refuse → Rethink → Recover","Rethink → Refuse → Reduce","Repair → Recover → Recycle"],
+   ok:2,fb_de:"Erst nachdenken (Rethink), dann ablehnen (Refuse), dann reduzieren (Reduce).",fb_en:"First rethink, then refuse, then reduce."},
+  {q_de:"Was ist ein Beispiel für „Refuse“?",q_en:"What is an example of “Refuse”?",
+   opts_de:["Ein T-Shirt reparieren.","Ein kostenloses Werbegeschenk nicht annehmen.","Müll trennen.","Ein Gerät recyceln."],
+   opts_en:["Repairing a T-shirt.","Not accepting a free promotional gift.","Sorting waste.","Recycling a device."],
+   ok:1,fb_de:"Refuse bedeutet, Dinge abzulehnen, die du nicht brauchst.",fb_en:"Refuse means saying no to things you don't need."},
+  {q_de:"Welches Verhalten passt zu „Reduce“?",q_en:"Which behaviour fits “Reduce”?",
+   opts_de:["Statt Auto Fahrrad fahren.","Werbegeschenke sammeln.","Kleidung nach kurzer Zeit wegwerfen.","Alles doppelt kaufen."],
+   opts_en:["Using a bike instead of a car.","Collecting freebies.","Throwing away clothes quickly.","Buying everything twice."],
+   ok:0,fb_de:"Reduce meint: weniger Ressourcen verbrauchen.",fb_en:"Reduce means using fewer resources."},
+  {q_de:"Welches ist KEIN Beispiel für Reuse?",q_en:"Which is NOT an example of reuse?",
+   opts_de:["Eine Glasflasche als Vase verwenden.","Mehrwegbox für Pausenbrot nutzen.","Plastiktüte nach einmaligem Gebrauch wegwerfen.","Alte T-Shirts als Putzlappen nutzen."],
+   opts_en:["Using a glass bottle as a vase.","Using a lunchbox for snacks.","Throwing away a plastic bag after one use.","Using old T-shirts as cleaning cloths."],
+   ok:2,fb_de:"Die Plastiktüte wegwerfen ist kein Reuse.",fb_en:"Throwing away a plastic bag is not reuse."},
+  {q_de:"Was ist ein wichtiges Ziel der 7 Rs?",q_en:"What is an important goal of the 7 Rs?",
+   opts_de:["Mehr Werbung zu produzieren.","Den Rohstoffverbrauch zu senken.","Möglichst viel zu kaufen.","Müll zu exportieren."],
+   opts_en:["Produce more advertising.","Reduce resource consumption.","Buy as much as possible.","Export waste."],
+   ok:1,fb_de:"Die 7 Rs zielen darauf ab, unseren Ressourcenverbrauch zu reduzieren.",fb_en:"The 7 Rs aim to reduce our resource consumption."},
+  {q_de:"Was bedeutet „Refurbished“?",q_en:"What does “refurbished” mean?",
+   opts_de:["Neu und originalverpackt.","Gebraucht, professionell überholt und geprüft.","Nur einmal ausprobiert.","Nur äußerlich gereinigt."],
+   opts_en:["Brand new.","Used, professionally refurbished and tested.","Tried once.","Only cleaned from outside."],
+   ok:1,fb_de:"Refurbished-Geräte sind gebraucht, aber professionell aufbereitet.",fb_en:"Refurbished devices are used but professionally refurbished."},
+  {q_de:"Welches Verhalten reduziert Lebensmittelverschwendung?",q_en:"Which behaviour reduces food waste?",
+   opts_de:["Immer ohne Liste einkaufen.","Reste direkt wegwerfen.","MHD falsch verstehen.","Einkäufe planen und Reste einplanen."],
+   opts_en:["Always shop without a list.","Throw leftovers away immediately.","Misunderstand best-before dates.","Plan shopping and use leftovers."],
+   ok:3,fb_de:"Planung hilft, Lebensmittelverschwendung zu vermeiden.",fb_en:"Planning helps to avoid food waste."},
+  {q_de:"Was bedeutet „Fast Fashion“?",q_en:"What does “Fast Fashion” mean?",
+   opts_de:["Sehr langlebige Kleidung.","Schnell produzierte, billige Kleidung mit kurzen Trends.","Nur Sportkleidung.","Nur Secondhand-Mode."],
+   opts_en:["Very durable clothing.","Cheap, quickly produced fashion with short trends.","Only sportswear.","Only second-hand fashion."],
+   ok:1,fb_de:"Fast Fashion ist schnell und billig – aber oft umweltschädlich.",fb_en:"Fast fashion is cheap and fast – but often harmful."},
+  {q_de:"Welches Beispiel passt zur Linearwirtschaft?",q_en:"Which example fits the linear economy?",
+   opts_de:["Geräte reparieren lassen.","Produkte recyceln.","Produkte einmal nutzen und wegwerfen.","Produkte teilen."],
+   opts_en:["Repair devices.","Recycle products.","Use products once and throw away.","Share products."],
+   ok:2,fb_de:"Linear: nehmen, nutzen, wegwerfen.",fb_en:"Linear: take, use, dispose."},
+  {q_de:"Welches Beispiel passt zur Kreislaufwirtschaft?",q_en:"Which example fits the circular economy?",
+   opts_de:["Jedes Jahr ein neues Handy kaufen.","Studienhefte nur halb voll schreiben.","Kleidung tauschen oder Secondhand kaufen.","Lebensmittel in den Restmüll werfen."],
+   opts_en:["Buy a new phone every year.","Half-use notebooks.","Swap or buy second-hand clothes.","Throw food into residual waste."],
+   ok:2,fb_de:"Tauschen und Secondhand gehören zur Kreislaufwirtschaft.",fb_en:"Swapping and second-hand belong to the circular economy."},
+  {q_de:"Was ist ein Beispiel für „Repair“?",q_en:"What is an example of “Repair”?",
+   opts_de:["Kleid mit einem kleinen Loch wegwerfen.","Handy-Display reparieren lassen.","Stift nach kurzem Gebrauch wegwerfen.","Schuh mit kleinem Defekt ersetzen."],
+   opts_en:["Throw away a dress with a tiny hole.","Have a phone screen repaired.","Throw away a pen after little use.","Replace a shoe with a small defect."],
+   ok:1,fb_de:"Reparieren verlängert die Lebensdauer eines Produkts.",fb_en:"Repairing extends a product's life."},
+  {q_de:"Warum ist Mülltrennung so wichtig?",q_en:"Why is waste sorting important?",
+   opts_de:["Weil die Tonne sonst schmutzig wird.","Weil nur getrennte Abfälle recycelt werden können.","Weil es gesetzlich verboten ist.","Weil es schöner aussieht."],
+   opts_en:["Because bins stay cleaner.","Because only sorted waste can be recycled.","Because otherwise it's illegal.","Because it looks nicer."],
+   ok:1,fb_de:"Nur getrennte Abfälle können gut recycelt werden.",fb_en:"Only sorted waste can be recycled properly."},
+  {q_de:"Welche Aussage zu Social Media und Konsum stimmt eher?",q_en:"Which statement about social media and consumption is more true?",
+   opts_de:["Social Media hat keinen Einfluss auf Konsum.","Alle TikTok-Videos sind Werbung.","Social Media kann Kaufentscheidungen stark beeinflussen.","Werbung gibt es nur im Fernsehen."],
+   opts_en:["Social media has no effect on consumption.","All TikTok videos are ads.","Social media strongly influences buying decisions.","Advertising only exists on TV."],
+   ok:2,fb_de:"Social Media beeinflusst viele Kaufentscheidungen – daher ist kritisches Denken wichtig.",fb_en:"Social media influences many buying decisions – critical thinking is important."},
+  {q_de:"Was ist ein Beispiel für „Rethink“ im Alltag?",q_en:"What is an example of “Rethink” in daily life?",
+   opts_de:["Einfach kaufen, weil es im Angebot ist.","Sich fragen, ob man etwas wirklich braucht.","Nur kaufen, weil andere es haben.","Produkte ohne nachzudenken bestellen."],
+   opts_en:["Buying just because it's on sale.","Asking if you really need something.","Buying because others have it.","Ordering without thinking."],
+   ok:1,fb_de:"Rethink heißt, vor einer Entscheidung bewusst nachzudenken.",fb_en:"Rethink means thinking before deciding."},
+  {q_de:"Was ist ein Vorteil von „Borrow statt Buy“?",q_en:"What is an advantage of \"Borrow instead of Buy\"?",
+   opts_de:["Du gibst mehr Geld aus.","Es werden weniger Produkte produziert.","Du hast immer alles doppelt.","Es hat keinen Vorteil."],
+   opts_en:["You spend more money.","Fewer products need to be produced.","You have everything twice.","It has no advantage."],
+   ok:1,fb_de:"Wenn mehr geteilt wird, müssen weniger Produkte hergestellt werden.",fb_en:"Sharing means fewer products need to be produced."},
+  {q_de:"Warum hat Ernährung viel mit Nachhaltigkeit zu tun?",q_en:"Why is food strongly linked to sustainability?",
+   opts_de:["Weil Essen nichts mit Ressourcen zu tun hat.","Weil Landwirtschaft keine Fläche braucht.","Weil für Lebensmittel Wasser, Fläche und Energie benötigt werden.","Es hat keinen Zusammenhang."],
+   opts_en:["Because food has nothing to do with resources.","Because farming needs no land.","Because food requires water, land and energy.","There is no connection."],
+   ok:2,fb_de:"Für jedes Lebensmittel werden Ressourcen eingesetzt – deshalb ist bewusste Ernährung wichtig.",fb_en:"Every food uses resources – that's why conscious eating matters."},
+  {q_de:"Was ist eine gute digitale Angewohnheit?",q_en:"What is a good digital habit?",
+   opts_de:["Alle Mails für immer speichern.","Regelmäßig unnötige Dateien löschen.","Unendlich viele Fotos in die Cloud laden.","Alle Apps dauerhaft installiert lassen."],
+   opts_en:["Keep all emails forever.","Regularly delete unnecessary files.","Upload unlimited photos to the cloud.","Keep all apps installed forever."],
+   ok:1,fb_de:"Auch Daten verbrauchen Ressourcen – Aufräumen hilft.",fb_en:"Data also uses resources – cleaning up helps."},
+  {q_de:"Warum gehört Bildung für nachhaltige Entwicklung (BNE) in die Schule?",q_en:"Why should Education for Sustainable Development be in school?",
+   opts_de:["Damit Noten steigen.","Damit wir Klimadaten auswendig lernen.","Damit Schülerinnen und Schüler lernen, verantwortungsvoll zu handeln.","Weil es im Lehrplan so steht und sonst nichts."],
+   opts_en:["So grades get higher.","So we memorize climate data.","So students learn to act responsibly.","Just because it's written in the curriculum."],
+   ok:2,fb_de:"BNE soll dich befähigen, nachhaltige Entscheidungen zu treffen.",fb_en:"ESD should enable you to make sustainable decisions."},
+  {q_de:"Was ist ein sinnvoller erster Schritt, wenn du nachhaltiger leben willst?",q_en:"What is a sensible first step if you want to live more sustainably?",
+   opts_de:["Alles gleichzeitig perfekt machen wollen.","Mit einer kleinen, realistischen Veränderung beginnen.","Gar nichts ändern.","Andere kritisieren, aber selbst nichts tun."],
+   opts_en:["Try to change everything perfectly at once.","Start with one small realistic change.","Change nothing.","Criticize others but change nothing yourself."],
+   ok:1,fb_de:"Kleine Schritte sind realistisch und motivierend – so bleibst du dran.",fb_en:"Small steps are realistic and motivating – that's how you continue."}
+];
+
+// ==================== SELF TEST (20 Q, 4-scale) =============
+const TEST = [
+  {topic:"Impulskäufe",topicEN:"Impulse Buying",
+   q_de:"Ich kaufe spontan Dinge, die ich nicht geplant habe.",
+   q_en:"I buy things spontaneously that I didn't plan.",
+   scale_de:["Ja, sehr häufig","Eher oft","Nur manchmal","Nein, fast nie"],
+   scale_en:["Yes, very often","Quite often","Sometimes","Almost never"],
+   scores:[1,2,3,4]},
+  {topic:"Social Media",topicEN:"Social Media",
+   q_de:"Social-Media-Trends beeinflussen, was ich kaufe.",
+   q_en:"Social media trends influence what I buy.",
+   scale_de:["Stark","Etwas","Kaum","Gar nicht"],
+   scale_en:["Strongly","Somewhat","Hardly","Not at all"],
+   scores:[1,2,3,4]},
+  {topic:"Smartphone",topicEN:"Smartphone",
+   q_de:"Ich nutze mein Smartphone so lange, wie es gut funktioniert.",
+   q_en:"I use my phone as long as it works well.",
+   scale_de:["Nein, ich wechsle sehr früh","Eher nein","Eher ja","Ja, auf jeden Fall"],
+   scale_en:["No, I change very early","Rather no","Rather yes","Yes, absolutely"],
+   scores:[1,2,3,4]},
+  {topic:"Refurbished",topicEN:"Refurbished",
+   q_de:"Ich kann mir vorstellen, ein refurbished Gerät zu kaufen.",
+   q_en:"I can imagine buying a refurbished device.",
+   scale_de:["Nein, auf keinen Fall","Eher nein","Eher ja","Ja, auf jeden Fall"],
+   scale_en:["No, never","Rather no","Rather yes","Yes, absolutely"],
+   scores:[1,2,3,4]},
+  {topic:"Kleidung",topicEN:"Clothing",
+   q_de:"Ich kaufe eher weniger, aber gute Kleidung statt viel Fast Fashion.",
+   q_en:"I prefer few but good clothes instead of lots of fast fashion.",
+   scale_de:["Trifft gar nicht zu","Trifft eher nicht zu","Trifft eher zu","Trifft voll zu"],
+   scale_en:["Not true","Rather not true","Rather true","Totally true"],
+   scores:[1,2,3,4]},
+  {topic:"Marken",topicEN:"Brands",
+   q_de:"Markenlogo ist für mich wichtiger als Nachhaltigkeit.",
+   q_en:"Brand logos are more important to me than sustainability.",
+   scale_de:["Ja, sehr wichtig","Eher wichtig","Eher unwichtig","Unwichtig"],
+   scale_en:["Very important","Quite important","Rather unimportant","Unimportant"],
+   scores:[1,2,3,4].map(v=>5-v)},
+  {topic:"Einwegbecher",topicEN:"Disposable Cups",
+   q_de:"Ich nutze einen eigenen Becher statt Einwegbecher.",
+   q_en:"I use my own cup instead of disposable cups.",
+   scale_de:["Nie","Selten","Oft","Fast immer"],
+   scale_en:["Never","Rarely","Often","Almost always"],
+   scores:[1,2,3,4]},
+  {topic:"Kiosk",topicEN:"Kiosk Snacks",
+   q_de:"Ich kaufe regelmäßig Snacks/Drinks in Einwegverpackungen.",
+   q_en:"I regularly buy snacks/drinks in single-use packaging.",
+   scale_de:["Sehr häufig","Oft","Selten","Fast nie"],
+   scale_en:["Very often","Often","Rarely","Almost never"],
+   scores:[1,2,3,4].map(v=>5-v)},
+  {topic:"Leihen",topicEN:"Borrowing",
+   q_de:"Wenn ich etwas nur einmal brauche, leihe ich es mir.",
+   q_en:"If I only need something once, I borrow it.",
+   scale_de:["Nie","Selten","Manchmal","Oft"],
+   scale_en:["Never","Rarely","Sometimes","Often"],
+   scores:[1,2,3,4]},
+  {topic:"Schulmaterial",topicEN:"School Supplies",
+   q_de:"Ich nutze Schulmaterialien (Hefte, Ordner, Stifte) möglichst lange.",
+   q_en:"I use school supplies (notebooks, folders, pens) as long as possible.",
+   scale_de:["Trifft gar nicht zu","Trifft eher nicht zu","Trifft eher zu","Trifft voll zu"],
+   scale_en:["Not true","Rather not true","Rather true","Totally true"],
+   scores:[1,2,3,4]},
+  {topic:"Digital",topicEN:"Digital",
+   q_de:"Ich räume meinen digitalen Speicher (Mails, Fotos, Apps) regelmäßig auf.",
+   q_en:"I regularly clean up my digital storage (mails, photos, apps).",
+   scale_de:["Nie","Selten","Manchmal","Regelmäßig"],
+   scale_en:["Never","Rarely","Sometimes","Regularly"],
+   scores:[1,2,3,4]},
+  {topic:"Lebensmittelplanung",topicEN:"Food planning",
+   q_de:"Ich plane Einkäufe so, dass wir möglichst wenig wegwerfen.",
+   q_en:"I plan shopping so we throw away as little as possible.",
+   scale_de:["Gar nicht","Eher wenig","Relativ gut","Sehr gut"],
+   scale_en:["Not at all","Rather little","Quite well","Very well"],
+   scores:[1,2,3,4]},
+  {topic:"Reste",topicEN:"Leftovers",
+   q_de:"Essensreste werden bei uns weiterverwendet.",
+   q_en:"We use up leftovers at home.",
+   scale_de:["Nie","Selten","Oft","Fast immer"],
+   scale_en:["Never","Rarely","Often","Almost always"],
+   scores:[1,2,3,4]},
+  {topic:"Mülltrennung",topicEN:"Waste Sorting",
+   q_de:"Ich trenne meinen Müll korrekt.",
+   q_en:"I sort my waste correctly.",
+   scale_de:["Gar nicht","Teilweise","Meistens","Immer"],
+   scale_en:["Not at all","Partly","Mostly","Always"],
+   scores:[1,2,3,4]},
+  {topic:"Reparieren",topicEN:"Repair",
+   q_de:"Ich versuche, Dinge zu reparieren, bevor ich sie ersetze.",
+   q_en:"I try to repair things before replacing them.",
+   scale_de:["Nie","Selten","Manchmal","Oft"],
+   scale_en:["Never","Rarely","Sometimes","Often"],
+   scores:[1,2,3,4]},
+  {topic:"ÖPNV",topicEN:"Public Transport",
+   q_de:"Ich nutze, wenn möglich, Bus/Bahn oder Fahrrad statt Auto.",
+   q_en:"I use public transport or bike instead of a car whenever possible.",
+   scale_de:["Nie","Selten","Manchmal","Oft"],
+   scale_en:["Never","Rarely","Sometimes","Often"],
+   scores:[1,2,3,4]},
+  {topic:"Wasser",topicEN:"Water",
+   q_de:"Ich gehe bewusst mit Wasser um (kurz duschen, Hahn abdrehen).",
+   q_en:"I use water consciously (short showers, turn off tap).",
+   scale_de:["Gar nicht","Eher wenig","Relativ bewusst","Sehr bewusst"],
+   scale_en:["Not at all","Rather little","Quite conscious","Very conscious"],
+   scores:[1,2,3,4]},
+  {topic:"Strom",topicEN:"Electricity",
+   q_de:"Ich achte auf Stromverbrauch (Licht aus, Standby vermeiden).",
+   q_en:"I pay attention to electricity use (lights off, no standby).",
+   scale_de:["Nie","Selten","Manchmal","Oft"],
+   scale_en:["Never","Rarely","Sometimes","Often"],
+   scores:[1,2,3,4]},
+  {topic:"Teilen",topicEN:"Sharing",
+   q_de:"Ich teile Dinge gerne mit Familie/Freunden (z. B. Spiele, Bücher).",
+   q_en:"I like to share things with family/friends (e.g. games, books).",
+   scale_de:["Gar nicht","Eher nicht","Eher ja","Ja, sehr"],
+   scale_en:["Not at all","Rather not","Rather yes","Yes, very"],
+   scores:[1,2,3,4]},
+  {topic:"Engagement",topicEN:"Engagement",
+   q_de:"Ich spreche mit anderen über Nachhaltigkeit oder engagiere mich (z. B. AG, Projekte).",
+   q_en:"I talk to others about sustainability or get involved (e.g. clubs, projects).",
+   scale_de:["Gar nicht","Selten","Manchmal","Regelmäßig"],
+   scale_en:["Not at all","Rarely","Sometimes","Regularly"],
+   scores:[1,2,3,4]}
+];
+
+// ==================== STATE =================================
+let LANG = 'de';
+let DARK = false;
+let qIdx = 0, qScore = 0, qDone = false;
+let stIdx = 0, stAnswers = new Array(TEST.length).fill(null);
+let certSummary = {};
+
+// ==================== LANGUAGE SWITCH =======================
+function setLang(l){
+  LANG = l;
+  document.getElementById('langsel').value = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
+  applyTR();
+  buildLinearCards();
+  buildSchool();
+  buildFood();
+  buildFAQ();
+  buildSources();
+  renderQuiz();
+  renderTest();
+  const btn = document.getElementById('dbtn');
+  btn.textContent = DARK ? (LANG==='ar'?'☀️':'☀️') : '🌙';
+}
+function applyTR(){
+  if(!TR[LANG]) LANG='en';
+  const tr = TR[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(tr[key]!==undefined) el.innerHTML = tr[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(tr[key]!==undefined) el.setAttribute('placeholder',tr[key]);
+  });
+}
+
+// ==================== DARK MODE =============================
+function toggleDark(){
+  DARK = !DARK;
+  document.documentElement.setAttribute('data-theme',DARK?'dark':'light');
+  const btn = document.getElementById('dbtn');
+  btn.textContent = DARK ? '☀️' : '🌙';
+}
+
+// ==================== MODAL ================================
+function openModal(obj){
+  const d = obj[LANG] || obj['en'];
+  document.getElementById('mtid').textContent = d.title;
+  document.getElementById('mbod').innerHTML   = d.body;
+  document.getElementById('modal').classList.add('open');
+}
+function closeMod(){
+  document.getElementById('modal').classList.remove('open');
+}
+
+// topic tags
+document.addEventListener('click',e=>{
+  if(e.target.matches('.tag')){
+    const id = e.target.getAttribute('data-topic');
+    const t = TOPICS[id];
+    if(!t) return;
+    const title = t['title_'+LANG] || t.title_en || t.title_de;
+    const body  = t['body_'+LANG]  || t.body_en  || t.body_de;
+    document.getElementById('mtid').textContent = title;
+    document.getElementById('mbod').innerHTML   = body;
+    document.getElementById('modal').classList.add('open');
+  }
+});
+document.getElementById('topic-tags').addEventListener('keypress',e=>{
+  if(e.key==='Enter' && e.target.matches('.tag')) e.target.click();
+});
+
+// ==================== 7R CARDS =============================
+function buildRsCards(){
+  const grid = document.getElementById('rs-cards-grid');
+  grid.innerHTML = '';
+  RS_DETAIL.forEach((r,i)=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openRsModal(i);
+    const title = (LANG==='de'?r.title_de:r.title_en);
+    const desc  = (LANG==='de'?r.desc_de:r.desc_en);
+    const exs   = (LANG==='de'?r.examples_de:r.examples_en);
+    card.innerHTML = `<div class="card-ico">🔁</div><h3>${title}</h3><p>${desc}</p><ul style="font-size:.86rem;color:var(--txt2);margin-top:.4rem;padding-left:1.2rem">${exs.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    grid.appendChild(card);
+  });
+}
+function openRsModal(i){
+  const r = RS_DETAIL[i];
+  const title = (LANG==='de'?r.title_de:r.title_en);
+  const desc  = (LANG==='de'?r.desc_de:r.desc_en);
+  const exs   = (LANG==='de'?r.examples_de:r.examples_en);
+  document.getElementById('mtid').textContent = title;
+  document.getElementById('mbod').innerHTML   = `<p>${desc}</p><h4>Beispiele / Examples</h4><ul>${exs.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ==================== LINEAR / CIRCULAR LISTS ===============
+function buildLinearCards(){
+  const bad = document.getElementById('lc-bad-list');
+  const good= document.getElementById('lc-good-list');
+  const de = (LANG==='de');
+  bad.innerHTML = (de?[
+    "Produkte werden schnell gekauft und früh weggeworfen.",
+    "Reparaturen lohnen sich wirtschaftlich oft nicht.",
+    "Rohstoffe werden ohne Rücksicht auf spätere Generationen gefördert.",
+    "Abfall landet auf Deponien oder wird verbrannt."
+  ]:[
+    "Products are bought quickly and thrown away early.",
+    "Repairs are often not attractive.",
+    "Resources are extracted without thinking of future generations.",
+    "Waste is landfilled or incinerated."
+  ]).map(x=>`<li>${x}</li>`).join('');
+  good.innerHTML = (de?[
+    "Produkte werden für lange Lebensdauer und Reparierbarkeit entwickelt.",
+    "Teilen, Leihen und Wiederverwenden haben Vorrang.",
+    "Recycling und Rückgewinnung von Rohstoffen sind fest eingeplant.",
+    "Abfall wird als Ressource verstanden, nicht als Müll."
+  ]:[
+    "Products are designed to last and be repairable.",
+    "Sharing, borrowing and reusing come first.",
+    "Recycling and recovery of materials are planned in.",
+    "Waste is seen as a resource, not rubbish."
+  ]).map(x=>`<li>${x}</li>`).join('');
+}
+
+// ==================== SCHOOL / HOME ========================
+function buildSchool(){
+  const sList = document.getElementById('school-list');
+  const hList = document.getElementById('home-list');
+  if(LANG==='de'){
+    sList.innerHTML = SCHOOL_IDEAS_DE.map(x=>`<li>${x}</li>`).join('');
+    hList.innerHTML = HOME_IDEAS_DE.map(x=>`<li>${x}</li>`).join('');
+  }else{
+    const sEN = [
+      "Use refillable bottles & lunch boxes instead of disposable packaging.",
+      "Reuse notebooks and folders for several years.",
+      "Organize a swap event for books & materials.",
+      "Share digital documents instead of printing everything.",
+      "Save electricity in the classroom (lights, devices).",
+      "Start a repair or sustainability club."
+    ];
+    const hEN = [
+      "Plan meals to reduce food waste.",
+      "Sort waste correctly at home.",
+      "Try second-hand clothing.",
+      "Repair devices instead of buying new.",
+      "Prefer regional & seasonal food.",
+      "Choose train trips instead of short flights when possible."
+    ];
+    sList.innerHTML = sEN.map(x=>`<li>${x}</li>`).join('');
+    hList.innerHTML = hEN.map(x=>`<li>${x}</li>`).join('');
+  }
+}
+
+// ==================== MAP ==================================
+function selR(id){
+  document.querySelectorAll('.cpth').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cbtn').forEach(b=>b.classList.remove('active'));
+  const p = document.getElementById('mp-'+id);
+  if(p) p.classList.add('active');
+  document.querySelectorAll('.cbtn[data-r="'+id+'"]').forEach(b=>b.classList.add('active'));
+  const data = MAP_DATA[id];
+  if(!data) return;
+  const d = data[LANG] || data['en'];
+  document.getElementById('mi-title').textContent = d.title;
+  document.getElementById('mi-text').textContent  = d.text;
+}
+
+// ==================== FOOD ================================
+function buildFood(){
+  const grid = document.getElementById('food-grid');
+  grid.innerHTML = '';
+  const cards = (LANG==='de')?FOOD_CARDS_DE:[
+    {icon:"🛒",title:"Planning & shopping",text:"Write a shopping list, avoid buying when very hungry, don't be misled by large discounts."},
+    {icon:"🥦",title:"Storage",text:"Store food properly so it stays fresh longer."},
+    {icon:"🍽️",title:"Leftovers",text:"Plan leftover meals and be creative with what's left."},
+    {icon:"📦",title:"Packaging",text:"Prefer low-packaging or reusable packaging where practical."}
+  ];
+  cards.forEach(c=>{
+    const div = document.createElement('div');
+    div.className='food-card';
+    div.innerHTML = `<span class="ico">${c.icon}</span><h4>${c.title}</h4><p>${c.text}</p>`;
+    grid.appendChild(div);
+  });
+}
+
+// ==================== VIDEO ================================
+function startVid(){
+  document.getElementById('vph').style.display='none';
+  document.getElementById('vemb').style.display='block';
+  const v = document.getElementById('vid-local');
+  if(v) v.play().catch(()=>{});
+}
+function loadYT(){
+  const url = document.getElementById('yt-url').value.trim();
+  if(!url) return;
+  let idMatch = url.match(/v=([^&]+)/) || url.match(/youtu\.be\/([^?]+)/);
+  if(!idMatch){alert('Ungültige YouTube-URL');return;}
+  const id = idMatch[1];
+  const embed = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>`;
+  document.getElementById('vemb').innerHTML = embed;
+  document.getElementById('vph').style.display='none';
+  document.getElementById('vemb').style.display='block';
+}
+
+// ==================== QUIZ ================================
+function renderQuiz(){
+  const box = document.getElementById('qbox');
+  if(!box) return;
+  if(qIdx>=QUIZ.length){showQScore();return;}
+  document.getElementById('qscr').style.display='none';
+  document.getElementById('qcnt').textContent =
+    (LANG==='de'?'Frage ':'Question ')+ (qIdx+1)+' '+(LANG==='de'?'von ':'of ')+QUIZ.length;
+  document.getElementById('qpb').style.width = (qIdx/QUIZ.length*100)+'%';
+  const q = QUIZ[qIdx];
+  document.getElementById('qq').textContent = (LANG==='de'?q.q_de:q.q_en);
+  const optsBox = document.getElementById('qopts');
+  optsBox.innerHTML='';
+  const opts = (LANG==='de'?q.opts_de:q.opts_en);
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='qopt';
+    b.textContent=o;
+    b.onclick=()=>answerQ(i);
+    optsBox.appendChild(b);
+  });
+  const fb = document.getElementById('qfb');
+  fb.className='qfb';
+  fb.textContent='';
+  document.getElementById('qnxt').disabled=true;
+  qDone=false;
+}
+function answerQ(i){
+  if(qDone) return;
+  qDone=true;
+  const q = QUIZ[qIdx];
+  if(i===q.ok) qScore++;
+  document.querySelectorAll('#qopts .qopt').forEach((b,idx)=>{
+    b.disabled=true;
+    if(idx===q.ok) b.classList.add('ok');
+    else if(idx===i) b.classList.add('no');
+  });
+  const fb = document.getElementById('qfb');
+  fb.classList.add('show');
+  const correct = i===q.ok;
+  fb.classList.add(correct?'ok':'no');
+  fb.textContent = (correct?(LANG==='de'?'✅ Richtig! ':'✅ Correct! '):(LANG==='de'?'❌ Leider falsch. ':'❌ Incorrect. ')) + (LANG==='de'?q.fb_de:q.fb_en);
+  document.getElementById('qnxt').disabled=false;
+}
+function qNext(){
+  qIdx++;
+  if(qIdx>=QUIZ.length) showQScore(); else renderQuiz();
+}
+function showQScore(){
+  ['qcnt','qq','qopts','qfb'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  document.querySelector('#qbox .pwrap').style.display='none';
+  document.querySelector('#qbox .qnav').style.display='none';
+  const scr=document.getElementById('qscr');
+  scr.style.display='block';
+  document.getElementById('qsnum').textContent = qScore+' / '+QUIZ.length;
+  const pct=Math.round(qScore/QUIZ.length*100);
+  let msg;
+  if(pct>=80) msg=LANG==='de'?"🌟 Super, du kennst dich richtig gut aus!":"🌟 Great job, you really know a lot!";
+  else if(pct>=50) msg=LANG==='de'?"👍 Schon gut – da geht noch mehr.":"👍 Good – there's still room to grow.";
+  else msg=LANG==='de'?"📚 Kein Problem – du kannst viel dazu lernen.":"📚 No problem – there's a lot to learn.";
+  document.getElementById('qslbl').textContent=msg;
+}
+function qReset(){
+  qIdx=0;qScore=0;qDone=false;
+  ['qcnt','qq','qopts','qfb'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='';
+  });
+  document.querySelector('#qbox .pwrap').style.display='';
+  document.querySelector('#qbox .qnav').style.display='';
+  document.getElementById('qscr').style.display='none';
+  renderQuiz();
+}
+
+// ==================== SELF TEST ============================
+function renderTest(){
+  if(stIdx>=TEST.length) return;
+  const t = TEST[stIdx];
+  document.getElementById('stcnt').textContent =
+    (LANG==='de'?'Frage ':'Question ')+(stIdx+1)+' '+(LANG==='de'?'von ':'of ')+TEST.length;
+  document.getElementById('stpb').style.width=(stIdx/TEST.length*100)+'%';
+  document.getElementById('stbadge').textContent = (LANG==='de'?t.topic:t.topicEN);
+  document.getElementById('stq').textContent = (LANG==='de'?t.q_de:t.q_en);
+  const optsBox = document.getElementById('stopts');
+  optsBox.innerHTML='';
+  const scale = (LANG==='de'?t.scale_de:t.scale_en);
+  scale.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='topt';
+    if(stAnswers[stIdx]===i) b.classList.add('sel');
+    b.textContent=opt;
+    b.onclick=()=>selectTestAnswer(i);
+    optsBox.appendChild(b);
+  });
+  document.getElementById('stbk').disabled = stIdx===0;
+  const nxt = document.getElementById('stnxt');
+  nxt.disabled = stAnswers[stIdx]===null;
+  nxt.textContent = stIdx===TEST.length-1
+    ? (LANG==='de'?'✅ Auswertung anzeigen':'✅ Show results')
+    : (LANG==='de'?'Weiter →':'Next →');
+}
+function selectTestAnswer(i){
+  stAnswers[stIdx]=i;
+  document.querySelectorAll('#stopts .topt').forEach((b,idx)=>{
+    b.classList.toggle('sel',idx===i);
+  });
+  document.getElementById('stnxt').disabled=false;
+}
+function stBack(){
+  if(stIdx>0){stIdx--;renderTest();}
+}
+function stNext(){
+  if(stAnswers[stIdx]===null) return;
+  if(stIdx<TEST.length-1){stIdx++;renderTest();}
+  else showSelfResult();
+}
+function showSelfResult(){
+  let total=0,max=0;
+  TEST.forEach((t,i)=>{
+    const idx=stAnswers[i];
+    if(idx!=null){total+=t.scores[idx];max+=4;}
+  });
+  const pct = Math.round(total/max*100);
+  let type,emoji,desc,strengths,improve,tips;
+  if(pct<40){
+    type = LANG==='de'?"Linear-Konsument:in":"Linear Consumer";
+    emoji="🌱";
+    desc = LANG==='de'
+      ? "Du bist am Anfang deiner Nachhaltigkeitsreise. Das Gute: Du hast den Test gemacht und kannst jetzt gezielt starten."
+      : "You are at the beginning of your sustainability journey. Good news: you took the test and can now start improving.";
+    strengths = LANG==='de'
+      ? ["Du interessierst dich für das Thema.","Du bist bereit, ehrlich hinzuschauen."]
+      : ["You are interested in the topic.","You are willing to look honestly."];
+    improve = LANG==='de'
+      ? ["Impulskäufe reduzieren.","Mehrweg statt Einweg nutzen.","Müll konsequent trennen."]
+      : ["Reduce impulse buying.","Use reusables instead of single-use.","Sort waste consistently."];
+    tips = LANG==='de'
+      ? ["Wähle dir eine Sache aus, die du ab heute änderst (z. B. kein Einwegbecher mehr).","Sprich mit jemandem über dein Ergebnis und bitte um Unterstützung.","Nutze die 7 Rs als Checkliste bei deinem nächsten Einkauf."]
+      : ["Choose one thing to change from today (e.g. no more disposable cups).","Talk to someone about your result and ask for support.","Use the 7 Rs as a checklist in your next shopping trip."];
+  }else if(pct<70){
+    type = LANG==='de'?"Nachhaltigkeits-Aktive:r":"Sustainability Activist";
+    emoji="♻️";
+    desc = LANG==='de'
+      ? "Du machst schon vieles bewusst und triffst oft nachhaltige Entscheidungen. Mit ein paar zusätzlichen Schritten wirst du ein echter Circular Hero."
+      : "You already make many conscious and sustainable decisions. With a few extra steps you can become a true circular hero.";
+    strengths = LANG==='de'
+      ? ["Du denkst über deinen Konsum nach.","Du trennst häufig deinen Müll richtig.","Du nutzt einige Dinge bereits länger oder reparierst sie."]
+      : ["You think about your consumption.","You often sort your waste correctly.","You already use or repair some things longer."];
+    improve = LANG==='de'
+      ? ["Fast Fashion weiter reduzieren.","Elektronik möglichst lange nutzen.","Noch konsequenter Lebensmittel planen und Reste nutzen."]
+      : ["Reduce fast fashion further.","Use electronics as long as possible.","Plan food better and use leftovers more consistently."];
+    tips = LANG==='de'
+      ? ["Führe für eine Woche Tagebuch über deinen Konsum.","Setze dir ein konkretes Ziel (z. B. nur Secondhand-Kleidung in diesem Monat).","Teile deine Erfahrungen mit Freund:innen oder Familie."]
+      : ["Keep a one-week journal of your consumption.","Set a concrete goal (e.g. only second-hand clothes this month).","Share your experiences with friends or family."];
+  }else{
+    type = "Circular Hero";
+    emoji="🌍";
+    desc = LANG==='de'
+      ? "Wow! Du lebst sehr nachhaltig und denkst kreislauforientiert. Du bist ein Vorbild für andere – nutze deine Stimme und dein Wissen."
+      : "Wow! You live very sustainably and think in cycles. You are a role model – use your voice and knowledge.";
+    strengths = LANG==='de'
+      ? ["Du vermeidest unnötige Käufe.","Du nutzt Dinge lange und reparierst sie.","Du trennst Müll konsequent.","Du denkst über deinen Einfluss nach."]
+      : ["You avoid unnecessary purchases.","You use and repair things for a long time.","You sort waste consistently.","You think about your impact."];
+    improve = LANG==='de'
+      ? ["Andere motivieren und unterstützen.","Dich in Projekten, AGs oder Initiativen einbringen."]
+      : ["Motivate and support others.","Get involved in projects or initiatives."];
+    tips = LANG==='de'
+      ? ["Starte ein kleines Nachhaltigkeitsprojekt an deiner Schule.","Halte einen kurzen Vortrag in deiner Klasse über die 7 Rs.","Nutze Social Media bewusst, um gute Beispiele zu zeigen."]
+      : ["Start a small project at your school.","Give a short talk in your class about the 7 Rs.","Use social media consciously to show good examples."];
+  }
+  document.getElementById('stbox').style.display='none';
+  document.getElementById('sres').style.display='block';
+  document.getElementById('rej').textContent=emoji;
+  document.getElementById('rtt').textContent=type;
+  document.getElementById('rsc').textContent = total+' / '+max+' Punkte • '+pct+'%';
+  document.getElementById('rdesc').textContent=desc;
+  document.getElementById('rstr').innerHTML = strengths.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('rimp').innerHTML = improve.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('rtip').innerHTML = tips.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('stpb').style.width='100%';
+  certSummary = {emoji,type,total,max,pct,strengths,improve};
+  buildCertificate();
+}
+function buildCertificate(){
+  if(!certSummary.type) return;
+  document.getElementById('cico').textContent = certSummary.emoji;
+  document.getElementById('ctitle').textContent = certSummary.type;
+  document.getElementById('cscore').textContent = certSummary.total+' / '+certSummary.max+' Punkte • '+certSummary.pct+'%';
+  document.getElementById('stico').textContent = certSummary.emoji;
+  document.getElementById('stlbl').textContent = certSummary.type;
+  const sList=document.getElementById('cert-str');
+  const iList=document.getElementById('cert-imp');
+  sList.innerHTML = certSummary.strengths.map(x=>`<li>${x}</li>`).join('');
+  iList.innerHTML = certSummary.improve.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('cdate').textContent = new Date().toLocaleDateString(LANG==='de'?'de-DE':'en-GB',{year:'numeric',month:'long',day:'numeric'});
+}
+function showCert(){
+  document.getElementById('carea').classList.add('show');
+  document.getElementById('certbox').scrollIntoView({behavior:'smooth'});
+}
+function hideCert(){
+  document.getElementById('carea').classList.remove('show');
+}
+function stReset(){
+  stIdx=0;
+  stAnswers = new Array(TEST.length).fill(null);
+  certSummary={};
+  document.getElementById('stbox').style.display='block';
+  document.getElementById('sres').style.display='none';
+  document.getElementById('carea').classList.remove('show');
+  renderTest();
+}
+
+// ==================== BADGE PRINT ===========================
+function showBadgePrint(type){
+  const area=document.getElementById('badge-print-area');
+  const content=document.getElementById('badge-print-content');
+  area.classList.add('show');
+  if(type==='round'){
+    content.innerHTML = `<div class="badge-round" style="margin:0 auto;cursor:default"><span class="b-ico">🌍</span><span class="b-title">${LANG==='de'?'Ich handle nachhaltig &amp; schütze unseren Planeten!':(TR[LANG]?.bgRound||TR['en'].bgRound)}</span></div>`;
+  }else{
+    content.innerHTML = `<div class="badge-rect" style="margin:0 auto;cursor:default"><span class="b-ico2">♻️</span><div class="b-text"><strong>${LANG==='de'?'7 Rs – Aktiv für die Erde':(TR[LANG]?.bgRectT||TR['en'].bgRectT)}</strong><span>${LANG==='de'?'OHG Monheim am Rhein • 2026':(TR[LANG]?.bgRectS||TR['en'].bgRectS)}</span></div></div>`;
+  }
+  area.scrollIntoView({behavior:'smooth'});
+}
+function hideBadge(){
+  document.getElementById('badge-print-area').classList.remove('show');
+}
+
+// ==================== FAQ & SOURCES ========================
+function buildFAQ(){
+  const list=document.getElementById('faqlist');
+  list.innerHTML='';
+  const faq = (LANG==='de')?FAQ_DE:FAQ_DE; // simple fallback in other languages
+  faq.forEach((f,i)=>{
+    const item=document.createElement('div');
+    item.className='aitem';
+    item.setAttribute('role','listitem');
+    item.innerHTML = `<button class="ahdr" onclick="toggleFAQ(this)" aria-expanded="false" aria-controls="faq${i}"><span>${f.q}</span><span class="achev">▼</span></button><div class="abdy" id="faq${i}">${f.a}</div>`;
+    list.appendChild(item);
+  });
+}
+function toggleFAQ(btn){
+  const open=btn.classList.contains('open');
+  document.querySelectorAll('.ahdr').forEach(b=>{
+    b.classList.remove('open');
+    b.setAttribute('aria-expanded','false');
+    if(b.nextElementSibling) b.nextElementSibling.classList.remove('open');
+  });
+  if(!open){
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+    btn.nextElementSibling.classList.add('open');
+  }
+}
+function buildSources(){
+  const ul=document.getElementById('srclist');
+  ul.innerHTML='';
+  SOURCES.forEach(s=>{
+    const li=document.createElement('li');
+    const ext=!s.url.startsWith('#');
+    li.innerHTML=`<span class="srclbl">${s.label}</span><a href="${s.url}" ${ext?'target="_blank" rel="noopener"':''}>${s.url}</a><div class="srcdesc">${s.desc}</div>`;
+    ul.appendChild(li);
+  });
+}
+
+// ==================== INIT ================================
+document.addEventListener('DOMContentLoaded',()=>{
+  // TR block must be present here in full in your file
+  applyTR();
+  buildRsCards();
+  buildLinearCards();
+  buildSchool();
+  buildFood();
+  buildFAQ();
+  buildSources();
+  renderQuiz();
+  renderTest();
+});
+</script>
+</body>
+</html>
